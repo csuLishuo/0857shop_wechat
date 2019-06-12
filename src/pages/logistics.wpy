@@ -1,0 +1,204 @@
+<style lang="scss">
+  @import "../css/common";
+
+  page {
+    height: 100%;
+  }
+
+  .logistics-container {
+    height: 100%;
+    background-color: #fff;
+    view {
+      box-sizing: border-box;
+    }
+    .steps-contaniner{
+      padding:torpx(10) torpx(30) torpx(30) torpx(20);
+    }
+    .logistics-item {
+      position: relative;
+      /*padding-left:torpx(115);*/
+      padding-left: torpx(135);
+      padding-right: torpx(30);
+      .border{
+        border-left: 1px solid rgba(0,0,0,0.1);
+        position: absolute;
+        /*left: torpx(90);*/
+        left: torpx(110);
+        top:0;
+        height: 100%;
+        z-index: 1;
+      }
+      .icon{
+        position: absolute;
+        /*left: torpx(85);*/
+        left: torpx(105);
+        top:50%;
+        transform: translateY(-50%);
+        width:torpx(15);
+        height:torpx(15);
+        background:#666;
+        border-radius:50%;
+        z-index: 2;
+      }
+      .time{
+        position: absolute;
+        left:0;
+        font-size: torpx(20);
+        top:50%;
+        transform: translateY(-50%);
+        /*max-width: torpx(70);*/
+        width: torpx(90);
+        text-align: right;
+        .big{
+          font-size: torpx(24);
+        }
+      }
+      .project-con{
+        padding-bottom:torpx(25);
+        padding-top:torpx(25);
+        font-size: torpx(24);
+      }
+    }
+    .logistics-title{
+      position: relative;
+      padding-left:torpx(135);
+      .border{
+        border-left: 1px solid rgba(0,0,0,0.1);
+        position: absolute;
+        /*left: torpx(90);*/
+        left:torpx(110);
+        top:50%;
+        height: 50%;
+        z-index: 1;
+      }
+      .icon{
+        position: absolute;
+        /*left: torpx(75);*/
+        left:torpx(97);
+        top:50%;
+        transform: translateY(-50%);
+        width:torpx(30);
+        height:torpx(30);
+        background:red;
+        border-radius:50%;
+        z-index: 2;
+        font-size: torpx(20);
+        color: #fff;
+        text-align: center;
+        line-height: torpx(30);
+      }
+      .text{
+        font-size: torpx(24);
+        padding-bottom:torpx(25);
+        padding-top:torpx(25);
+      }
+    }
+    .noData {
+      text-align: center;
+      padding-top: torpx(20);
+    }
+    .blank{
+      background-color: #efefef;
+      height: torpx(20);
+    }
+  }
+</style>
+<template>
+  <view class="logistics-container">
+    <view class="blank"></view>
+    <view class="steps-contaniner">
+      <view class="logistics-title" wx:if="{{goodsInfo}}">
+        <view class="border"></view>
+        <view class="icon">收</view>
+        <view class="text" wx:if="{{goodsInfo.is_pickup == 0}}">[收货地址]{{goodsInfo.district}}{{goodsInfo.addr}}</view>
+        <view class="text" wx:if="{{goodsInfo.is_pickup == 1}}">[取件地址]{{goodsInfo.dealer_address}}</view>
+      </view>
+      <view wx:if="{{logisticsList.length >0 }}" class="logistics-item" wx:for="{{logisticsList}}" wx:key="unique" wx:for-item="listItem" wx:for-index="index">
+        <view class="time">
+          <view class="big">{{listItem.timeTop}}</view>
+          <view>{{listItem.timeBottom}}</view>
+        </view>
+        <view class="border"></view>
+        <view class="icon"></view>
+        <view class="project-con">
+          {{listItem.countent}}
+        </view>
+      </view>
+      <view wx:if="{{logisticsList.length ==0 }}" class="noData" style="color: #999">暂无数据</view>
+    </view>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+import lf from 'lf'
+
+export default class Logistics extends wepy.page {
+  config = {
+    navigationBarTitleText: '物流详情',
+    navigationBarTextStyle: 'black',
+    backgroundTextStyle: 'light',
+    navigationBarBackgroundColor: '#fff',
+    usingComponents: {}
+  }
+  data = {
+    orderId: '',
+    logisticsList: [
+    ],
+    goodsInfo: {}
+  }
+
+  computed = {}
+
+  methods = {
+  }
+  events = {}
+  async init () {
+    try {
+      const r = await lf.net.post('/Api/order/logistics_info', {order_id: this.orderId})
+      if (r.code === 200) {
+        if (r.data && r.data.list) {
+          let mlist = r.data.list || []
+          mlist.forEach(v => {
+            v.timeTop = v.time.slice(5, 10)
+            v.timeBottom = v.time.slice(11, 16)
+          })
+          this.logisticsList = mlist
+          this.$apply()
+        }
+      } else {
+        wepy.showToast({
+          title: r.info,
+          icon: 'none'
+        })
+      }
+    } catch (e) {
+      wepy.showToast({
+        title: e.toString(),
+        icon: 'none'
+      })
+    }
+    wepy.hideLoading()
+  }
+  async getOrderDetail () {
+    this.$apply()
+    try {
+      const r = await lf.net.post('/Api/Order/order_detail', { order_id: this.orderId })
+      if (r.code === 200) {
+        this.goodsInfo = r.data
+        this.$apply()
+      } else {
+        lf.toast(r.info)
+      }
+    } catch (e) {
+      lf.log.info(e)
+      lf.toast('系统内部错误')
+    }
+  }
+  onLoad (option) {
+    this.orderId = option.orderId
+    this.init()
+    this.getOrderDetail()
+  }
+}
+</script>

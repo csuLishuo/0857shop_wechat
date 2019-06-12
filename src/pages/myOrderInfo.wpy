@@ -1,0 +1,919 @@
+<style lang="scss">
+  @import "../css/common";
+
+  page {
+    background: #f5f5f5;
+  }
+
+  .flex_between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .border_bottom {
+    border-bottom: torpx(1) solid #ededed;
+  }
+
+  .ground {
+    background-color: white;
+  }
+
+  .weight {
+    font-weight: bold;
+  }
+
+  .isHaveSolid {
+    border-top: torpx(1) solid #ededed;
+  }
+
+  .myOrder {
+    position: relative;
+    .location {
+      min-height: torpx(100);
+      color: #000;
+      font-size: torpx(30);
+      /*margin-bottom: torpx(35);*/
+      padding: torpx(20) 0;
+      border-bottom: torpx(1) solid #ededed;
+      @extend .ground;
+
+      .noLocation {
+        min-height: torpx(100);
+        /*padding-left: torpx(48);*/
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        .locationIMG {
+          width: torpx(38);
+          height: torpx(48);
+          margin-right: torpx(15);
+        }
+      }
+      .haveLocation {
+        /*padding: 0 torpx(38) torpx(28);*/
+        box-sizing: border-box;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        .headerTitle {
+          .phone {
+            color: #999999;
+            font-size: torpx(26);
+            margin-left: torpx(38);
+          }
+        }
+        .infoLocation {
+          margin-top: torpx(25);
+          color: #666;
+          /*height:torpx(75);*/
+          font-size: torpx(26);
+          padding-bottom: torpx(10);
+        }
+      }
+    }
+    .stripIMG {
+      width: 100%;
+      height: torpx(15);
+      position: absolute;
+      top: torpx(190);
+    }
+    .wineInfo {
+      padding: 0 torpx(36);
+      background-color: white;
+      font-size: torpx(26);
+      color: black;
+      .orderCode {
+        height: torpx(90);
+      }
+      .info {
+        padding: torpx(40) 0;
+        height: torpx(152);
+        .infoLeft {
+          display: flex;
+          .infoIMG {
+            height: torpx(150);
+            width: torpx(150);
+            border: torpx(1) solid #ededed;
+            border-radius: torpx(10);
+            overflow: hidden;
+            .wineIMG {
+              height: 100%;
+              width: 100%;
+            }
+          }
+          .leftRight {
+            margin-left: torpx(15);
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+            .wineName {
+              display: flex;
+              justify-content: flex-start;
+              flex-direction: column;
+              align-items: flex-start;
+              .wineTitle {
+                align-self: start;
+                width: torpx(400);
+                font-size: torpx(30);
+                color: #333;
+                @extend .weight
+              }
+              .promise {
+                align-self: start;
+                font-size: torpx(24);
+                color: #999;
+              }
+            }
+            .price {
+              font-size: torpx(36);
+              color: #cf0210;
+              .symbol {
+                font-size: torpx(24);
+              }
+            }
+          }
+        }
+        .wineNumber {
+          align-self: flex-end;
+        }
+      }
+      .item {
+        height: torpx(100);
+        .noPostman {
+          font-size: torpx(30);
+          display: flex;
+          height:100%;
+          justify-content: flex-start;
+          align-items: center;
+          .selectPostItem {
+            display: block;
+            width: torpx(120);
+            height: torpx(60);
+            background:rgba(255,255,255,1);
+            border:1px solid rgba(204,204,204,1);
+            border-radius: torpx(10);
+            font-size: torpx(24);
+            font-weight:400;
+            color:rgba(153,153,153,1);
+            line-height: torpx(60);
+            text-align: center;
+            margin-right: torpx(20);
+            &:last-child{
+              margin-right: torpx(0);
+            }
+          }
+          .havSelect {
+            color:rgba(207,0,14,1)!important;
+            border-color: rgba(207,0,14,1)!important;
+          }
+          @extend .weight
+        }
+        .orderTime {
+          color: #1c1c1c;
+          font-size: torpx(30);
+          .invoiceImg {
+            width: torpx(17);
+            height: torpx(31);
+            vertical-align: center;
+            margin-left: torpx(32);
+          }
+          .smbol {
+            color:rgba(207,0,14,1);
+            font-size: torpx(24);
+          }
+          .price {
+            color:rgba(207,0,14,1);
+            font-size: torpx(28);
+          }
+        }
+        .orderPrice {
+          color: #cf000e;
+          font-size: torpx(30);
+          .symolPrice {
+            font-size: torpx(24);
+          }
+        }
+        .orderPayWay {
+          font-size: torpx(24);
+        }
+      }
+      .item_orders {
+        &:last-child {
+          > view {
+            &:last-child {
+              border-bottom: none;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .pay {
+    z-index: 9999;
+    height: torpx(98);
+    padding-left: torpx(35);
+    width: 100%;
+    box-sizing: border-box;
+    @extend .ground;
+    @extend .flex_between;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    .payLeft {
+      font-size: torpx(26);
+      color: #333333;
+      .tatolPrice {
+        color: #cf000e;
+      }
+    }
+    .payRight {
+      height: 100%;
+      width: torpx(278);
+      line-height: torpx(98);
+      text-align: center;
+      color: white;
+      font-size: torpx(32);
+      background-color: #cf0210;
+    }
+  }
+
+  .payS {
+    background: gray !important;
+  }
+
+  .van-switch {
+    height: torpx(50)!important;
+    width: torpx(100)!important;
+    margin: 0 torpx(10);
+    .van-switch__node {
+     width: torpx(50)!important;
+      height: torpx(50)!important;
+    }
+  }
+  .van-switch--on .van-switch__node {
+    transform: translateX(torpx(50))!important;
+  }
+  .loading {
+    height: 100vmax;
+    text-align: center;
+    .load {
+      margin-top: 20vmax;
+    }
+  }
+
+  .invoice {
+    font-size: torpx(28);
+    font-weight: bold;
+    color: #000;
+    background-color: white;
+    padding: 0 torpx(40);
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    height: torpx(100);
+    align-items: center;
+    .invoiceLeft{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .invoiceImg {
+        width: torpx(17);
+        height: torpx(31);
+        vertical-align: center;
+        margin-left: torpx(32);
+      }
+    }
+
+  }
+</style>
+<template>
+  <block wx:if="{{isLoading}}">
+    <view class="myOrder {{isSelectedLocation? '': 'isHaveSolid'}}">
+      <!--<view class="location">-->
+      <!--<view wx:if="{{!isSelectedLocation}}" class="noLocation" bind:tap="goToSelectAddress">-->
+      <!--<image class="locationIMG" src="./../images/myOrderLocation.png"></image>-->
+      <!--<view>点击添加收货地址</view>-->
+      <!--</view>-->
+      <!--<view wx:else class="haveLocation" bind:tap="goToSelectAddress">-->
+      <!--<view class="headerTitle">-->
+      <!--<text>收件人: {{address.name}}</text>-->
+      <!--<text class="phone">{{address.mobile}}</text>-->
+      <!--</view>-->
+      <!--<view class="infoLocation">{{address.district}}{{address.addr}}</view>-->
+      <!--</view>-->
+      <!--</view>-->
+      <!--<image class="stripIMG" src="./../images/MyOrderStrip.jpg"></image>-->
+      <view class="orderList">
+        <block>
+          <view class="wineInfo">
+            <view class="border_bottom flex_between orderCode">
+              <view class="weight">
+                <text>订单号:</text>
+                <text>{{order_no}}</text>
+              </view>
+              <view style="color: #f13d4d">{{status}}</view>
+            </view>
+
+            <view class="item_orders">
+              <block wx:for="{{orderDetail}}" wx:key="unique">
+                <view class="border_bottom flex_between info" @tap="gotoInfo({{ item.goods_id }})">
+                  <view class="infoLeft">
+                    <view class="infoIMG">
+                      <image mode="aspectFit" class="wineIMG" src="{{item.goods_cover_url}}"></image>
+                    </view>
+                    <view class="leftRight">
+                      <view class="wineName">
+                        <view class="wineTitle ellipsis-1">
+                          {{item.goods_title}}
+                        </view>
+                        <view class="promise">{{item.cate_id_text}}</view>
+                      </view>
+                      <view class="price">
+                        <text class="symbol">￥</text>
+                        <text>{{item.discount_amount}}</text>
+                      </view>
+                    </view>
+                  </view>
+                  <view class="wineNumber">x{{item.number}}</view>
+                </view>
+              </block>
+              <view class="border_bottom item flex_between">
+                <view>配送方式</view>
+                <view class="noPostman">
+                  <text data-type="1" @tap="selectPostManItem" class="selectPostItem {{1 === is_pickup? 'havSelect': ''}}">自提</text>
+                  <text data-type="0" @tap="selectPostManItem" class="selectPostItem {{0 === is_pickup? 'havSelect': ''}}">快递</text>
+                </view>
+              </view>
+              <view class="location">
+                <view wx:if="{{!isSelectedLocation}}" class="noLocation" bind:tap="goToSelectAddress">
+                  <image class="locationIMG" src="./../images/myOrderLocation.png"></image>
+                  <view>点击添加收货地址</view>
+                </view>
+                <view wx:else class="haveLocation" bind:tap="goToSelectAddress">
+                  <view class="headerTitle">
+                    <text>收件人: {{address.name}}</text>
+                    <text class="phone">{{address.mobile}}</text>
+                  </view>
+                  <view class="infoLocation">{{address.district}}{{address.addr}}</view>
+                </view>
+              </view>
+              <block wx:if="{{is_pickup === 0}}">
+                <picker bindchange="bindPickerChange" value="{{index}}" range="{{title}}">
+                  <view class="border_bottom item flex_between">
+                    <view>快递公司</view>
+                    <view class="orderTime">
+                      <text wx:if="{{deliver_company}}">{{deliver_company}}</text>
+                      <image src="./../images/icon-8.png" class="invoiceImg"></image>
+                    </view>
+                  </view>
+                </picker>
+                <view class="border_bottom item flex_between" wx:if="{{deliverFee > 0}}">
+                  <view>快递运费</view>
+                  <view class="orderTime">
+                    <text class="smbol">￥</text>
+                    <text class="price">{{deliverFee}}</text>
+                  </view>
+                </view>
+              </block>
+              <view class="border_bottom item flex_between">
+                <view>订单时间</view>
+                <view class="orderTime">{{addtime}}</view>
+              </view>
+              <view class="border_bottom item flex_between">
+                <view>商品金额</view>
+                <view class="orderPrice">
+                  <text class="symolPrice">￥</text>
+                  <text>{{allMoney}}</text>
+                </view>
+              </view>
+              <view wx:if="{{(item.order_status + '') === (10 + '')}}" class="flex_between border_bottom item">
+                <view>支付方式</view>
+                <view class="orderPayWay">微信支付</view>
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+      <view style="height: 20rpx"></view>
+      <view class="invoice" @tap="goToInvoice" wx:if="{{invoice_open === 1 && invoice_type === 1}}">
+        <view>发票</view>
+        <view class="invoiceLeft">
+          <text>{{is_invoice_text}}</text>
+          <image src="./../images/icon-8.png" class="invoiceImg"></image>
+        </view>
+      </view>
+    </view>
+    <view style="height: 120rpx;background-color:#f5f5f5"></view>
+    <block wx:if="{{dealer_id !== 0 }}">
+      <view class="pay" wx:if="{{pay_status === 0}}">
+        <view class="payLeft">
+          <text>合计:</text>
+          <text class="tatolPrice">￥{{allMoney}}</text>
+        </view>
+        <view class="payRight" wx:if="{{dealer_check_is_open == 1 && order_status == 10 && dealer_status == 0 && (character - 0) < 50}}" bind:tap="goToCheck">去审核</view>
+        <block wx:else >
+          <button style="border-radius: 0px"  bindtap="goToPayMoney" class="payRight {{ payStatus ? 'payS' :  ''}}" >{{payStatus ? '审核中' : '去支付'}}</button>
+        </block>
+      </view>
+    </block>
+    <!--客服自己的-->
+    <block wx:else>
+      <view class="pay" wx:if="{{pay_status === 0}}">
+        <view class="payLeft">
+          <text>合计:</text>
+          <text class="tatolPrice">￥{{allMoney}}</text>
+        </view>
+        <view class="payRight" bind:tap="goToPayMoney">去支付</view>
+      </view>
+    </block>
+  </block>
+  <block wx:else>
+      <view class="loading">
+        <van-loading type="spinner" color="#6e6e6e" size="60px" custom-class="load" />
+      </view>
+  </block>
+</template>
+<script>
+import wepy from 'wepy'
+import lf from 'lf'
+import { fireEvent, EVENT, TYPES, onEvent } from '../js/event'
+export default class myOrderInfo extends wepy.page {
+  config = {
+    backgroundTextStyle: 'dark',
+    navigationBarBackgroundColor: 'white',
+    navigationBarTitleText: '我的订单',
+    navigationBarTextStyle: 'black',
+    // enablePullDownRefresh: true,
+    usingComponents: {
+      'van-popup': '/components/vant/popup/index',
+      'van-cell': '/components/vant/cell/index',
+      'van-cell-group': '/components/vant/cell-group/index',
+      'van-swipe-cell': '/components/vant/swipe-cell/index',
+      'van-dialog': '/components/vant/dialog/index',
+      'van-card': '/components/vant/card/index',
+      'van-switch': '/components/vant/switch/index',
+      'van-loading': '/components/vant/loading/index'
+    }
+  };
+  components = {};
+  data = {
+    isPay: false,
+    isSelectedLocation: false,
+    isPx: false,
+    orderId: null,
+    dealer_id: null,
+    dealer_status: null,
+    order_status: null,
+    addtime: 0,
+    address: {
+      name: null
+    },
+    orderDetail: [],
+    order_no: null,
+    allMoney: null,
+    status: null,
+    pay_status: null,
+    payStatus: false,
+    role: 1,
+    character: null,
+    isSuccess: false,
+    indx: null,
+    tap: null,
+    is_pickup: 1,
+    checked: false,
+    pSelect: '自提',
+    postMan: ['快递', '自提'],
+    dealer_check_is_open: 0,
+    shop: null,
+    isLoading: false,
+    is_invoice: null,
+    mAddressId: null,
+    is_invoice_text: '不开发票',
+    logistics: [],
+    title: [],
+    titleIndex: null,
+    deliverFee: 0,
+    deliver_company: null,
+    invoice_open: null,
+    invoice_type: null,
+    allMoneyBackup: 0,
+    deliver_id: null
+  };
+
+  onLoad (option) {
+    lf.log.info('options:', option)
+    this.initDataConfig()
+    this.character = lf.user.getRole()
+    this.orderId = option.orderId
+    this.indx = option.indx
+    this.tap = option.tap
+    this.isPx = lf.util.isPx(this)
+    this.shop = option.shop
+    this.$apply()
+    this.isToCheck()
+    this.getOrderDetail()
+    this.getWL()
+  }
+  selectPostManItem (e) {
+    if (this.pay_status === 11) {
+      return false
+    }
+    let { type } = e.currentTarget.dataset
+    this.is_pickup = +type
+    if (this.is_pickup === 1 && this.allMoney > this.allMoneyBackup) {
+      this.allMoney = this.allMoney - +this.deliverFee
+    }
+    if (this.is_pickup === 0 && +this.allMoney === +this.allMoneyBackup) {
+      this.allMoney = this.allMoney + +this.deliverFee
+      this.getFree(true, null)
+    }
+    this.$apply()
+  }
+  bindPickerChange (e) {
+    if (!this.address) {
+      return lf.toast('请先选择地址')
+    }
+    this.titleIndex = +e.detail.value
+    this.deliver_company = this.title[+e.detail.value]
+    this.$apply()
+    this.getFree(false, 's')
+  }
+  getFree (bol = false, s) {
+    let deliverId
+    if (bol) {
+      deliverId = this.logistics[0].id
+      this.deliver_company = this.title[0]
+    } else {
+      deliverId = this.logistics[this.titleIndex].id
+    }
+    if (+this.deliver_id !== +deliverId) {
+      lf.showLoading('加载中...')
+      this.deliver_id = deliverId
+      this.$apply()
+      if (s) {
+        this.allMoney = parseInt(this.allMoney) - +this.deliverFee
+      }
+      lf.net.post('/Api/Order/get_deliver_fee', {
+        deliver_id: deliverId,
+        order_id: this.orderId
+      }).then(res => {
+        lf.hideLoading()
+        if (res.code === 200) {
+          this.deliverFee = +res.data.deliverFee
+          if (!s) {
+            this.allMoney = parseInt(this.allMoney) + this.deliverFee
+          }
+          this.$apply()
+        } else {
+          this.deliver_id = null
+          this.$apply()
+          lf.toast(res.info)
+        }
+      })
+    }
+  }
+  goToInvoice () {
+    lf.storage.set('addr', lf.storage.get('address'))
+    wx.navigateTo({
+      url: './invoice/invoiceInfo?id=' + this.orderId + '&invoiceId=' + this.is_invoice + '&mAddressId=' + this.mAddressId
+    })
+  }
+  async isToCheck () {
+    try {
+      const res = await lf.net.post('/Api/public/system_config', {})
+      if (res.code === 200) {
+        this.dealer_check_is_open = res.data.dealer_check_is_open
+        this.invoice_open = +res.data.invoice_open
+        this.invoice_type = +res.data.invoice_type
+      } else {
+        lf.toast(res.info)
+      }
+      this.$apply()
+    } catch (e) {
+      lf.toast('系统内部错误')
+    }
+  }
+  goToSelectAddress () {
+    if (this.pay_status - 0 === 0) {
+      wepy.navigateTo({
+        url: './addressList?select=1'
+      })
+    }
+  }
+  async onShow () {
+    this.role = lf.user.getRole() <= 50 ? 1 : 2
+    let address = lf.storage.get('address') ? JSON.parse(lf.storage.get('address')) : {name: null}
+    if (address.name || address.name !== null) {
+      this.address = address
+      await this.relevance(true)
+      if (this.address.name !== null) {
+        this.isSelectedLocation = true
+      } else {
+        this.isSelectedLocation = false
+      }
+    }
+    onEvent(EVENT.ORDER, (e) => {
+      switch (e.type) {
+        case TYPES.FUNCTIONCHANGE:
+          const data = e.data
+          if (data) {
+            // FUNCTIONCHANGE
+            this.getOrderDetail()
+          }
+          break
+      }
+    })
+    this.$apply()
+  }
+  async getWL () {
+    lf.net.post('/Api/order/city_deliver').then(res => {
+      if (res.code === 200) {
+        this.logistics = res.data.list
+        this.logistics.forEach(item => {
+          this.title.push(item.title)
+        })
+        this.$apply()
+      } else {
+        lf.toast(res.info)
+      }
+    })
+  }
+  async getAddressList () {
+    try {
+      const r = await lf.net.post('/Api/member/member_address_list', {
+        page_start: 0,
+        page_size: 100
+      })
+      if (r.code === 200) {
+        if (r.data.list === null || r.data.list.length <= 0) {
+          this.isSelectedLocation = false
+          this.$apply()
+          return
+        }
+        r.data.list.forEach(v => {
+          if (+v.status === 1) {
+            this.isSelectedLocation = true
+            lf.storage.set('address', JSON.stringify(v))
+            this.address = v
+          }
+        })
+        this.relevance(true)
+      } else {
+        wepy.showToast({
+          title: r.info,
+          icon: 'none'
+        })
+      }
+      this.$apply()
+    } catch (e) {
+      wepy.showToast({
+        title: '获取地址错误',
+        icon: 'none'
+      })
+    }
+  }
+  watch = {
+    // deliverFee(newVal, oldVal) {
+    //   this.allMoney = parseInt(this.allMoney) + +newVal
+    //   this.$apply()
+    // }
+  }
+  methods = {
+    gotoInfo (goodsId) {
+      wx.navigateTo({
+        url: 'wineInfo?goodsId=' + goodsId
+      })
+    }
+  }
+
+  onPullDownRefresh () {}
+
+  onReady () {}
+
+  onUnload () {
+    this.initDataConfig()
+  }
+  initDataConfig () {
+    this.isPay = false
+    this.isSelectedLocation = false
+    this.orderDetail = null
+    this.orderId = null
+    this.address = {
+      name: null
+    }
+    this.dealer_id = null
+    this.dealer_status = null
+    this.addtime = 0
+    this.orderDetail = []
+    this.order_no = null
+    this.allMoney = null
+    this.status = null
+    this.order_status = null
+    this.pay_status = null
+    this.payStatus = false
+    this.role = 1
+    this.is_pickup = 1
+    this.isSuccess = false
+    this.pSelect = ''
+    this.is_invoice = null
+    this.mAddressId = null
+    this.logistics = []
+    this.title = []
+    this.titleIndex = null
+    this.deliverFee = null
+    this.deliver_company = null
+    this.postMan = ['快递', '自提']
+    this.invoice_open = null
+    this.invoice_type = null
+    this.deliver_id = null
+    this.allMoneyBackup = 0
+    lf.storage.remove('address')
+    this.$apply()
+  }
+  async getOrderDetail () {
+    try {
+      const r = await lf.net.post('/Api/Order/order_detail', { order_id: this.orderId })
+      if (r.code === 200) {
+        this.isLoading = true
+        this.dealer_id = +r.data.dealer_id
+        this.is_invoice = r.data.is_invoice
+        this.mAddressId = r.data.member_address_id
+        if (r.data.is_invoice_text) {
+          this.is_invoice_text = r.data.is_invoice_text
+        }
+        if (r.data.delive_amount) {
+          this.deliverFee = r.data.delive_amount
+        }
+        if (+r.data.deliver_id > 0) {
+          this.deliver_company = r.data.deliver_info.title
+        }
+        this.dealer_status = +r.data.dealer_status
+        if (this.role === 2) { // 这取经销商的
+          this.status = r.data.dealer_status_text
+          this.order_status = +r.data.dealer_status
+        } else {
+          this.status = r.data.order_status_text
+          this.order_status = +r.data.order_status
+          if (r.data.receiver_name) {
+            let address = {
+              id: r.data.member_address_id,
+              name: r.data.receiver_name,
+              mobile: r.data.receiver_mobile,
+              district: r.data.district,
+              addr: r.data.addr
+            }
+            if (!this.address.name) {
+              lf.storage.set('address', JSON.stringify(address))
+              this.address = address
+              this.isSelectedLocation = true
+            }
+          } else {
+            this.isSelectedLocation = false
+            this.getAddressList()
+          }
+        }
+        if (+this.dealer_status === 11 && +this.order_status === 10) {
+          this.payStatus = false
+        } else {
+          this.payStatus = true
+        }
+        this.order_no = r.data.order_no
+        this.allMoney = +r.data.order_amount
+        this.allMoneyBackup = +r.data.order_amount
+        this.orderDetail = r.data.order_item_list
+        this.pay_status = +r.data.pay_status
+        this.addtime = r.data.addtime
+        this.isSuccess = true
+        this.is_pickup = +r.data.is_pickup
+        this.postManIndex = +r.data.is_pickup
+        this.pSelect = this.postMan[this.is_pickup]
+        this.$apply()
+      } else {
+        lf.toast(r.info)
+      }
+    } catch (e) {
+      console.log(e)
+      lf.toast('系统内部错误')
+    }
+  }
+  async goToCheck() {
+    if (!this.address) {
+      return lf.toast('请选择地址')
+    }
+    const r = await lf.net.post('api/order/notic_dealer_check', {
+      order_id: this.orderId
+    })
+    if (r.code === 200) {
+      lf.toast(r.info)
+      setTimeout(() => {
+        if (this.shop === 'shop') {
+          wx.navigateTo({
+            url: `orderList?tab=0`
+          })
+        } else {
+          wx.navigateBack({
+            delta: 1
+          })
+        }
+      }, 1600)
+    } else {
+      lf.toast(r.info)
+    }
+  }
+  goToPayMoney () {
+    if (this.is_pickup === 0 && !this.deliver_company) {
+      return lf.toast('你选择了快递，但是没有选择快递公司')
+    }
+    if (!this.payStatus) {
+      this.isLogin()
+    }
+  }
+
+  async isLogin () {
+    let mid = lf.storage.get('mid')
+    if (!mid) {
+      wx.showModal({
+        title: '提示',
+        content: '请先登陆',
+        showCancel: true,
+        success: res => {
+          if (res.confirm) {
+            wepy.navigateTo({
+              url: 'login'
+            })
+          }
+        }
+      })
+    } else {
+      if (!this.address) {
+        return lf.toast('请选择地址')
+      }
+      this.relevance(false)
+    }
+  }
+
+  pay () {
+    lf.pay(async res => {
+      let channel = res === 0 ? 'wx' : 'xx'
+      let isDeliver = this.is_pickup.toString() === '1' ? 0 : 1
+      try {
+        const r = await lf.net.post('/Api/order/distributor_order_pay', {
+          order_id: this.orderId,
+          parent_mid: lf.user.getParent(),
+          channel,
+          is_deliver: isDeliver
+        })
+        if (r.code === 200) {
+          lf.toast(r.info)
+          setTimeout(() => {
+            let TYPE = +this.tap === -1 ? TYPES.ORDER_PASS_CHANGES : TYPES.ORDER_STATUS_CHANGES
+            let DATA = +this.tap === -1 ? this.indx : this.orderId
+            fireEvent(EVENT.ORDER, {
+              type: TYPE,
+              data: DATA
+            })
+            if (this.tap) {
+              wx.navigateBack({
+                delta: 1
+              })
+            } else {
+              wx.redirectTo({
+                url: './orderList?tab=0'
+              })
+            }
+          }, 1500)
+        } else {
+          lf.toast(r.info)
+        }
+      } catch (e) {
+        lf.toast('系统错误')
+      }
+    })
+  }
+  async relevance (bol) {
+    try {
+      const r = await lf.net.post('/Api/Order/bind_member_address', {
+        order_id: this.orderId,
+        member_address_id: this.address.id,
+        is_pickup: this.is_pickup.toString()
+      })
+      if (r.code === 200) {
+        if (this.titleIndex !== null && bol) {
+          this.getFree()
+        }
+        if (!bol) {
+          this.pay()
+        }
+      } else {
+        lf.toast(r.info)
+      }
+      this.$apply()
+    } catch (e) {
+      lf.toast('系统错误，关联地址失败')
+    }
+  }
+}
+</script>

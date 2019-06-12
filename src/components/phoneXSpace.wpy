@@ -1,0 +1,31 @@
+<style lang="scss">
+  .take-space {
+    height: 80rpx;
+    width: 100%;
+  }
+  .back-wilte {
+    background-color: #fff;
+  }
+</style>
+<template>
+  <view class="take-space {{!isTransparent ? 'back-wilte' : ''}}">
+  </view>
+</template>
+<script>
+import wepy from 'wepy'
+// import lf from 'lf'
+
+export default class Space extends wepy.component {
+  props = {
+    isTransparent: Boolean,
+    default: false
+  }
+  data = {
+  }
+  events = {}
+  methods = {}
+
+  onLoad () {
+  }
+}
+</script>

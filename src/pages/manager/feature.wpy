@@ -1,0 +1,153 @@
+<style lang="scss">
+  @import "../../css/common";
+
+  page {
+    height: 100%;
+  }
+  .feature-container .van-cell__right-icon {
+    color: #969799;
+    margin-left: 5px;
+    position: absolute;
+    top: 50%;
+    right: torpx(20);
+    transform: translateY(-50%);
+  }
+
+  .feature-container .item {
+    border-bottom: torpx(1) solid #eee;
+    background-color: #fff;
+    padding-left: torpx(20);
+  }
+
+  .feature-container {
+    box-sizing: border-box;
+    height: 100%;
+    .van-cell {
+      padding: torpx(15) torpx(15) torpx(15) 0;
+    }
+    .van-cell__title {
+      .van-cell__label {
+        font-size: torpx(28);
+        font-weight: 400;
+      }
+    }
+    .noData {
+      text-align: center;
+      padding: torpx(20);
+    }
+  }
+  .xfeature-container{
+    padding-bottom: torpx(80);
+  }
+</style>
+<template>
+  <view class="feature-container {{isPx ? 'xfeature-container' : ''}}">
+    <view class="feature-inner">
+      <scroll-view scroll-y="{{scrollY}}" class="scrollView" bindscrolltolower="reachBottom">
+        <view wx:if="{{dataList.length >0}}" class="item" wx:for="{{dataList}}" wx:key="unique" wx:for-item="item" @tap="toContent({{item.new_version_desc}})">
+          <van-cell
+            title="{{item.name}}"
+            label="{{item.up}}"
+            is-link
+          />
+        </view>
+        <view wx:if="{{dataList.length ==0}}" class="noData" style="color: #999">暂无版本更新</view>
+      </scroll-view>
+    </view>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+import lf from 'lf'
+import CommonMixin from '../../mixins/common'
+
+export default class Feature extends wepy.page {
+  config = {
+    navigationBarTitleText: '功能介绍',
+    navigationBarTextStyle: 'black',
+    backgroundTextStyle: 'light',
+    navigationBarBackgroundColor: '#fff',
+    usingComponents: {
+      'van-cell': '/components/vant/cell/index'
+    }
+  }
+  mixins = [CommonMixin]
+  data = {
+    scrollY: true,
+    pageStart: 1,
+    dataList: [],
+    total: ''
+  }
+
+  computed = {}
+
+  methods = {
+    toContent (txt) {
+      wepy.navigateTo({
+        url: `featureCon?conten=${txt}`
+      })
+    }
+  }
+  events = {}
+
+  async init () {
+    var data = {
+      page_start: (this.pageStart - 1) * 10,
+      page_size: 10
+    }
+    try {
+      const r = await lf.net.post('/Api/version/xcx_version_list', data)
+      if (r.code === 200) {
+        if (r.data && r.data.list) {
+          let mlist = r.data.list || []
+          mlist.forEach(v => {
+            v.up = v.uptime.slice(0, 11)
+            v.name = `${v.new_version}主要更新`
+          })
+          if (this.pageStart === 1) {
+            this.dataList = mlist
+          } else {
+            for (let i = 0; i < mlist.length; i++) {
+              this.dataList.push(mlist[i])
+            }
+          }
+          this.$apply()
+        }
+      } else {
+        wepy.showToast({
+          title: r.info,
+          icon: 'none'
+        })
+      }
+    } catch (e) {
+      wepy.showToast({
+        title: e.toString(),
+        icon: 'none'
+      })
+    }
+    wepy.hideLoading()
+  }
+  reachBottom () {
+    wepy.showLoading({
+      title: '加载中...'
+    })
+    this.pageStart += 1
+    this.init()
+    wepy.stopPullDownRefresh()
+  }
+  onLoad () {
+    this.pageStart = 1
+    this.dataList = []
+    this.$apply()
+    this.init()
+  }
+  onShow () {
+  }
+  onUnload () {
+    this.pageStart = 1
+    this.dataList = []
+    this.$apply()
+  }
+}
+</script>

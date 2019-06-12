@@ -1,0 +1,200 @@
+<style lang="scss">
+  @import "../css/common";
+
+  page {
+    height: 100%;
+  }
+
+  .message-container {
+    height: 100%;
+    view {
+      box-sizing: border-box;
+    }
+    .scrollView{
+      height: 100%;
+    }
+    .message-item {
+      margin-top: torpx(59);
+      padding: 0 torpx(30);
+      .times {
+        width: 100%;
+        text-align: center;
+        margin-bottom: torpx(18);
+        view {
+          height: torpx(40);
+          padding: 0 torpx(20);
+          line-height: torpx(40);
+          background-color: rgba(0, 0, 0, 0.2);
+          border-radius: torpx(20);
+          display: inline-block;
+          text-align: center;
+          font-size: torpx(24);
+          color: #fff;
+        }
+      }
+      .contens {
+        background-color: #fff;
+        padding: torpx(35) 0 torpx(40) torpx(30);
+        word-break:break-all;
+        .title {
+          font-size: torpx(36);
+          line-height: torpx(36);
+          color: #1c1c1c;
+          margin-bottom: torpx(26);
+          position: relative;
+        }
+        .title_c {
+          padding-left: torpx(19);
+          .circle {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            width: torpx(12);
+            height: torpx(12);
+            background-color: #e24747;
+            border-radius: 50%;
+            margin-right: torpx(7);
+          }
+        }
+        .details {
+          font-size: torpx(28);
+          line-height: torpx(38);
+          color: #666;
+        }
+      }
+    }
+    .message-item:last-child{
+      margin-bottom:torpx(59);
+    }
+    .noData {
+      text-align: center;
+      padding-top: torpx(20);
+    }
+  }
+</style>
+<template>
+  <view class="message-container">
+    <scroll-view scroll-y="{{scrollY}}" class="scrollView" bindscrolltolower="reachBottom">
+      <view wx:if="{{messageList.length >0 }}" class="message-item" wx:for="{{messageList}}" wx:key="unique" wx:for-item="listItem" wx:for-index="index" @tap="toRead({{listItem}}, {{index}})">
+        <view class="times">
+          <view>{{listItem.addtime}}</view>
+        </view>
+        <view class="contens">
+          <view class="title {{ listItem.is_read != 1 ? 'title_c': '' }}">
+            <view class="circle" wx:if="{{listItem.is_read != 1}}"></view>
+            {{listItem.title}}
+          </view>
+          <view class="details" wx:for="{{listItem.arrContent}}" wx:key="item">{{item}}</view>
+        </view>
+      </view>
+      <view wx:if="{{messageList.length ==0 }}" class="noData" style="color: #999">暂无消息</view>
+    </scroll-view>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+import lf from 'lf'
+
+export default class Message extends wepy.page {
+  config = {
+    navigationBarTitleText: '消息',
+    navigationBarTextStyle: 'black',
+    backgroundTextStyle: 'light',
+    navigationBarBackgroundColor: '#fff',
+    usingComponents: {}
+  }
+  data = {
+    scrollY: true,
+    messageList: [],
+    pageStart: 1
+  }
+
+  computed = {}
+
+  methods = {
+    async toRead (data, index) {
+      let url = data.url
+      if (Number(data.is_read) !== 1) {
+        try {
+          const r = await lf.net.post('/Api/member/message_read', {
+            id: data.id
+          })
+          if (r.code === 200) {
+            this.messageList[index].is_read = 1
+          }
+        } catch (e) {
+          wepy.showToast({
+            title: e.toString(),
+            icon: 'none'
+          })
+        }
+      }
+      if (url) {
+        wepy.navigateTo({
+          url: url
+        })
+      }
+    }
+  }
+  events = {}
+
+  async init () {
+    var data = {
+      page_start: (this.pageStart - 1) * 10,
+      page_size: 10
+    }
+    try {
+      const r = await lf.net.post('/api/member/message_list', data)
+      if (r.code === 200) {
+        if (r.data && r.data.list) {
+          let mlist = r.data.list || []
+          mlist.forEach(v => {
+            let arrContent = []
+            arrContent = v.content.split('\n')
+            v.arrContent = arrContent
+          })
+          if (this.pageStart === 1) {
+            this.messageList = mlist
+          } else {
+            for (let i = 0; i < mlist.length; i++) {
+              this.messageList.push(mlist[i])
+            }
+          }
+          this.$apply()
+        }
+      } else {
+        wepy.showToast({
+          title: r.info,
+          icon: 'none'
+        })
+      }
+    } catch (e) {
+      wepy.showToast({
+        title: e.toString(),
+        icon: 'none'
+      })
+    }
+    wepy.hideLoading()
+  }
+  reachBottom () {
+    wepy.showLoading({
+      title: '加载中...'
+    })
+    this.pageStart += 1
+    this.init()
+    wepy.stopPullDownRefresh()
+  }
+  onLoad () {
+    this.init()
+  }
+  onShow () {
+  }
+  onUnload () {
+    this.pageStart = 1
+    this.messageList = []
+    this.$apply()
+  }
+}
+</script>

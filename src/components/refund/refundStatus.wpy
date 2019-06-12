@@ -1,0 +1,390 @@
+<style lang="scss">
+  @import "../../css/common";
+  page {
+    background-color: #f5f5f5;
+  }
+  .refundDetail {
+    padding-top: torpx(12);
+    .order_status {
+      background-color: #cf000e;
+      height: torpx(200);
+      padding-left: torpx(50);
+      box-sizing: border-box;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      color: white;
+      .yet {
+        font-size: torpx(32);
+        margin-bottom: torpx(15);
+      }
+      .countDown {
+        font-size: torpx(26);
+      }
+    }
+    .refundStatus {
+      background-color: white;
+      padding-left: torpx(30);
+      box-sizing: border-box;
+      .tip {
+        font-size: torpx(28);
+        color: black;
+        line-height: torpx(92);
+      }
+      .desWarp {
+        padding-left: torpx(15);
+        box-sizing: border-box;
+        border-top: 1px solid #eee;
+        padding-top: torpx(22);
+        .desItem {
+          padding-right: torpx(30);
+          box-sizing: border-box;
+          font-size: torpx(24);
+          color: #999;
+          display: flex;
+          .itemDot {
+            display: inline-block;
+            margin-right: torpx(22);
+            width: torpx(10);
+            height: torpx(10);
+            border-radius: 50%;
+            background-color: #999;
+            position: relative;
+            top: torpx(14);
+          }
+        }
+      }
+      .operate {
+        text-align: right;
+        padding-right: torpx(30);
+        box-sizing: border-box;
+        padding-top: torpx(45);
+        padding-bottom: torpx(18);
+        .operateBtn {
+          padding: torpx(15) torpx(22);
+          display: inline-block;
+          font-size: torpx(28);
+          margin-left: torpx(26);
+          border-width: 1px;
+          border-style: solid;
+        }
+        .repeal {
+          border-color: #666;
+          color: #666;
+        }
+        .amend {
+          border-color: #cf000e;
+          color: #cf000e;
+        }
+      }
+      .getGoodsAddress {
+        padding-bottom: torpx(40);
+        border-bottom: 1px solid #eee;
+        .addInfos {
+          padding-right: torpx(30);
+          box-sizing: border-box;
+          border-top: 1px solid #eee;
+          padding-top: torpx(50);
+          font-size: torpx(28);
+          color: #666;
+          display: flex;
+          align-items: center;
+          .imgArrW {
+            width: torpx(48);
+            height: torpx(62);
+            display: block;
+            margin-right: torpx(20);
+          }
+          .aDDInfo {
+            .presonInfo {
+              display: flex;
+              justify-content: space-between;
+              margin-bottom: torpx(22);
+            }
+            .infoAddress {
+              line-height: torpx(36);
+            }
+          }
+        }
+      }
+      .tipGoods {
+        padding: torpx(40) torpx(35) torpx(25) torpx(8);
+        .tipItems {
+          font-size: torpx(24);
+          color: #999;
+          margin-bottom: torpx(22);
+          display: flex;
+          .tipDot {
+            width: torpx(10);
+            height: torpx(10);
+            border-radius: 50%;
+            background-color: #999;
+            margin-right: torpx(22);
+            position: relative;
+            top: torpx(16);
+            display: inline-block;
+          }
+          .desRR{
+            @extend .m
+          }
+        }
+      }
+      .refundGoodsOpe {
+        text-align: right;
+        padding-right: torpx(30);
+        padding-bottom: torpx(70);
+        .btnOperate {
+          display: inline-block;
+          padding: torpx(20) torpx(16);
+          border-width: 1px;
+          border-style: solid;
+          font-size: torpx(28);
+          margin-left: torpx(20);
+          .header {
+            width: 100%;
+            text-align: center;
+            font-weight: 900;
+            margin-bottom: torpx(10);
+          }
+        }
+        .sent {
+          color: #333;
+          border-color: #333;
+        }
+        .noSent {
+          color: #cf000e;
+          border-color: #cf000e;
+        }
+      }
+    }
+    .negotiate {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: torpx(90);
+      padding: 0 torpx(30);
+      margin: torpx(20) 0;
+      background-color: white;
+      color: #333;
+      font-size: torpx(28);
+      .arrowRightNEImg {
+        width: torpx(18);
+        height: torpx(32);
+      }
+    }
+    .RgoodsInfo {
+      position: relative;
+      background-color: white;
+      margin-bottom: torpx(20);
+      .tipTitle {
+        line-height: torpx(88);
+        padding-left: torpx(30);
+        font-size: torpx(28);
+        color: #333;
+      }
+      .van-card {
+        background-color: #f5f5f5;
+        .van-card__img {
+          border: 1px solid #d0d0d0;
+        }
+        .van-card__title {
+          @extend .ellipsis-2
+        }
+      }
+    }
+    .RorderTimeInfo {
+      margin-bottom: torpx(20);
+      padding: 0 torpx(30);
+      display: flex;
+      align-items: center;
+      background-color: white;
+      box-sizing: border-box;
+      flex-direction: column;
+      > view {
+        &:last-child{
+          border-bottom: none;
+        }
+        border-bottom: 1px solid #eee;
+        min-height: torpx(88);
+        font-size: torpx(28);
+        color: #333;
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        .tite {
+          width: torpx(150);
+        }
+        .t_desdes {
+          @extend .m
+        }
+      }
+    }
+  }
+  .m {
+    flex: 1;
+    white-space:normal;
+    word-wrap:break-word;
+    word-break:break-all;
+  }
+</style>
+<template>
+  <view class="refundDetail">
+    <view class="order_status">
+      <view class="yet">商家已经拒绝你退货申请，建议修改申请</view>
+      <view class="countDown">还剩0天15时11分</view>
+    </view>
+    <view class="refundStatus">
+      <view class="tip">您已成功发起退款申请，请耐心等待商家处理</view>
+      <view class="tip">商家已同意退货申请，请尽早退货</view>
+      <block wx:if="{{status === 1}}">
+        <view class="desWarp">
+          <view class="desItem">
+            <text class="itemDot"></text>
+            <text class="txtDes">商家同意后，请按照给出的退货地址退货，并请记录退货运单号</text>
+          </view>
+          <view class="desItem">
+            <text class="itemDot"></text>
+            <text class="txtDes">如商家拒绝，您可以修改申请后再次发起，商家会重新处理</text>
+          </view>
+          <view class="desItem">
+            <text class="itemDot"></text>
+            <text class="txtDes">如商家超时未处理，退货申请将达成，请按系统给出的退货地址退货</text>
+          </view>
+        </view>
+        <view class="operate">
+          <view class="repeal operateBtn">撤销申请</view>
+          <view class="amend operateBtn">修改申请</view>
+        </view>
+      </block>
+      <block wx:else>
+        <view class="getGoodsAddress">
+            <view class="addInfos">
+              <image class="imgArrW" src="./../../images/6_03.png"></image>
+              <view class="aDDInfo">
+                <view class="presonInfo">
+                  <view class="name">
+                    <text>收货人：</text>
+                    <text>也买酒售后</text>
+                  </view>
+                  <view class="Tel">
+                    0731-89565269
+                  </view>
+                </view>
+                <view class="infoAddress">
+                  北京市朝阳区十八里店大羊坊路333号微沃办公区A座6层
+                </view>
+              </view>
+            </view>
+        </view>
+        <view class="tipGoods">
+          <view class="tipItems">
+            <text class="tipDot"></text>
+            <txet class="desRR">未与商家协商一致，请勿使用到付及平邮，以免商家拒签货物</txet>
+          </view>
+          <view class="tipItems">
+            <text class="tipDot"></text>
+            <txet class="desRR">交易的钱款还在淘宝中间账户，确保您资金安全</txet>
+          </view>
+          <view class="tipItems">
+            <text class="tipDot"></text>
+            <txet class="desRR">请填写真实物流信息，逾期未填写，退货申请将撤销</txet>
+          </view>
+          <view class="tipItems">
+            <text class="tipDot"></text>
+            <txet class="desRR">也买酒提供官方寄件服务（上门取件），退货有保障</txet>
+          </view>
+        </view>
+        <view class="refundGoodsOpe">
+          <view class="btnOperate sent">
+            <view class="header">我已寄出</view>
+            <view>点击填写物流单号</view>
+          </view>
+          <view class="btnOperate noSent">
+            <view class="header">我要寄件</view>
+            <view>官方推荐寄件服务</view>
+          </view>
+        </view>
+      </block>
+    </view>
+    <view class="negotiate" @tap="goToNegotiate">
+      <view>协商详情</view>
+      <image class="arrowRightNEImg" src="./../../images/icon-8.png"></image>
+    </view>
+    <view class="RgoodsInfo">
+      <view class="tipTitle">退款信息</view>
+      <van-card
+        thumb="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1554784086160&di=50345add97931a5bab12f7b5b91fc4a2&imgtype=0&src=http%3A%2F%2Fm.360buyimg.com%2Fn12%2Fjfs%2Ft3016%2F73%2F397458831%2F180496%2Ff6f016a1%2F579ef7b9Na47116e1.jpg%2521q70.jpg"
+        title="红色限量版套装礼盒红色限量版套装礼盒红色限量版套装礼盒红色限量版套装礼盒红色限量版套装礼盒红色限量版套装礼盒"
+        desc="礼盒装"
+      >
+      </van-card>
+    </view>
+    <view class="RorderTimeInfo">
+      <view>
+        <text class="tite">退款金额：</text>
+        <text class="t_desdes">￥988.00</text>
+      </view>
+      <view>
+        <text class="tite">退款原因：</text>
+        <text class="t_desdes">24小时无理由退货</text>
+      </view>
+      <view>
+        <text class="tite">退款说明：</text>
+        <text class="t_desdes">2019-04-02 09:05:30</text>
+      </view>
+      <view>
+        <text class="tite">申请时间：</text>
+        <text class="t_desdes">2019-04-02 09:05:30</text>
+      </view>
+    </view>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+import lf from 'lf'
+export default class refundStatus extends wepy.component {
+  config = {
+    backgroundTextStyle: 'light',
+    navigationBarBackgroundColor: '#fff',
+    navigationBarTitleText: '退款详情',
+    navigationBarTextStyle: 'black'
+  }
+  components = {}
+  mixins = []
+  data = {
+    orderId: null,
+    status: 0
+  }
+  computed = {}
+  methods = {
+    goToNegotiate () {
+      wx.navigateTo({
+        url: `./../negotiate?orderId=${this.orderId}`
+      })
+    }
+  }
+  events = {}
+  onShow () {}
+  onLoad() {
+  }
+  init (opt) {
+    let { orderId } = opt
+    this.orderId = orderId
+    this.getOrderDetail()
+  }
+  async getOrderDetail () {
+    try {
+      const r = await lf.net.post('/Api/Order/order_detail', { order_id: this.orderId })
+      if (r.code === 200) {
+        console.log(r)
+      } else {
+        lf.toast(r.info)
+      }
+    } catch (e) {
+      lf.toast('系统内部错误')
+    }
+  }
+}
+</script>

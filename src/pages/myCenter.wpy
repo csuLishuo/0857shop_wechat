@@ -1,0 +1,534 @@
+<style lang="scss">
+  @import "../css/common";
+
+  .container {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    align-items: center;
+    flex-direction: column;
+    font-size: torpx(30);
+    .top-login {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      background-color: #cf0210;
+      height: torpx(240);
+      width: 100%;
+      .avtar {
+        width: torpx(136);
+        height: torpx(136);
+        border-radius: 50%;
+        margin: 0 torpx(30);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .avatar-img {
+          width: torpx(130);
+          height: torpx(130);
+          border-radius: 50%;
+          overflow: hidden;
+        }
+      }
+      .top-text {
+        color: #fff;
+        font-size: torpx(30);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: flex-start;
+        .top-name {
+          font-size: torpx(36);
+        }
+        .top-score {
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          font-size: torpx(30);
+          color:  rgba(255, 255, 255, 0.67);
+          .score-img {
+            width: torpx(41);
+            height: torpx(41);
+            margin-right: torpx(10);
+          }
+        }
+      }
+    }
+    .order-show {
+      display: flex;
+      justify-content: space-between;
+      height: torpx(100);
+      align-items: center;
+      width: 100%;
+      background-color: #fff;
+      border-bottom: 1rpx solid #eee;
+      .order-left {
+        margin-left: torpx(30);
+      }
+      .order-right {
+        color: #999;
+        margin-right: torpx(30);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: torpx(26);
+        .redRing{
+          margin-left: torpx(10);
+          width: torpx(12);
+          height: torpx(12);
+          background-color: #e24747;
+          border-radius: 50%;
+          /*position: absolute;*/
+          /*top:50%;*/
+          /*right:torpx(60);*/
+          /*<!--transform: translateY(-50%);-->*/
+        }
+        image {
+          width: torpx(18);
+          height: torpx(32);
+          margin-left: torpx(10);
+        }
+      }
+    }
+    .middle-show {
+      display: flex;
+      justify-content: space-around;
+      flex-direction: row;
+      align-items: center;
+      background-color: #fff;
+      height: torpx(100);
+      padding-top: torpx(20);
+      width: 100%;
+      .order-item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        position: relative;
+        image {
+          width: torpx(55);
+          height: torpx(55);
+        }
+        .item-content {
+          font-size: torpx(26);
+          color: #191825;
+        }
+        .top-right-show {
+          position: absolute;
+          top: 0px;
+          right: 0px;
+          background-color: #e24747;
+          border-radius: torpx(20);
+          padding: 0 torpx(8);
+          text-align: center;
+          height: torpx(30);
+          line-height: torpx(30);
+          font-size: torpx(20);
+          color: #fff;
+        }
+      }
+    }
+    .bottom-show {
+    }
+    .function-list {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      width: 100%;
+      /*margin-bottom: torpx(80);*/
+      /*height: 313rpx;*/
+      margin-top: torpx(20);
+      background-color: #fff;
+      border-bottom: 1rpx solid #eee;
+      .row-item {
+        width: 100%;
+        height: torpx(100);
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        font-size: torpx(30);
+        color: #1c1c1c;
+        .tip-show {
+          color: #ce000e;
+        }
+        .item-content {
+          padding-right: torpx(30);
+        }
+        .function-title {
+          padding-left: torpx(30);
+          color: #333333;
+        }
+        .input-right-mes {
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-end;
+          align-items: center;
+          flex: 1;
+          padding-right: torpx(30);
+          image {
+            width: torpx(18);
+            height: torpx(33);
+          }
+        }
+      }
+      .first-row {
+        border-bottom: 1rpx solid #eee;
+        height: torpx(100);
+      }
+      .redRing{
+        width: torpx(12);
+        height: torpx(12);
+        background-color: #e24747;
+        border-radius: 50%;
+        position: absolute;
+        top:50%;
+        right:torpx(60);
+        transform: translateY(-50%);
+      }
+      .row-message{
+        position: relative;
+      }
+    }
+  }
+</style>
+<template>
+  <view class="container ">
+    <view class="top-login">
+      <view class="avtar">
+        <open-data class="avatar-img"  type="userAvatarUrl"></open-data>
+      </view>
+      <view class="top-text" @tap="GoTo('login')" wx:if="{{!isLogin}}">登录/注册</view>
+      <view class="top-text" wx:else>
+        <open-data class="top-name"  type="userNickName"></open-data>
+        <view class="top-score" @tap="GoTo('integral')">
+          <image class="score-img" src="../images/icon-score.png"></image>
+          <view class="score-content">积分: {{score}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="order-show" wx:if="{{role < 30}}">
+      <view class="order-left">我的订单</view>
+      <view class="order-right" @tap="GoTo('orderList?tab=0')" >
+        查看全部订单
+        <view class="redRing" wx:if="{{all}}"></view>
+        <image src="../images/icon-8.png"></image>
+      </view>
+    </view>
+    <view class="order-show" wx:elif="{{role == 30}}">
+      <view class="order-left">我的订单</view>
+      <view class="order-right" @tap="GoTo('manager/documentaryOrder')" >
+        查看全部订单
+        <view class="redRing" wx:if="{{all}}"></view>
+        <image src="../images/icon-8.png"></image>
+      </view>
+    </view>
+    <view class="order-show" wx:else>
+      <view class="order-left">我的订单</view>
+      <view class="order-right" @tap="GoTo('manager/order')" >
+        查看全部订单
+        <view class="redRing" wx:if="{{all}}"></view>
+        <image src="../images/icon-8.png"></image>
+      </view>
+    </view>
+    <view class="order-show" wx:if="{{role > 50}}" @tap="GoTo('returnGoods')" >
+      <view class="order-left">退换货订单</view>
+      <view class="order-right">
+        <view class="redRing" wx:if="{{returnAll}}"></view>
+        <image src="../images/icon-8.png"></image>
+      </view>
+    </view>
+    <view class="middle-show" wx:if="{{role < 30}}">
+      <view class="order-item" @tap="GoTo('orderList?tab=10')">
+        <image src="../images/icon-pay.png"></image>
+        <view class="item-content">待付款</view>
+        <view class="top-right-show" wx:if="{{unpay}}">
+          {{unpay}}
+        </view>
+      </view>
+      <view class="order-item" @tap="GoTo('orderList?tab=20')">
+        <image  src="../images/icon-recive.png"></image>
+        <view class="top-right-show" wx:if="{{unsend}}">
+          {{unsend}}
+        </view>
+        <view class="item-content">待发货</view>
+      </view>
+      <view class="order-item" @tap="GoTo('orderList?tab=30')">
+        <image src="../images/icon-send.png"></image>
+        <view class="top-right-show" wx:if="{{unreceive}}">
+          {{unreceive}}
+        </view>
+        <view class="item-content">待收货</view>
+      </view>
+    </view>
+    <view class="function-list">
+      <view wx:if="{{isLogin}}" class="row-item first-row" @tap="GoTo('security')" >
+        <view class="function-title">账号与安全</view>
+        <view class="input-right-mes">
+          <image src="../images/icon-8.png" />
+        </view>
+      </view>
+      <view wx:if="{{isLogin && (role === 50 || role === 60)}}" class="row-item first-row" @tap="GoTo('payment')" >
+        <view class="function-title">我的提成</view>
+        <view class="input-right-mes">
+          <image src="../images/icon-8.png" />
+        </view>
+      </view>
+      <view wx:if="{{isLogin && role === 20}}" class="row-item first-row" @tap="GoTo('commission')" >
+        <view class="function-title">我的佣金</view>
+        <view class="input-right-mes">
+          <image src="../images/icon-8.png" />
+        </view>
+      </view>
+      <view wx:if="{{isLogin && (role === 1 || role === 5 || role === 20)}}" class="row-item first-row" @tap="GoTo('addressList')" >
+        <view class="function-title">地址管理</view>
+        <view class="input-right-mes">
+          <image src="../images/icon-8.png" />
+        </view>
+      </view>
+      <view wx:if="{{isLogin && (role === 1 || role === 5 || role === 20)}}" class="row-item first-row"
+            @tap="GoTo('invoice/invoiceList')">
+        <view class="function-title">发票管理</view>
+        <view class="input-right-mes">
+          <image src="../images/icon-8.png"/>
+        </view>
+      </view>
+      <view wx:if="{{invoiceType === 2 && isLogin && (role === 1 || role === 5 || role === 20)}}" class="row-item first-row"
+            @tap="GoTo('invoice/orderInvoiceList')">
+        <view class="function-title">发票列表</view>
+        <view class="input-right-mes">
+          <image src="../images/icon-8.png"/>
+        </view>
+      </view>
+      <view wx:if="{{isLogin && role === 60}}" class="row-item first-row" @tap="GoTo('manager/myResults')" >
+        <view class="function-title">团队业绩</view>
+        <view class="input-right-mes">
+          <image src="../images/icon-8.png" />
+        </view>
+      </view>
+      <view wx:if="{{isLogin && role === 50}}" class="row-item first-row" @tap="GoTo('manager/achievement')" >
+        <view class="function-title">业绩</view>
+        <view class="input-right-mes">
+          <image src="../images/icon-8.png" />
+        </view>
+      </view>
+      <view wx:if="{{isLogin && role >= 50}}" class="row-item first-row" @tap="GoTo('customers')" >
+        <view class="function-title">客户</view>
+        <view class="input-right-mes">
+          <image src="../images/icon-8.png" />
+        </view>
+      </view>
+      <view  class="row-item first-row" @tap="onTel">
+        <view class="function-title" >客服服务</view>
+        <view class="item-content tip-show">0731-89908283</view>
+      </view>
+      <view class="row-item first-row row-message" @tap="GoTo('message')" >
+        <view class="function-title">消息</view>
+        <view class="input-right-mes">
+          <view class="redRing" wx:if="{{IsRead}}"></view>
+          <image src="../images/icon-8.png" />
+        </view>
+      </view>
+      <view class="row-item first-row" @tap="GoTo('manager/feature')" >
+        <view class="function-title">版本</view>
+        <view class="input-right-mes">
+          <image src="../images/icon-8.png" />
+        </view>
+      </view>
+    </view>
+    <!--<navbar active="4"></navbar>-->
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+import lf from 'lf'
+import navbar from '../components/navbar'
+// import { SERVER_BAS_URL } from '../js/define'
+import commonMixin from '../mixins/common'
+
+export default class Test extends wepy.page {
+  config = {
+    backgroundTextStyle: 'light',
+    navigationBarBackgroundColor: '#cf0210',
+    navigationBarTitleText: '我的',
+    navigationBarTextStyle: 'white',
+    usingComponents: {
+      'van-icon': '/components/vant/icon/index',
+      'van-popup': '/components/vant/popup/index',
+      'van-cell-group': '/components/vant/cell-group/index',
+      'van-swipe-cell': '/components/vant/swipe-cell/index',
+      'van-cell': '/components/vant/cell/index'
+    }
+  }
+  components = {
+    navbar
+  }
+  mixins = [commonMixin]
+  data = {
+    isLogin: false,
+    phone: '0731-89908283',
+    score: 0,
+    role: 1,
+    IsRead: false,
+    all: 0,
+    returnAll: 0,
+    unpay: 0,
+    unsend: 0,
+    unreceive: 0,
+    // 0-关闭发票功能 1-京东模式(支付时出现发票) 2-滴滴模式(订单完成后统一开票)
+    invoiceType: 2
+  }
+  computed = {}
+  methods = {
+    onTel () {
+      wx.makePhoneCall({
+        phoneNumber: this.phone
+      })
+    },
+    GoTo (path) {
+      if (path !== 'manager/feature' && !this.isLogin) {
+        path = 'login'
+      }
+      wepy.navigateTo({
+        url: path
+      })
+    }
+  }
+  events = {}
+
+  async getScore () {
+    try {
+      const r = await lf.net.post('/Api/distributor/integral_detail', {})
+      if (r.code === 200) {
+        this.score = r.data.jefen
+        // 查询积分
+        this.$apply()
+      } else {
+        wepy.showToast({
+          title: r.info,
+          icon: 'none'
+        })
+      }
+    } catch (e) {
+      wepy.showToast({
+        title: '系统内部错误',
+        icon: 'none'
+      })
+    }
+  }
+  async getReadMessage () {
+    var data = {
+      page_start: 0,
+      page_size: 30
+    }
+    try {
+      const r = await lf.net.post('/api/member/message_list', data)
+      if (r.code === 200) {
+        if (r.data && r.data.list) {
+          let mlist = r.data.list || []
+          if (mlist.length === 0) {
+            this.IsRead = false
+            this.$apply()
+            return false
+          }
+          let flag = false
+          for (var i = 0; i < mlist.length; i++) {
+            if (Number(mlist[i].is_read) !== 1) {
+              flag = true
+              break
+            }
+          }
+          this.IsRead = flag
+          this.$apply()
+        }
+      } else {
+        wepy.showToast({
+          title: r.info,
+          icon: 'none'
+        })
+      }
+    } catch (e) {
+      wepy.showToast({
+        title: e.toString(),
+        icon: 'none'
+      })
+    }
+  }
+  async getConfig () {
+    const result = await lf.net.post('api/public/system_config', {})
+    if (result.code === 200) {
+      if (!parseInt(result.data.invoice_open)) {
+        this.invoiceType = 0
+        return
+      }
+      this.invoiceType = parseInt(result.data.invoice_type)
+    } else {
+      lf.toast(result.info)
+    }
+  }
+  async getOrderStatus () {
+    // 订单状态(10:待付款 20:待发货 30:待收货 )
+    lf.log.info('getOrderStatus---------')
+    var sendOrder = {
+      // all: -1,
+      'unpay': 10,
+      'unsend': 20,
+      'unreceive': 30
+    }
+    const {order, retrunOrder} = await wepy.$instance.showOrderRedDot()
+    this.all = order
+    this.returnAll = retrunOrder
+    if (lf.user.getRole() <= 20) {
+      for (var key in sendOrder) {
+        let param = {
+          order_status: sendOrder[key],
+          page_start: 0,
+          page_size: 10
+        }
+        if (sendOrder[key] === -1) {
+          delete param.order_status
+        }
+        const result = await lf.net.post('/Api/Order/order_list', param)
+        if (result.code === 200) {
+          var num = result.data.num ? parseInt(result.data.num) : 0
+          this[key] = num <= 99 ? num : '+99'
+        }
+      }
+      this.$apply()
+    }
+  }
+
+  getNextPath(options) {
+    let urlList = ['audit/sendGoodsInfo']
+    for (let i = 0; i < urlList.length; i++) {
+      if (urlList[i].indexOf(options.url) !== -1) {
+        return urlList[i]
+      }
+    }
+  }
+
+  onLoad (options) {
+    if (options.orderId) {
+      wepy.navigateTo({
+        url: `myOrderInfo?orderId=${options.orderId}`
+      })
+    }
+    this.role = lf.user.getRole()
+  }
+
+  onShow () {
+    this.$parent.changeTabbar()
+    this.isLogin = lf.user.isLogin()
+    this.role = lf.user.getRole()
+    if (this.isLogin) {
+      this.getReadMessage()
+      this.getScore()
+      this.getOrderStatus()
+      this.getConfig()
+    }
+  }
+}
+</script>

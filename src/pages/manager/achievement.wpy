@@ -1,0 +1,323 @@
+<style lang="scss">
+  @import "../../css/common";
+
+  page {
+    height: 100%;
+  }
+  .myResults-container{
+    view{
+      box-sizing: border-box;
+      font-family: PingFangSC-Medium;
+    }
+    text{
+      box-sizing: border-box;
+    }
+    .swiper-tab {
+      width: 100%;
+      text-align: center;
+      font-size: torpx(30);
+      display: flex;
+      flex-flow: row;
+      justify-content: space-between;
+      position: absolute;
+      background-color: #cf0210;
+      height:torpx(215);
+      z-index:1;
+    }
+    .swiper-tab-item {
+      background-color: #cf0210;
+      width: 25%;
+      color: #ffffff;
+      text-align: center;
+      padding:torpx(30) 0 torpx(40);
+      box-sizing: border-box;
+      text{
+        padding-bottom:torpx(15);
+      }
+    }
+    .active {
+      color: #fff;
+      text{
+        border-bottom: torpx(3) solid #fff;
+      }
+    }
+
+    .swiper-box {
+      display: block;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      padding-top: torpx(90);
+      box-sizing: border-box;
+      overflow: scroll;
+      &-item {
+        margin-bottom: torpx(20);
+        overflow: scroll;
+      }
+    }
+
+    scroll-view {
+      height: 100%;
+    }
+    .myResults-content{
+      position: relative;
+      padding-top:torpx(250);
+      .header{
+        padding:0 torpx(19);
+        position: absolute;
+        top:torpx(105);
+        left:0;
+        width:100%;
+        z-index:2;
+        .contens{
+          width:100%;
+          background-color: #fff;
+          box-shadow: 0 torpx(3) torpx(7) 0px
+          rgba(0, 0, 0, 0.1);
+          border-radius: torpx(10);
+          .contens-item{
+            list-style: none;
+            box-sizing: border-box;
+            width: 33.3333%;
+            height: torpx(151);
+            text-align: center;
+            float: left;
+            padding:torpx(29) 0 torpx(38);
+            text {
+              color: #cf0210;
+              font-size: torpx(30);
+              display: block;
+              line-height:torpx(24);
+              width:100%;
+            }
+            .p-number {
+              padding-top:torpx(28);
+              font-family: PingFang-SC-Heavy;
+              font-size: torpx(36);
+              border-right: torpx(1) solid rgba(46,188,136,0.2);
+              font-size: torpx(44);
+              line-height: torpx(44);
+              font-weight: 500;
+            }
+          }
+          .contens-item:last-child {
+            .p-number{
+              border: none;
+            }
+          }
+        }
+      }
+      .list{
+        padding:0 torpx(20);
+        .list-tab{
+          .tab-item{
+            float: left;
+            text-align: center;
+            font-size: torpx(22);
+            color: #999;
+            padding:torpx(20) 0;
+          }
+          .tab-item-1{
+            width: 26%;
+          }
+          .tab-item-2{
+            width:25%;
+          }
+          .tab-item-3{
+            width:25%;
+          }
+          .tab-item-4{
+            width:24%;
+          }
+        }
+        .list-content{
+          background-color: #fff;
+          border-radius: torpx(5);
+          margin-bottom: torpx(3);
+          display:flex;
+          padding: torpx(22) 0;
+          .content-item{
+            text-align: center;
+            font-size: torpx(24);
+            color: #333;
+            word-wrap:break-word;
+            display:flex;
+            align-items:center;
+            justify-content: center;
+            word-wrap: break-word;
+            word-break: normal;
+            flex-wrap: wrap;
+            word-break: break-all;
+          }
+          .content-item-1{
+            text-align:left;
+            padding-left:torpx(20);
+            justify-content:flex-start;
+            flex: 2.6 0 0;
+            image{
+              width: torpx(68);
+              height: torpx(68);
+              border-radius: 50%;
+              vertical-align: middle;
+              margin-right: torpx(8);
+            }
+          }
+          .content-item-2{
+            font-weight: 500;
+            flex: 2.5 0 0;
+          }
+          .content-item-3{
+            font-weight: 500;
+            flex: 2.5 0 0;
+          }
+          .content-item-4{
+            color: #999;
+            flex: 2.4 0 0;
+          }
+        }
+      }
+    }
+  }
+</style>
+<template>
+  <view class="myResults-container">
+    <view class="swiper-tab">
+      <view class="swiper-tab-item {{currentTab==0?'active':''}}" data-current="0" bindtap="clickTab(0)">
+        <text>本月</text>
+      </view>
+      <view class="swiper-tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="clickTab(1)">
+        <text>本季度</text>
+      </view>
+      <view class="swiper-tab-item {{currentTab==2?'active':''}}" data-current="2" bindtap="clickTab(2)">
+        <text>本年度</text>
+      </view>
+      <view class="swiper-tab-item {{currentTab==3?'active':''}}" data-current="3" bindtap="clickTab(3)">
+        <text>全部</text>
+      </view>
+    </view>
+    <view class="myResults-content" wx:for="{{array}}" wx:for-item="item"  wx:for-index="index" wx:key="unique" wx:if="{{currentTab === index}}">
+      <view class="header">
+        <view class="contens clearfix">
+          <view class="contens-item">
+            <text>销售额</text>
+            <text class="p-number"> {{total_amount}}</text>
+          </view>
+          <view class="contens-item">
+            <text>客户数</text>
+            <text class="p-number"> {{customer_cnt}}</text>
+          </view>
+          <view class="contens-item">
+            <text>成交订单数</text>
+            <text class="p-number"> {{order_cnt}}</text>
+          </view>
+        </view>
+      </view>
+      <view class="list" wx:if="{{orders.length >0}}">
+        <view class="list-tab clearfix">
+          <view class="tab-item tab-item-1">客户</view>
+          <view class="tab-item tab-item-2">销售额</view>
+          <view class="tab-item tab-item-3">订购货品数</view>
+          <view class="tab-item tab-item-4">时间</view>
+        </view>
+        <view class="list-content clearfix" wx:for="{{orders}}" wx:for-item="item" wx:key="unique">
+          <view class="content-item content-item-1">
+            <!--<image class='header-image' src="{{item.member_avatar? item.member_avatar : cusimage}}"></image>-->
+            {{item.customers_name}}</view>
+          <view class="content-item content-item-2">{{item.order_amount}}</view>
+          <view class="content-item content-item-3">{{item.item_cnt}}</view>
+          <view class="content-item content-item-4">{{item.addtime}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+import lf from 'lf'
+
+export default class Achievement extends wepy.page {
+  config = {
+    navigationBarTitleText: '我的业绩',
+    navigationBarTextStyle: 'black',
+    backgroundTextStyle: 'light',
+    navigationBarBackgroundColor: '#fff',
+    usingComponents: {
+      'van-area': '/components/vant/area/index',
+      'van-popup': '/components/vant/popup/index'
+    }
+  }
+  data = {
+    array: [0, 1, 2, 3],
+    currentTab: 0,
+    total_amount: '',
+    customer_cnt: '',
+    order_cnt: '',
+    orders: [],
+    cusimage: ''
+  }
+
+  computed = {
+  }
+
+  methods = {
+    clickTab(number) {
+      if (this.currentTab === Number(number)) {
+        return false
+      } else {
+        let types
+        this.currentTab = Number(number)
+        switch (this.currentTab) {
+          case 0:
+            types = 0
+            break
+          case 1:
+            types = 10
+            break
+          case 2:
+            types = 20
+            break
+          case 3:
+            types = 100
+            break
+          default:
+        }
+        this.getDatas(types)
+      }
+      this.$apply()
+    }
+  }
+  events = {}
+  async getDatas (type) {
+    try {
+      const res = await lf.net.post('/Api/seller/performance', {
+        type: type
+      })
+      if (res.code === 200) {
+        this.total_amount = res.data.performance.total_amount || 0
+        this.customer_cnt = res.data.performance.customer_cnt || 0
+        this.order_cnt = res.data.performance.order_cnt || 0
+        this.orders = res.data.orders || []
+        this.orders.forEach(v => {
+          v.addtime = v.addtime.slice(0, 10)
+        })
+        this.$apply()
+      } else {
+        wepy.showToast({
+          title: res.info,
+          icon: 'none'
+        })
+      }
+    } catch (e) {
+      wepy.showToast({
+        title: '操作失败',
+        icon: 'none'
+      })
+    }
+  }
+
+  onLoad () {
+    this.getDatas(0)
+  }
+}
+</script>

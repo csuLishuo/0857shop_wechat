@@ -1,0 +1,231 @@
+<style lang="less">
+  page{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  ::-webkit-scrollbar{
+    width: 0;
+    height: 0;
+    color: transparent;
+  }
+  .rejected{
+    .re_reason{
+      color: #888;
+      font-size: 24rpx;
+      line-height: 60rpx;
+      padding-left: 30rpx;
+      background-color: #f7f7f7;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    .rejectedScroll{
+      height: 100%;
+      padding-top: 60rpx;
+      box-sizing: border-box;
+      .rejectedItem{
+        padding:0 30rpx;
+        box-sizing: border-box;
+        height: 98rpx;
+        background-color: white;
+        border-bottom: 1rpx solid #ddd;
+        display: flex;
+        justify-content: flex-start;
+        .selectImage{
+          width: 45rpx;
+          height: 100%;
+          margin-right: 20rpx;
+          position: relative;
+          .img{
+            width: 100%;
+            height: 45rpx;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+          }
+        }
+        .reason{
+          flex: 1;
+          font-size: 30rpx;
+          color: #333;
+          .content{
+            line-height: 95rpx;
+          }
+          .textarea{
+            width:100%;
+            height: 200rpx;
+          }
+        }
+      }
+      .sureBtn{
+        width: 670rpx;
+        margin-left: 40rpx;
+        height: 90rpx;
+        background-color: #cf000e;
+        text-align: center;
+        line-height: 90rpx;
+        color: white;
+        font-size: 32rpx;
+        margin-top: 50rpx;
+        border-radius: 14rpx;
+      }
+    }
+  }
+
+.lastItem{
+    border-bottom: none!important;
+    height: 230rpx!important;
+    padding-top: 30rpx!important;
+  }
+  .lastSelectImg{
+    top:20rpx!important;
+  }
+</style>
+<template>
+  <view class="rejected" style="padding-bottom: {{isPx?'80rpx':'0'}}">
+    <view class="re_reason">选择原因</view>
+    <scroll-view scroll-y="true" class="rejectedScroll">
+      <block wx:for="{{reasonList}}" wx:key="unique" wx:for-index="index">
+          <view class="rejectedItem {{index === reasonList.length-1?'lastItem':''}}" @tap="selectReason({{index}})">
+            <view class="selectImage">
+              <image class="img {{index === reasonList.length-1?'lastSelectImg':''}}" src="{{index === selectIndex?'./../../images/salesman/select.png':'./../../images/salesman/no_select.png'}}"></image>
+            </view>
+            <view class="reason">
+              <text wx:if="{{index !== reasonList.length-1}}" class="content">{{item.title}}</text>
+              <textarea wx:else class="textarea" placeholder="请填写其他原因" bindinput="getOtherReason" ></textarea>
+            </view>
+          </view>
+      </block>
+      <view class="sureBtn" bindtap="sureReason">确认</view>
+    </scroll-view>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+import lf from 'lf'
+import CommonMixin from '../../mixins/common'
+
+export default class MjRejected extends wepy.page {
+  config = {
+    backgroundTextStyle: 'light',
+    navigationBarBackgroundColor: '#cf000e',
+    navigationBarTitleText: '拒绝理由',
+    navigationBarTextStyle: 'white',
+    usingComponents: {}
+  };
+  mixins = [CommonMixin]
+  components = {};
+  data = {
+    isPx: false,
+    selectIndex: '',
+    order_id: null,
+    otherReason: '',
+    reasonList: [ ]
+  };
+
+  onLoad(option) {
+    this.order_id = option.id
+  }
+  onShow() {
+    this.isPx = lf.util.isPx(this)
+    this.denyReason()
+  }
+  methods = {
+    selectReason(index) {
+      this.selectIndex = +index
+      this.$apply()
+    },
+    getOtherReason(ev) {
+      this.otherReason = ev.detail.value
+      this.$apply()
+    }
+  };
+  async denyReason () {
+    try {
+      const res = await lf.net.post('/Api/order/dealer_back_result_list')
+      if (res.code === 200) {
+        if (res.data.list && Array.isArray(res.data.list) && res.data.list.length > 0) {
+          let data = res.data.list
+          let createNewArr = []
+          data.forEach((item, index) => {
+            var obj = {
+              title: item,
+              id: index
+            }
+            createNewArr.push(obj)
+          })
+          this.reasonList = createNewArr
+        } else {
+          wepy.showToast({
+            title: '数据错误',
+            icon: 'none'
+          })
+        }
+        this.$apply()
+      } else {
+        wepy.showToast({
+          title: res.info,
+          icon: 'none'
+        })
+      }
+    } catch (err) {
+      console.error(err)
+      wepy.showToast({
+        title: '发生错误',
+        icon: 'none'
+      })
+    }
+  }
+  async sureReason () {
+    try {
+      if (this.selectIndex === '') {
+        return wepy.showToast({
+          title: '请选择一个原因',
+          icon: 'none',
+          duration: 2000
+        })
+      }
+      if (this.selectIndex === this.reasonList.length - 1 && this.otherReason === '') {
+        return wepy.showToast({
+          title: '请填写其他原因',
+          icon: 'none',
+          duration: 2000
+        })
+      }
+      var reason
+      if (this.selectIndex === this.reasonList.length - 1) {
+        reason = this.otherReason
+      } else {
+        reason = this.reasonList[this.selectIndex].title
+      }
+      let parma = {
+        id: this.order_id,
+        message: reason
+      }
+      const r = await lf.net.post('/Api/Factory/order_check_back', parma)
+      if (r.code === 200) {
+        wepy.showToast({
+          title: '操作成功',
+          icon: 'none'
+        })
+        wx.navigateBack({
+          delta: 1
+        })
+      } else {
+        wepy.showToast({
+          title: r.info,
+          icon: 'none'
+        })
+      }
+    } catch (err) {
+      wepy.showToast({
+        title: '发生错误',
+        icon: 'none'
+      })
+    }
+  }
+}
+</script>

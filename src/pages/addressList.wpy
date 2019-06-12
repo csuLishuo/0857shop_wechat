@@ -1,0 +1,355 @@
+<style lang="less">
+  page{
+    background: #f5f5f5;
+  }
+  ::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    color: transparent;
+  }
+  .addNewAddress{
+    position: relative;
+    .scroll_y{
+      padding-top: 2rpx;
+      box-sizing: border-box;
+    }
+    .btn{
+      font-size: 32rpx;
+      color: white;
+      text-align: center;
+      line-height: 100rpx;
+      background: #cf0120;
+      width: 670rpx;
+      border-radius: 10rpx;
+      margin: 60rpx auto 20rpx;
+    }
+  }
+  .addressItem{
+    width: 100%;
+    padding-left: 30rpx;
+    padding-right: 40rpx;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    .content{
+      flex: 1;
+      font-size: 28rpx;
+      padding-bottom: 30rpx;
+      .baseInfo{
+        font-size: 30rpx;
+        color: #333;
+        padding: 30rpx 0rpx 24rpx;
+        /*border-bottom: 1rpx solid #f0f0f0;*/
+        display: flex;
+        justify-content:flex-start;
+        .selectAddress {
+          display: flex;
+          justify-content: flex-start;
+          .selectImgAddress {
+            width: 36rpx;
+            height: 36rpx;
+            display: block;
+            margin-right: 15rpx;
+            align-self: center;
+          }
+        }
+        .op{
+          /*margin-right: 30rpx;*/
+          margin-right: 90rpx;
+          align-self: center;
+          max-width: 330rpx;
+        }
+
+      }
+      .detailInfo{
+        /*height: 145rpx;*/
+        /*line-height: 145rpx;*/
+        height: 100rpx;
+        line-height: 50rpx;
+        padding-left: 46rpx;
+        padding-right: 64rpx;
+        box-sizing: border-box;
+        color: #666;
+        width: 100%;
+        .mR {
+          color: #cf000e;
+          font-size: 24rpx;
+          padding: 2rpx 12rpx;
+          background: #f8d9db;
+          border-radius: 8rpx;
+          margin-right: 22rpx;
+        }
+        .desAddress {
+          word-break: break-all;
+          line-break: anywhere;
+          word-wrap: break-word;
+        }
+      }
+    }
+    .enditeIMG{
+      width: 34rpx;
+      height: 37rpx;
+
+    }
+  }
+  .operte{
+    width: 64px;
+    height: 100%;
+    color: white;
+    font-size: 40rpx;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    line-height: 200rpx;
+    /*.editAddress {*/
+      /*width: 64px;*/
+      /*height: 100%;*/
+      /*background: #dbb47b;*/
+    /*}*/
+    .delect{
+      flex: 1;
+      background: #cf0210;
+    }
+  }
+</style>
+<template>
+  <view class="addNewAddress">
+    <scroll-view scroll-y="true" class="scroll_y" style="height: 100%;padding-bottom: {{ isPx?'80rpx': '0rpx'}}">
+      <block wx:for="{{allAddress}}" wx:key="unique" wx:for-item="item">
+        <van-swipe-cell right-width="{{ 64 }}">  <!--128-->
+          <view class="addressItem">
+            <view class="content">
+              <view class="baseInfo">
+                <view class="selectAddress">
+                  <image @tap="selectAddress" data-d="{{item}}" data-index="{{index}}" class="selectImgAddress" src="{{item.flag? './../images/addressSelected.png': './../images/addressNoSelected.png'}}"></image>
+                  <text class="op ellipsis-1">{{item.name}}</text>
+                </view>
+                <text>{{item.mobile}}</text>
+                <!--<image bind:tap="goToEdit({{item.id}})" class="img" src="./../images/edit.jpg"></image>-->
+              </view>
+              <view class="detailInfo ellipsis-2">
+                <text wx:if="{{item.flag && !isSelect}}" class="mR">默认</text>
+                <!--</text>{{item.district}}{{item.addr}}-->
+                <text class="desAddress">{{item.district}}{{item.addr}}</text>
+              </view>
+            </view>
+            <image bind:tap="goToEdit({{item.id}})" class="enditeIMG" src="./../images/addressMofit.png"></image>
+          </view>
+          <view slot="right" class="operte" >
+            <!--<view class="editAddress" bind:tap="goToEdit({{item.id}})">编辑</view>-->
+            <view class="delect" data-id="{{index}}" bind:tap="delect">删除</view>
+          </view>
+        </van-swipe-cell>
+      </block>
+      <view>{{s}}</view>
+      <view class="btn" bind:tap="addNew">{{btn}}</view>
+    </scroll-view>
+  </view>
+</template>
+<script>
+import wepy from 'wepy'
+import lf from 'lf'
+export default class addressList extends wepy.page {
+  config = {
+    navigationBarBackgroundColor: '#fff',
+    navigationBarTitleText: '地址列表',
+    navigationBarTextStyle: 'black',
+    // enablePullDownRefresh: true,
+    usingComponents: {
+      'van-popup': '/components/vant/popup/index',
+      'van-cell': '/components/vant/cell/index',
+      'van-cell-group': '/components/vant/cell-group/index',
+      'van-swipe-cell': '/components/vant/swipe-cell/index',
+      'van-dialog': '/components/vant/dialog/index'
+    }
+  }
+  components = { }
+  data = {
+    allAddress: [],
+    isPx: false,
+    isSelect: false,
+    btn: null
+  }
+
+  onLoad (option) {
+    this.isSelect = option.select
+    this.isPx = lf.util.isPx(this)
+  }
+  onShow () {
+    this.getAddressList()
+    this.$apply()
+  }
+  methods = {
+    goToEdit(id) {
+      wx.navigateTo({
+        url: 'editAddress?id=' + id
+      })
+    }
+  }
+  onPullDownRefresh () {
+    this.allAddress = []
+    this.getAddressList()
+    wx.stopPullDownRefresh()
+  }
+  async selectAddress (e) {
+    let titelTxt = this.isSelect ? '已选择' : '已是默认地址'
+    let index = e.currentTarget.dataset.index
+    if (this.allAddress[index].flag) {
+      return lf.toast(titelTxt)
+    }
+    this.allAddress.forEach(v => {
+      v.flag = false
+    })
+    this.allAddress[index].flag = !this.allAddress[index].flag
+    if (this.isSelect === '1') {
+      lf.storage.set('address', JSON.stringify(this.allAddress[index]))
+      return false
+    }
+    if (this.isSelect === 'invoice') {
+      lf.storage.set('addr', JSON.stringify(this.allAddress[index]))
+      return false
+    }
+    let status = this.allAddress[index].flag ? 1 : 0
+    let { id } = e.currentTarget.dataset.d
+    var submitData = {
+      id: id,
+      status: status
+    }
+    try {
+      const r = await lf.net.post('/Api/member/member_set_default', submitData)
+      wepy.hideLoading()
+      if (r.code === 200) {
+        wx.showToast({
+          title: '设置成功',
+          duration: 1000
+        })
+      } else {
+        wepy.showToast({
+          title: r.info,
+          icon: 'none'
+        })
+      }
+    } catch (e) {
+      wepy.showToast({
+        title: '系统内部错误',
+        icon: 'none'
+      })
+    }
+  }
+  delect(e) {
+    let index = e.currentTarget.dataset.id
+    let that = this
+    wx.showModal({
+      title: '提示',
+      content: '确认删除该地址?',
+      showCancel: true,
+      success: res => {
+        if (res.confirm) {
+          let id = that.allAddress[index].id
+          that.delectAssress(id)
+          this.$apply()
+        }
+      }
+    })
+  }
+  async delectAssress (id) {
+    try {
+      const r = await lf.net.post('/Api/member/member_address_del', {id: id})
+      if (r.code === 200) {
+        wepy.showToast({
+          title: '操作成功',
+          icon: 'none'
+        })
+        this.getAddressList()
+      } else {
+        wepy.showToast({
+          title: r.info,
+          icon: 'none'
+        })
+      }
+      this.$apply()
+    } catch (e) {
+      wepy.showToast({
+        title: '发生错误',
+        icon: 'none'
+      })
+    }
+  }
+  async addNew (id) {
+    if (this.isSelect) {
+      this.backPage()
+    } else {
+      this.goToNewAddress()
+    }
+  }
+  backPage() {
+    wepy.navigateBack({
+      delta: 1
+    })
+  }
+  goToNewAddress() {
+    wx.navigateTo({
+      url: 'editAddress'
+    })
+  }
+  async getAddressList () {
+    try {
+      const r = await lf.net.post('/Api/member/member_address_list', {
+        page_start: 0,
+        page_size: 100
+      })
+      wepy.hideLoading()
+      if (r.code === 200) {
+        this.allAddress = []
+        if (r.data.list === null || r.data.list.length <= 0) {
+          let title = this.isSelect ? '选择地址' : '收货地址'
+          this.isSelect = false
+          this.btn = '添加新地址'
+          wepy.setNavigationBarTitle({
+            title
+          })
+          this.$apply()
+          return false
+        }
+        r.data.list.forEach(v => {
+          if (+v.status === 1) {
+            v.flag = true
+            if (this.isSelect === '1') {
+              lf.storage.set('address', JSON.stringify(v))
+            }
+            if (this.isSelect === 'invoice') {
+              lf.storage.set('addr', JSON.stringify(v))
+            }
+          } else {
+            v.flag = false
+          }
+          // v.mobile = `${v.mobile.substr(0, 3)}-${v.mobile.substr(3, 4)}-${v.mobile.substr(7, 4)}`
+        })
+        this.allAddress = r.data.list
+        let title = this.isSelect ? '选择地址' : '收货地址'
+        this.btn = this.isSelect ? '确认' : '添加新地址'
+        wepy.setNavigationBarTitle({
+          title
+        })
+      } else {
+        wepy.showToast({
+          title: r.info,
+          icon: 'none'
+        })
+      }
+      this.$apply()
+    } catch (e) {
+      wepy.showToast({
+        title: '发生了错误',
+        icon: 'none'
+      })
+    }
+  }
+  onReady () { }
+  onUnload () {
+    this.allAddress = []
+  }
+}
+</script>

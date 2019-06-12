@@ -1,0 +1,310 @@
+<style lang="scss">
+  @import "../../css/common";
+  ::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    color: transparent;
+  }
+  page {
+    background-color: #f3f3f3;
+    height: 100vmax;
+    box-sizing: border-box;
+  }
+  .nav {
+    position: fixed;
+    left: 0;
+    top: torpx(0);
+    z-index: 9999;
+    width: 100%;
+    height: torpx(104);
+    border-top: 1px solid #dcd8d8;
+    border-bottom: 1px solid #dcd8d8;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    .navitem {
+      flex: 1;
+      text-align: center;
+      box-sizing: border-box;
+      height: 100%;
+      line-height: torpx(102);
+    }
+    .navSelect {
+      border-bottom: 2px solid #cf000e;
+    }
+  }
+.invoiceList {
+  border-top: 1px solid #d8d8d8;
+  height: 100%;
+  box-sizing: border-box;
+  .scroll_y {
+    height: 100%;
+    padding-bottom: torpx(112);
+    padding-top: torpx(104);
+    box-sizing: border-box;
+    .invoiceListItem {
+      background-color: white;
+      padding: torpx(60) torpx(60) torpx(20);
+      margin-bottom: torpx(35);
+      .invoiceMain {
+        padding-bottom: torpx(35);
+        border-bottom: 1px solid #d8d8d8;
+        .title {
+          font-size: torpx(38);
+          font-weight: bold;
+        }
+        .enterprise {
+          font-size: torpx(34);
+        }
+        .number {
+          font-size: torpx(30);
+        }
+      }
+      .setting {
+        display: flex;
+        justify-content: space-between;
+        height: torpx(86);
+        .left {
+          display: flex;
+          height: 100%;
+          align-items: center;
+          font-size: torpx(30);
+          .invoiceCir {
+            width: torpx(46);
+            height: torpx(46);
+            margin-right: torpx(15);
+          }
+        }
+        .right {
+          font-size: torpx(30);
+          display: flex;
+          .edit {
+            margin-right: torpx(70);
+            display: flex;
+            align-items: center;
+            height: 100%;
+            .editImg {
+              width: torpx(30);
+              height: torpx(34);
+              margin-right: torpx(15);
+            }
+          }
+          .detele {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            .deteleImg {
+              width: torpx(32);
+              height: torpx(34);
+              margin-right: torpx(15);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .btn {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: torpx(108);
+    padding: 0 torpx(38);
+    box-sizing: border-box;
+    width: 100%;
+    .bit {
+      height: torpx(88);
+      width: 100%;
+      background: linear-gradient(90deg, rgba(207, 0, 14, 1), rgba(239, 98, 39, 1));
+      box-shadow: 0px 4px 8px 0px rgba(226, 7, 0, 0.34);
+      border-radius: torpx(10);
+      text-align: center;
+      color: white;
+      line-height: torpx(88);
+    }
+  }
+  .noData {
+    color: grey;
+    font-size: torpx(50);
+    width: 100%;
+    text-align: center;
+    margin-top: torpx(50);
+  }
+
+}
+</style>
+<template>
+  <view class="invoiceList">
+    <view class="nav">
+      <block wx:for="{{nav}}" wx:key="unique">
+        <view @tap="selectNav({{index}})" class="navitem {{navSelect == index? 'navSelect': ''}}">{{item.type}}</view>
+      </block>
+    </view>
+    <scroll-view scroll-y class="scroll_y" style="padding-bottom: {{isPx? '192rpx': '112rpx'}}" bindscrolltolower="getMoreList">
+        <block  wx:for="{{list}}" wx:key="unique">
+          <view class="invoiceListItem">
+            <view class="invoiceMain">
+              <view class="title">企业纸质增值税{{item.type == 0 ? '普通': '专用'}}发票</view>
+              <view class="enterprise">{{item.title}}</view>
+              <view class="number">{{item.tax_id}}</view>
+            </view>
+            <view class="setting">
+              <view class="left" @tap="isSettingMoren({{item}}, {{index}})">
+                <image class="invoiceCir" src="{{item.is_default == 1? './../../images/addressSelected.png': './../../images/noSelect.png'}}"></image>
+                <text>默认</text>
+              </view>
+              <view class="right">
+                <view class="edit" @tap="edit" data-id="{{item.id}}">
+                  <image class="editImg" src="./../../images/editinvalidism.png"></image>
+                  <text>编辑</text>
+                </view>
+                <view class="detele" data-id="{{item.id}}" @tap="deleteInvoice">
+                  <image class="deteleImg" src="./../../images/deteleinvalidism.png"></image>
+                  <text>删除</text>
+                </view>
+              </view>
+            </view>
+          </view>
+        </block>
+    </scroll-view>
+    <block wx:if="{{list.length <= 0}}">
+      <view class="noData">暂无发票信息</view>
+    </block>
+    <view class="btn" style="bottom: {{isPx? '80rpx': '0'}}">
+      <view class="bit" @tap="edit">
+        + 新增发票内容
+      </view>
+    </view>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+import lf from 'lf'
+export default class invoiceList extends wepy.page {
+  config = {
+    backgroundTextStyle: 'light',
+    navigationBarBackgroundColor: '#fff',
+    navigationBarTitleText: '发票管理',
+    navigationBarTextStyle: 'black',
+    usingComponents: {
+      'van-card': '/components/vant/card/index'
+    }
+  }
+  components = {}
+  mixins = []
+  data = {
+    nav: [
+      {id: 0, type: '增值税普通发票'},
+      {id: 1, type: '增值税专用发票'}
+    ],
+    navSelect: 0,
+    isPx: false,
+    startNum: 0,
+    page_start: 0,
+    page_size: 10,
+    list: [ ],
+    listNum: 0,
+    noMore: false
+  }
+  computed = {}
+  events = {}
+  onLoad (opt) {
+    this.isPx = this.$parent.globalData.isIpx
+    this.$apply()
+  }
+  onUnload() {
+    this.$apply()
+  }
+  methods = {
+    selectNav(index) {
+      this.navSelect = index
+      this.list = []
+      this.getInvoiceList()
+      this.$apply()
+    },
+    isSettingMoren (item, index) {
+      let bol
+      if (+item.is_default === 1) {
+        return lf.toast('已经是默认')
+      } else {
+        bol = 1
+      }
+      let p = {
+        id: item.id,
+        type: this.navSelect,
+        title_type: item.title_type,
+        is_default: bol,
+        title: item.title,
+        tax_id: item.tax_id,
+        reg_mobile: item.reg_mobile,
+        reg_bank: item.reg_bank,
+        reg_bank_account: item.reg_bank_account,
+        reg_address: item.reg_address
+      }
+      lf.net.post('/Api/member/member_invoice_add', p).then(res => {
+        if (res.code === 200) {
+          this.list.forEach((item) => {
+            item.is_default = 0
+          })
+          this.list[index].is_default = 1
+          this.$apply()
+          return lf.toast('设置默认成功')
+        } else {
+          return lf.toast(res.info)
+        }
+      })
+    }
+  }
+  edit(e) {
+    let { id } = e.currentTarget.dataset
+    if (!id) {
+      id = ''
+    }
+    wx.navigateTo({
+      url: './editInvoice?id=' + id
+    })
+  }
+  onShow () {
+    this.getInvoiceList()
+  }
+  getMoreList () {
+    if (+this.listNum !== this.list.length) {
+      this.startNum = this.startNum + 1
+      this.page_start = this.page_size * this.startNum
+      this.getInvoiceList()
+    } else if (+this.listNum === this.list.length && !this.noMore) {
+      this.noMore = true
+      this.$apply()
+      lf.toast('没有更多了')
+    }
+  }
+  async getInvoiceList() {
+    this.list = []
+    this.listNum = 0
+    this.$apply()
+    const r = await lf.net.post('/Api/member/member_invoice_list', {type: this.navSelect, page_start: this.page_start, page_size: this.page_size})
+    if (r.code === 200) {
+      if (r.data.list && r.data.list.length > 0) {
+        this.listNum = r.data.num
+        this.list = this.list.concat(...r.data.list)
+        this.$apply()
+      }
+    } else {
+      lf.toast(r.info)
+    }
+  }
+  deleteInvoice(e) {
+    let { id } = e.currentTarget.dataset
+    lf.net.post('/Api/member/member_invoice_del', {id: id}).then(res => {
+      console.log(res)
+      if (res.code === 200) {
+        lf.toast('删除成功')
+        this.getInvoiceList()
+      } else {
+        lf.toast(res.info)
+      }
+    })
+  }
+}
+</script>

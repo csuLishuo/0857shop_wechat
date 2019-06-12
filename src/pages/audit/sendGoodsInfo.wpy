@@ -1,0 +1,478 @@
+<style lang="scss">
+  @import "../../css/common";
+  page {
+    background-color: #f5f5f5;
+  }
+  .refundAudit {
+    .header {
+      padding: torpx(30);
+      background-color: white;
+      .presonInfo {
+        margin-bottom: torpx(30);
+        >text {
+          font-size: torpx(30);
+          color: black;
+        }
+        .phone {
+          margin-left: torpx(30);
+          color: #999;
+          font-size: torpx(26);
+        }
+      }
+      .address {
+        font-size: torpx(26);
+        color: #666;
+        line-height: torpx(42);
+        width: 100%;
+      }
+    }
+    .placeHolder {
+      margin-bottom: torpx(20);
+      .Pimg {
+        width: 100%;
+        height: torpx(12);
+        display: block;
+      }
+    }
+    .goodsInfo {
+      @extend .WarpS;
+      .item_goods {
+        @extend .item;
+      }
+      .place {
+        height: torpx(20);
+        background-color: #f5f5f5;
+      }
+      .payMethods {
+        border-bottom: none;
+      }
+      .order_num {
+        font-weight: bold;
+        height: torpx(90)!important;
+      }
+      .vanCard {
+        padding: torpx(40);
+        width: 100%;
+        box-sizing: border-box;
+        border-bottom: 1px solid #eee;
+        .cardWarp {
+          display: flex;
+          .imgCard {
+            display: block;
+            width: torpx(150);
+            height: torpx(150);
+            border: 1px solid #eee;
+            border-radius: torpx(10);
+            margin-right: torpx(20);
+          }
+          .contentCard {
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+            justify-content: space-between;
+            .ti_des {
+              .title {
+                font-size: torpx(30);
+                color: #333;
+                font-weight: bold;
+                @extend .ellipsis-2
+              }
+              .des {
+                font-size: torpx(24);
+                color: #999;
+              }
+            }
+            .goodsI {
+              display: flex;
+              justify-content: space-between;
+              .price {
+                font-size: torpx(36);
+                color: #cf0210;
+                .symbol {
+                  font-size: torpx(30);
+                }
+              }
+              .numGoods {
+                font-size: torpx(26);
+                color: #666;
+              }
+            }
+          }
+        }
+      }
+      .postman {
+        .right {
+          font-weight: bold;
+        }
+      }
+      .orderTime {
+        .right {
+          font-weight: bold;
+        }
+      }
+      .goodsPrice {
+        @extend .r
+      }
+    }
+    .btn {
+     padding: torpx(101) torpx(40) torpx(40);
+      .itemBtn {
+        width: 100%;
+        height: torpx(98);
+        display: block;
+      }
+    }
+    .goodsOverww {
+      width: 100%;
+      height: torpx(98);
+      line-height: torpx(98);
+      font-size: torpx(30);
+      color: white;
+      border-radius: torpx(10);
+      background-color: #d40000!important;
+      text-align: center;
+      > view {
+        height: 100%;
+        border-radius: torpx(15);
+      }
+    }
+    .goodsOver {
+      width: 100%;
+      height: torpx(98);
+      line-height: torpx(98);
+      text-align: center;
+      font-size: torpx(30);
+      color: white;
+      display: flex;
+      border-radius: torpx(10);
+      text-align: center;
+      > view {
+        border-radius: torpx(15);
+        background-color: #d40000;
+        flex: 1;
+      }
+    }
+  }
+  .item {
+    padding: 0 torpx(40);
+    height: torpx(100);
+    display: flex;
+    align-items: center;
+    font-size: torpx(26);
+    border-bottom: 1px solid #eee;
+    .left {
+      @extend .l
+    }
+    .right {
+      @extend .f
+    }
+  }
+  .WarpS {
+    box-sizing: border-box;
+    background-color: white;
+    margin-bottom: torpx(32);
+  }
+  .l {
+    width: torpx(150);
+  }
+  .r {
+    .right{
+      color: #000;
+      font-weight: bold;
+      font-size: torpx(30);
+      .symbol {
+        font-size: torpx(26);
+      }
+    }
+  }
+  .f {
+    flex: 1;
+    text-align: right;
+    white-space:normal;
+    word-wrap:break-word;
+    word-break:break-all;
+  }
+</style>
+<template>
+  <view class="refundAudit">
+    <view class="header">
+      <view class="presonInfo">
+        <text>收货人：</text><text>{{goodsInfo.receiver_name}}</text><text class="phone">{{goodsInfo.receiver_mobile}}</text>
+      </view>
+      <view class="address">
+        {{goodsInfo.district}}{{goodsInfo.addr}}
+      </view>
+    </view>
+    <view class="placeHolder">
+      <image src="./../../images/MyOrderStrip.jpg" class="Pimg"></image>
+    </view>
+    <view class="goodsInfo">
+      <view class="item_goods order_num">订单号: {{goodsInfo.order_no}}</view>
+      <block wx:for="{{goodsInfo.order_item_list}}" wx:key="unique">
+        <view class="vanCard" @tap="goToInfo({{item.goods_id}})">
+          <view class="cardWarp">
+            <image class="imgCard" mode="aspectFit" src="{{item.goods_cover_url}}"></image>
+            <view class="contentCard">
+              <view class="ti_des">
+                <view class="title">{{item.goods_title}}</view>
+                <view class="des">{{item.cate_id_text}}</view>
+              </view>
+              <view class="goodsI">
+                <view class="price"><text class="symbol">￥</text><text>{{item.discount_amount}}</text></view>
+                <view class="numGoods">
+                  <text>x</text><text>{{item.number}}</text>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </block>
+      <view class="item_goods postman">
+        <view class="left">
+          配送方式
+        </view>
+        <view class="right">
+          <text wx:if="{{goodsInfo.is_pickup - 0 === 1}}">自提</text>
+          <text wx:else>快递 ￥{{goodsInfo.delive_amount}}</text>
+        </view>
+      </view>
+      <view class="item_goods orderTime">
+        <view class="left">
+          订单时间
+        </view>
+        <view class="right">
+          {{goodsInfo.uptime}}
+        </view>
+      </view>
+      <view class="item_goods goodsPrice">
+        <view class="left">
+          商品金额
+        </view>
+        <view class="right">
+          <text class="symbol">￥</text>
+          <text>{{allMoney}}</text>
+        </view>
+      </view>
+      <view class="place"></view>
+      <view class="item_goods payMethods">
+        <view class="left">
+          支付方式
+        </view>
+        <view class="right">
+          微信支付
+        </view>
+      </view>
+    </view>
+    <view class="btn" wx:if="{{role == 60 && goodsInfo.order_status == 20 && goodsInfo.return_status == 0 && goodsInfo.is_pickup == 0}}">
+      <view class="goodsOver" wx:if="{{goodsInfo.delive_status <= 10}}">
+        <view @tap="goodsOver">拣货完毕</view>
+      </view>
+      <view class="goodsOver" wx:if="{{goodsInfo.delive_status == 15 && goodsInfo.is_called != 1}}">
+        <view @tap="callCourier" style="margin-right: 15rpx;background-color: #a71c1c">呼叫快递</view>
+        <view @tap="sendGoods">商家配送</view>
+      </view>
+      <view class="goodsOver" wx:if="{{goodsInfo.delive_status == 15 && goodsInfo.is_called == 1}}">
+        <view @tap="callCourier">继续呼叫</view>
+      </view>
+      <view class="goodsOver" wx:if="{{goodsInfo.delive_status == 20 && goodsInfo.is_called == 1}}">
+        <view style="color: #ccc;background-color: grey">已经接单</view>
+      </view>
+      <!--<image class="itemBtn" wx:if="{{goodsInfo.delive_status == 15}}" src="./../../images/10_03.png" @tap="sendGoods"></image>-->
+    </view>
+    <view class="btn" wx:if="{{role == 60 && goodsInfo.order_status == 20 && goodsInfo.return_status == 0 && goodsInfo.is_pickup == 1}}">
+      <view class="goodsOverww" wx:if="{{goodsInfo.delive_status <= 10}}" @tap="goodsOver">拣货完毕</view>
+      <image class="itemBtn" wx:if="{{goodsInfo.delive_status == 15}}" src="./../../images/10_03.png" @tap="sendGoods"></image>
+    </view>
+  </view>
+  <view wx:if="{{isPx}}" style="height: 80rpx"></view>
+</template>
+
+<script>
+import wepy from 'wepy'
+import lf from 'lf'
+export default class refundAudit extends wepy.page {
+  config = {
+    backgroundTextStyle: 'light',
+    navigationBarBackgroundColor: '#fff',
+    navigationBarTitleText: '发货详情',
+    navigationBarTextStyle: 'black',
+    usingComponents: {
+      'van-card': '/components/vant/card/index'
+    }
+  }
+  components = {}
+  mixins = []
+  data = {
+    orderId: null,
+    goodsInfo: null,
+    allMoney: 0,
+    role: '',
+    isPx: false,
+    title: [],
+    deliver_info: null,
+    dealer_send_open: 0,
+    timer: null
+  }
+  computed = {}
+  events = {}
+  onLoad (opt) {
+    let { orderId } = opt
+    this.orderId = orderId
+    this.isPx = this.$parent.globalData.isIpx
+    this.role = lf.user.getRole()
+    this.$apply()
+  }
+  onUnload() {
+    this.orderId = null
+    this.goodsInfo = null
+    this.allMoney = 0
+    this.role = ''
+    this.title = []
+    this.deliver_info = null
+    this.dealer_send_open = 0
+  }
+  goodsOver () {
+    lf.net.post('/Api/Order/puck_up', {
+      order_id: this.orderId
+    }).then(res => {
+      lf.toast(res.info)
+      if (res.code === 200) {
+        this.goodsInfo.delive_status = 15
+        this.$apply()
+      }
+    })
+  }
+  async callCourier () {
+    try {
+      const res = await lf.net.post('/Api/Order/call_deliver', {
+        order_id: this.orderId
+      })
+      if (res.code === 200) {
+        this.goodsInfo.is_called = 1
+        this.goodsInfo.delive_status = +res.data.delive_status
+        lf.toast('呼叫成功')
+        if (+res.data.delive_status === 20) {
+          this.lunxun()
+        }
+      } else {
+        lf.toast(res.info)
+      }
+      this.$apply()
+    } catch (e) {
+      lf.toast('系统内部错误')
+    }
+  }
+  lunxun () {
+    if (+this.goodsInfo.is_called === 1 && +this.goodsInfo.delive_status === 15) {
+      lf.net.post('/Api/Order/get_deliver_status', {
+        order_id: this.orderId
+      }).then(res => {
+        if (res.code === 200) {
+          this.goodsInfo.delive_status = +res.data.delive_status
+          if (+res.data.delive_status === 20) {
+            this.timer = setTimeout(() => {
+              this.lunxun()
+            }, 3000)
+          } else {
+            if (this.timer) {
+              clearTimeout(this.timer)
+            }
+          }
+        } else {
+          lf.toast(res.info)
+        }
+      })
+    }
+  }
+  // async systemConfig () {
+  //   try {
+  //     const res = await lf.net.post('/Api/public/system_config', {})
+  //     if (res.code === 200) {
+  //       this.dealer_send_open = +res.data.dealer_send_open
+  //       // this.dealer_send_open = 0
+  //     } else {
+  //       lf.toast(res.info)
+  //     }
+  //     this.$apply()
+  //     await this.getWL()
+  //   } catch (e) {
+  //     lf.toast('系统内部错误')
+  //   }
+  // }
+  // async getWL () {
+  //   lf.net.post('/Api/Order/logistics_detail', {
+  //     order_id: this.orderId
+  //   }).then(res => {
+  //     console.log(res)
+  //     if (res.code === 200) {
+  //       if (+res.data.deliver_id > 0) {
+  //         this.title.push(res.data.deliver_info.title)
+  //       }
+  //       this.deliver_info = res.data.deliver_info
+  //       if (+this.dealer_send_open === 1) {
+  //         this.title.push('商家配送')
+  //       }
+  //       this.$apply()
+  //     } else {
+  //       lf.toast(res.info)
+  //     }
+  //   })
+  // }
+  async sendGoods () {
+    // if (+this.goodsInfo.is_pickup !== 1) {
+    //   return wx.navigateTo({
+    //     url: `./../fillNumDealer?orderId=${this.orderId}`
+    //   })
+    // }
+    let p = {
+      order_id: this.orderId,
+      logistics_code: this.goodsInfo.order_no,
+      logistics_info: ''
+    }
+    if (+this.goodsInfo.is_pickup === 0) {
+      p.send_type = 2
+    } else if (+this.goodsInfo.is_pickup === 1) {
+      p.send_type = 1
+    }
+    const r = await lf.net.post('/Api/Order/logistics_send', p)
+    if (r.code === 200) {
+      lf.toast('发货成功')
+      return setTimeout(() => {
+        this.getOrderDetail()
+      }, 1500)
+    }
+    lf.toast(r.info)
+  }
+  methods = {
+    goToInfo (id) {
+      wx.navigateTo({
+        url: `./../wineInfo?goodsId=${id}`
+      })
+    }
+  }
+  onShow () {
+    this.getOrderDetail()
+  }
+  async getOrderDetail () {
+    this.allMoney = 0
+    this.$apply()
+    try {
+      const r = await lf.net.post('/Api/Order/order_detail', { order_id: this.orderId })
+      if (r.code === 200) {
+        this.goodsInfo = r.data
+        this.goodsInfo.order_item_list.forEach(item => {
+          this.allMoney += (+item.discount_amount * +item.number)
+        })
+        if (+this.goodsInfo.delive_status === 20) {
+          this.lunxun()
+        }
+        this.$apply()
+      } else {
+        lf.toast(r.info)
+      }
+    } catch (e) {
+      lf.toast('系统内部错误')
+    }
+  }
+}
+</script>

@@ -1,0 +1,561 @@
+<style lang="scss">
+  @import "../css/common";
+  page {
+    height: 100%;
+  }
+  .returnGoods{
+    position: relative;
+    padding-top: torpx(90);
+    box-sizing: border-box;
+    .order-item{
+      background-color: #fff;
+      padding:0 torpx(41) torpx(24) torpx(37);
+      margin-top: torpx(20);
+      .order_item_list{
+        padding-bottom:torpx(20);
+        position: relative;
+      }
+      .order-item-top{
+        padding:torpx(33) 0;
+        border-bottom:torpx(1) solid #eeeeee;
+        font-size: torpx(26);
+        color: #000;
+        margin-bottom: torpx(34);
+      }
+      .footer{
+        text-align: right;
+        border-top:torpx(1) solid #eeeeee;
+        padding-top:torpx(25);
+        margin-top:torpx(16);
+        .total{
+          text-align: right;
+          font-size: torpx(24);
+          color: #999;
+          .money{
+            color: #cf0210;
+            font-size: torpx(18);
+            text{
+              font-size: torpx(28);
+            }
+          }
+        }
+        .order-btn{
+          margin-top: torpx(24);
+          width: torpx(150);
+          height: torpx(60);
+          background-color: #ffffff;
+          border-radius: torpx(5);
+          border:torpx(1) solid  #999999;
+          display: inline-block;
+          line-height: torpx(60);
+          text-align: center;
+          color: #999;
+          font-size: torpx(24);
+          margin-left:torpx(10);
+          &.order-btn-special{
+            width: auto;
+            padding: 0 26rpx;
+          }
+        }
+        .pay-btn{
+          background-color: #cf000e;
+          color: #fff;
+          border: none;
+        }
+      }
+      .van-card{
+        background-color: #fff;
+        padding:0;
+      }
+      .van-card__thumb{
+        width:torpx(200);
+        height:torpx(200);
+        border: torpx(1) solid #eee;
+      }
+      .van-card__title{
+        font-size: torpx(30);
+        color: #333;
+        line-height: torpx(36);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp:2;
+        -webkit-box-orient: vertical;
+      }
+      .van-card__desc{
+        font-size: torpx(24);
+        color: #999;
+        padding-bottom:torpx(40);
+      }
+      .van-card__price{
+        font-size: torpx(36);
+        color: #cf0210;
+      }
+      .van-card__num{
+        font-size: torpx(26);
+        color: #666;
+      }
+    }
+    .order_nav{
+      width: 100%;
+      height:torpx(90);
+      box-sizing: border-box;
+      background: #fff;
+      position: fixed;
+      line-height: torpx(90);
+      top: 0;
+      left: 0;
+      z-index: 100;
+      .nav_item {
+        float: left;
+        height: 100%;
+        width: 50%;
+        text-align: center;
+        box-sizing: border-box;
+        color: #333;
+        font-size: torpx(28);
+        border-bottom: torpx(5) solid transparent;
+      }
+      .nav_item_checked{
+        border-bottom: torpx(5) solid #cf0210;
+        color: #cf0210;
+      }
+    }
+    .noData{
+      text-align: center;
+      font-size: torpx(36);
+      padding-top:torpx(30);
+    }
+  }
+  .xcontainer-order{
+    padding-bottom: torpx(80);
+  }
+  .go-estimate {
+    color: #cf0210 !important;
+    border-color:#cf0210!important;
+  }
+  .popContent{
+    width: 630rpx;
+    background: #fff;
+    box-sizing: border-box;
+    padding: 30rpx;
+    border-radius: 12rpx;
+    .title{
+      font-size: 36rpx;
+      line-height: 106rpx;
+      text-align: center;
+    }
+    .input-box{
+      border:1rpx solid #ddd;
+      border-radius: 8rpx;
+      box-sizing: border-box;
+      padding: 10rpx;
+      textarea{
+        width: 100%;
+        /*height: 260rpx;*/
+        line-height: 52rpx;
+        font-size: 32rpx;
+        /*padding: 10rpx;*/
+        text-align: justify;
+        /*overflow: scroll;*/
+        height:354rpx;
+      }
+    }
+    .btn-box{
+      margin: 20rpx 0 0;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: space-between;
+      .btn{
+        width: 46%;
+        border-radius: 8rpx;
+        text-align: center;
+        line-height: 90rpx;
+        height: 90rpx;
+        font-size: 32rpx;
+        color: #fff;
+        background: #e5e5e5;
+        &.confirm{
+          background: #e12020;
+        }
+      }
+    }
+  }
+  .van-popup{
+    border-radius: 12rpx;
+  }
+</style>
+<template>
+  <scroll-view style="height: 100%" scroll-y="{{ !showPop}}">
+  <view class="returnGoods {{isPx ? 'xcontainer-order' : ''}}">
+    <view class="order_nav">
+      <block wx:for="{{navStatus}}" wx:for-item="item" wx:for-index="index" wx:key="unique">
+        <view class="nav_item {{item.id==tapStauts ? 'nav_item_checked': ''}}" bindtap="changeNav" data-navId="{{item.id}}">
+          <view>{{item.text}}</view>
+        </view>
+      </block>
+    </view>
+    <scroll-view scroll-y="true" class="scrollView" style="height: 100%">
+      <view class="order_list" wx:if="{{orderList.length > 0}}">
+        <block wx:for="{{orderList}}" wx:for-index="index" wx:for-item="item" wx:key="unique">
+          <view class="order-item">
+            <view class="order-item-top clearfix">
+              <view style="float: left">订单号: <text>{{item.order_item_detail.order_no}}</text></view>
+            </view>
+            <view class="order_item_list" bindtap="goDetail({{item.order_item_id}})">
+              <van-card
+                num="{{item.order_item_detail.number}}"
+                price="{{item.order_item_detail.discount_amount}}"
+                desc="{{item.order_item_detail.cate_id_text}}"
+                title="{{item.order_item_detail.goods_title}}"
+                thumb="{{item.order_item_detail.goods_cover_url}}"
+              >
+              </van-card>
+            </view>
+            <view class="footer">
+              <button wx:if="{{tapStauts=='10'}}" class="order-btn" bindtap="openPop({{item.order_item_id}},{{index}})">拒绝退货</button>
+              <button wx:if="{{tapStauts=='10'}}" class="order-btn go-estimate" bindtap="openPopAgree({{item.order_item_id}},{{index}})">同意退货</button>
+              <button wx:if="{{tapStauts!='10'}}" class="order-btn go-estimate order-btn-special">{{item.return_status_text}}</button>
+            </view>
+          </view>
+        </block>
+      </view>
+      <view wx:else class="noData" style="color: #999">暂无数据</view>
+    </scroll-view>
+    <van-popup show="{{ showPopAgree }}" bind:close="onClose">
+      <view class="popContent">
+        <view class="title">确定同意退货？</view>
+        <view class="btn-box">
+          <view class="btn" bindtap="onClose">取消</view>
+          <view class="btn confirm" bindtap="agreeConfirm">确定</view>
+        </view>
+      </view>
+    </van-popup>
+  </view>
+  </scroll-view>
+  <van-popup show="{{ showPop }}" bind:close="onClose">
+    <view class="popContent">
+      <view class="title">请输入拒绝理由</view>
+      <view class="input-box">
+        <textarea bindinput="reasonInput" fixed="true" value="{{rejectData.back_return_reason}}" placeholder="请输入拒绝理由"></textarea>
+      </view>
+      <view class="btn-box">
+        <view class="btn" bindtap="onClose">取消</view>
+        <view class="btn confirm" bindtap="rejectComfirm">提交</view>
+      </view>
+    </view>
+  </van-popup>
+</template>
+
+<script>
+import wepy from 'wepy'
+import lf from 'lf'
+import CommonMixin from '../mixins/common'
+// import { onEvent, EVENT, TYPES } from '../js/event'
+export default class Orderlist extends wepy.page {
+  config = {
+    backgroundTextStyle: 'light',
+    navigationBarBackgroundColor: '#fff',
+    navigationBarTitleText: '退换货',
+    navigationBarTextStyle: 'black',
+    usingComponents: {
+      'van-card': '/components/vant/card/index',
+      'van-popup': '/components/vant/popup/index'
+    }
+  }
+  mixins = [CommonMixin]
+  components = {}
+  data = {
+    navStatus: [
+      {
+        id: '10',
+        text: '待审核',
+        pageStart: 1
+      },
+      {
+        id: '20,30,35,40,50',
+        text: '已审核',
+        pageStart: 1
+      }
+    ],
+    tapStauts: '10',
+    orderList: [],
+    ind: null,
+    page_start: null,
+    showPop: false,
+    showPopAgree: false,
+    rejectData: {
+      order_item_id: null,
+      back_return_reason: null
+    },
+    agreeData: '',
+    deleteIndex: -1
+  }
+  computed = {}
+  methods = {
+    openPop (id, index) {
+      this.showPop = true
+      this.rejectData.order_item_id = id
+      this.deleteIndex = index
+      this.$apply()
+    },
+    openPopAgree (id, index) {
+      this.showPopAgree = true
+      this.agreeData = id
+      this.deleteIndex = index
+      this.$apply()
+    },
+    goDetail (id) {
+      wepy.navigateTo({
+        url: `audit/refundAudit?orderId=${id}`
+      })
+    },
+    toDetails (id, status) {
+      let index = this.orderList.findIndex(v => {
+        return id === v.id
+      })
+      this.page_start = null
+      let url = +status === 10 ? `myOrderInfo?orderId=${id}&indx=${index}&tap=${this.tapStauts}` : `returns/refundDetail?orderId=${id}`
+      wepy.navigateTo({
+        url
+      })
+    },
+    toLogistics(id) {
+      wx.navigateTo({
+        url: `logistics?orderId=${id}`
+      })
+    },
+    async deleteOrder (id, index) {
+      try {
+        const r = await lf.net.post('/Api/order/order_delete', {
+          order_id: id
+        })
+        if (r.code === 200) {
+          wepy.showToast({
+            title: '删除成功',
+            icon: 'none'
+          })
+          this.orderList.splice(index, 1)
+          this.$apply()
+        }
+      } catch (e) {
+        wepy.showToast({
+          title: e.toString(),
+          icon: 'none'
+        })
+      }
+    },
+    goEstimate(index, status) {
+      wx.navigateTo({
+        url: `estimate?status=${status}goods=${JSON.stringify(this.orderList[index].order_item_list)}&orderId=${this.orderList[index].id}`
+      })
+    },
+    async rejectComfirm () {
+      const result = await lf.net.post('/Api/Orderreturn/return_back', this.rejectData)
+      if (result.code === 200) {
+        wepy.showToast({
+          title: '成功',
+          icon: 'none'
+        })
+        this.showPop = false
+        this.rejectData = {
+          order_item_id: null,
+          back_return_reason: ''
+        }
+        this.orderList.splice(this.deleteIndex, 1)
+        this.$apply()
+        // this.orderList = []
+        // this.getOrderList(this.tapStauts)
+      } else {
+        wepy.showToast({
+          title: result.info,
+          icon: 'none'
+        })
+      }
+    },
+    async agreeConfirm () {
+      const result = await lf.net.post('/Api/Orderreturn/return_commit', {order_item_id: this.agreeData})
+      if (result.code === 200) {
+        wepy.showToast({
+          title: '成功',
+          icon: 'none'
+        })
+        this.showPopAgree = false
+        this.orderList.splice(this.deleteIndex, 1)
+        this.$apply()
+        // this.orderList = []
+        // this.getOrderList(this.tapStauts)
+      } else {
+        wepy.showToast({
+          title: result.info,
+          icon: 'none'
+        })
+      }
+    }
+  }
+  events = {}
+  reasonInput (e) {
+    this.rejectData.back_return_reason = e.detail.value
+  }
+  onClose () {
+    this.rejectData = {
+      order_item_id: null,
+      back_return_reason: ''
+    }
+    this.agreeData = ''
+    this.showPop = false
+    this.showPopAgree = false
+    this.$apply()
+  }
+  onLoad () {
+    // if (option.tab === '' || Number(option.tab) === 0) {
+    //   this.tapStauts = -1
+    // } else {
+    //   this.tapStauts = Number(option.tab)
+    // }
+    this.navStatus.forEach(v => {
+      v.pageStart = 1
+    })
+    this.getOrderList(this.tapStauts)
+  }
+
+  onShow () {
+    this.rejectData = {
+      order_item_id: null,
+      back_return_reason: ''
+    }
+    this.agreeData = ''
+    this.showPop = false
+    this.showPopAgree = false
+    this.$apply()
+    this.getOrderList(this.tapStauts)
+    // onEvent(EVENT.ORDER, (e) => {
+    //   switch (e.type) {
+    //     case TYPES.ORDER_STATUS_CHANGES:
+    //       const changeId = e.data
+    //       const index = this.orderList.findIndex(v => {
+    //         return changeId === v.id
+    //       })
+    //       if (index > -1) {
+    //         this.orderList.splice(index, 1)
+    //       }
+    //       break
+    //     case TYPES.ORDER_ALL_DELECT_CHANGES:
+    //       const id = e.data
+    //       const inx = this.orderList.findIndex(v => {
+    //         return id === v.id
+    //       })
+    //       if (inx > -1) {
+    //         this.orderList.splice(inx, 1)
+    //       }
+    //       break
+    //     case TYPES.ORDER_PASS_CHANGES:
+    //       this.page_start = e.data
+    //       this.ind = e.data
+    //       this.$apply()
+    //       this.getOrderList(this.tapStauts)
+    //       break
+    //   }
+    // })
+  }
+  changeNav(event) {
+    this.navStatus.forEach(v => {
+      v.pageStart = 1
+    })
+    this.orderList = []
+    this.ind = null
+    let navId = event.currentTarget.dataset.navid
+    if (navId === this.tapStauts) {
+      return
+    }
+    var id = navId
+    if (navId === -1) {
+      id = ''
+    }
+    this.tapStauts = navId
+    this.getOrderList(id)
+    this.$apply()
+  }
+  async getOrderList(status = '') {
+    try {
+      var pageStart
+      switch (this.tapStauts) {
+        case '10':
+          pageStart = this.navStatus[0].pageStart
+          break
+        case '20,30,35,40,50':
+          pageStart = this.navStatus[1].pageStart
+          break
+        default:
+      }
+      let param = {
+        return_status: status,
+        mid: lf.storage.get('mid'),
+        page_start: this.page_start || (pageStart - 1) * 10,
+        page_size: 10
+      }
+      if (status === '' || status === -1) {
+        delete param.return_status
+      }
+      const result = await lf.net.post('/Api/Orderreturn/dealer_return_list', param)
+      this.page_start = null
+      if (result.code === 200) {
+        var dataLi = result.data.list || []
+        if (this.ind && dataLi.length > 0) {
+          dataLi.forEach(item => {
+            if (+this.orderList[Number(this.ind)].id === +item.id) {
+              this.orderList.splice(this.ind, 1, item)
+            }
+          })
+          this.ind = null
+          this.$apply()
+          return false
+        }
+        if (pageStart === 1) {
+          this.orderList = dataLi
+        } else {
+          for (let i = 0; i < dataLi.length; i++) {
+            this.orderList.push(dataLi[i])
+          }
+        }
+        this.$apply()
+      }
+    } catch (e) {
+      console.log(e)
+      wx.showToast({
+        title: '发生了错误',
+        icon: 'none',
+        mask: true
+      })
+    }
+    wepy.hideLoading()
+  }
+  more() {
+    wepy.showLoading({
+      title: '加载中...'
+    })
+    switch (this.tapStauts) {
+      case '10':
+        this.navStatus[0].pageStart += 1
+        break
+      case '20,30,35,40,50':
+        this.navStatus[1].pageStart += 1
+        break
+      default:
+    }
+    this.getOrderList(this.tapStauts)
+    wepy.stopPullDownRefresh()
+  }
+  onReachBottom () {
+    this.more()
+  }
+  onPullDownRefresh () {
+    this.orderList = []
+    this.navStatus.forEach(item => {
+      item.pageStart = 1
+    })
+    this.getOrderList(this.tapStauts)
+  }
+}
+</script>

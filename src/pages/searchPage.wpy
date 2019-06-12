@@ -1,0 +1,406 @@
+<style lang="scss">
+  @import "../css/common";
+  ::-webkit-scrollbar{
+    width: 0;
+    height: 0;
+    color: transparent;
+  }
+  page{
+    height: 100%;
+  }
+  .searchContainer {
+    height: 100%;
+    .searchBox{
+      background: #fff;
+      padding-bottom: 18rpx;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1;
+      image{
+        width: 36rpx;
+        height: 36rpx;
+        position: absolute;
+        left: 51rpx;
+        top: 23rpx;
+        z-index: 2;
+      }
+      input{
+        width: 710rpx;
+        height: 80rpx;
+        box-sizing: border-box;
+        padding-left: 82rpx;
+        line-height: 80rpx;
+        border: 1rpx solid #e5e5e5;
+        border-radius: 40rpx;
+        margin: 0 auto;
+        font-size: 28rpx;
+        padding-right: 20rpx;
+      }
+    }
+    .middleBar{
+      position: absolute;
+      top: 97rpx;
+      left: 0;
+      right: 0;
+      z-index: 1;
+      background: #fff;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: space-around;
+      .item{
+        line-height: 94rpx;
+        font-size: 30rpx;
+        &.active{
+          color: #cf0210;
+          font-weight: bold;
+        }
+        image{
+          width: 16rpx;
+          height: 20rpx;
+        }
+      }
+    }
+    .goodsList{
+      padding: 214rpx 20rpx 0;
+      box-sizing: border-box;
+      height: 100%;
+      .goodBox{
+        background: #fff;
+        border-radius: 6rpx;
+        padding: 20rpx;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+        position: relative;
+        margin-bottom: 20rpx;
+        .imgBox{
+          width: 170rpx;
+          height: 170rpx;
+          border: 1rpx solid #e5e5e5;
+          image{
+            width: 100%;
+            height: 100%;
+          }
+        }
+        .textBox{
+          width: 480rpx;
+          height: 170rpx;
+          box-sizing: border-box;
+          position: relative;
+          .name{
+            font-size: 30rpx;
+            padding-top: 15rpx;
+            line-height: 40rpx;
+          }
+          .des{
+            font-size: 24rpx;
+            line-height: 34rpx;
+            color: #999;
+          }
+          .price{
+            font-size: 36rpx;
+            line-height: 36rpx;
+            color: #cf0210;
+            font-weight: bold;
+            position: absolute;
+            z-index: 1;
+            bottom: 0;
+            left: 0;
+            text{
+              font-size: 30rpx;
+            }
+          }
+        }
+        .btn{
+          width: 146rpx;
+          height: 52rpx;
+          line-height: 52rpx;
+          color: #fff;
+          font-size: 26rpx;
+          border-radius: 26rpx;
+          background: red;
+          text-align: center;
+          position: absolute;
+          z-index: 1;
+          right: 30rpx;
+          bottom: 30rpx;
+          background: linear-gradient(to right, #cf0210, #ef6127);
+        }
+      }
+      .noData{
+        text-align: center;
+        font-size: torpx(36);
+        padding-top:torpx(30);
+      }
+    }
+  }
+  .myCar{
+    position: fixed;
+    right: torpx(30);
+    bottom: torpx(150);
+    width: 100rpx;
+    height: 100rpx;
+    z-index: 2;
+    border-radius: 50%;
+    image{
+      width: 140rpx;
+      height: 140rpx;
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+    }
+    text{
+      width: 40rpx;
+      height: 40rpx;
+      background: rgba(242, 68, 28, 0.8);
+      border-radius: 50%;
+      text-align: center;
+      line-height: 40rpx;
+      font-size: 28rpx;
+      color: white;
+      position:absolute;
+      top: 10rpx;
+      left: 45rpx;
+    }
+  }
+</style>
+<template>
+  <view class="searchContainer ">
+    <view class="searchBox">
+      <image src="../images/home/icon1.png"></image>
+      <input type="text" value="{{searchValue}}" bindinput="getSearchContent" confirm-type="search" bindconfirm="search" placeholder="请输入搜索内容" />
+    </view>
+    <view class="middleBar">
+      <view class="item {{sortStatus==1?'active':''}}" bindtap="sort(1)">综合排序</view>
+      <view class="item {{sortStatus==2?'active':''}}" bindtap="sort(2)">销量</view>
+      <view class="item {{sortStatus==3?'active':''}}" bindtap="sort(3)">
+        价格
+        <image wx:if="{{priceSortStatus==0}}" src="../images/home/1.png"></image>
+        <image wx:if="{{priceSortStatus==1}}" src="../images/home/2.png"></image>
+        <image wx:if="{{priceSortStatus==2}}" src="../images/home/3.png"></image>
+      </view>
+    </view>
+    <scroll-view class="goodsList" scroll-y bindscrolltolower="scrolltolower">
+      <view wx:if="{{dataList.length>0}}" class="goodBox" wx:for="{{dataList}}" wx:for-item="item" wx:key="item.id">
+        <view class="imgBox" bindtap="goDetail({{item.id}})">
+          <image mode="aspectFit" src="{{item.goods_cover}}"></image>
+        </view>
+        <view class="textBox" bindtap="goDetail({{item.id}})">
+          <view class="name ellipsis-2">{{item.goods_title}}</view>
+          <view class="des">{{item.cate_id_text}}</view>
+          <view class="price"><text>￥</text>{{item.goods_price}}</view>
+        </view>
+        <view class="btn" bindtap="buy({{item}})">去抢购</view>
+      </view>
+      <view wx:if="{{dataList==null}}" class="noData" style="color: #999">暂无数据</view>
+    </scroll-view>
+    <view class="myCar" catchtap="skipToOrderList">
+      <image src="./../images/icon_Buy.png"></image>
+      <text wx:if="{{carNumber!==0}}">{{carNumber}}</text>
+    </view>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+import lf from 'lf'
+// import { SERVER_BAS_URL } from '../js/define'
+
+export default class SearchPage extends wepy.page {
+  config = {
+    backgroundTextStyle: 'light',
+    navigationBarBackgroundColor: '#fff',
+    navigationBarTitleText: '搜索',
+    navigationBarTextStyle: 'black',
+    usingComponents: {
+      'van-search': '/components/vant/search/index',
+      'van-icon': '/components/vant/icon/index',
+      'van-popup': '/components/vant/popup/index',
+      'van-cell-group': '/components/vant/cell-group/index',
+      'van-swipe-cell': '/components/vant/swipe-cell/index'
+    }
+  }
+  components = {
+  }
+  data = {
+    pageStart: 1,
+    searchValue: '',
+    dataList: [],
+    brand_id: '',
+    area_id: '',
+    cate_id: '',
+    orderBy: '',
+    orderType: '',
+    sortStatus: '1',
+    priceSortStatus: 0,
+    total: 0,
+    carNumber: 0
+  }
+  resetData () {
+    this.pageStart = 1
+    this.dataList = []
+    this.searchValue = ''
+    this.brand_id = ''
+    this.area_id = ''
+    this.cate_id = ''
+    this.orderBy = ''
+    this.orderType = ''
+    this.sortStatus = '1'
+    this.priceSortStatus = 0
+    this.total = 0
+    this.carNumber = 0
+    this.$apply()
+  }
+  computed = {}
+  methods = {
+    getSearchContent (e) {
+      this.searchValue = e.detail.value
+    },
+    search () {
+      this.pageStart = 1
+      // this.brand_id = ''
+      // this.cate_id = ''
+      // this.area_id = ''
+      this.getDataList()
+    },
+    skipToOrderList() {
+      wx.switchTab({
+        url: './shopCart'
+      })
+    },
+    buy (item) {
+      var status = lf.user.addGood(item)
+      if (status.isSuccess) {
+        wepy.showToast({
+          title: '加入购物车成功',
+          icon: 'none'
+        })
+        this.carNumber++
+        this.$apply()
+      } else {
+        wepy.showToast({
+          title: status.msg,
+          icon: 'none'
+        })
+      }
+    },
+    goDetail (id) {
+      wepy.navigateTo({
+        url: `wineInfo?goodsId=${id}`
+      })
+    },
+    sort(sortStatus) {
+      if (sortStatus === this.sortStatus && sortStatus !== '3') {
+        return
+      }
+      this.pageStart = 1
+      this.sortStatus = sortStatus
+      if (sortStatus === '1') {
+        this.priceSortStatus = 0
+        this.orderBy = ''
+        this.orderType = ''
+      } else if (sortStatus === '2') {
+        this.priceSortStatus = 0
+        this.orderBy = 'all_sold_number'
+        this.orderType = 'desc'
+      } else if (sortStatus === '3') {
+        this.orderBy = 'goods_price'
+        if (this.priceSortStatus === 0 || this.priceSortStatus === 2) {
+          this.priceSortStatus = 1
+          this.orderType = 'desc'
+        } else if (this.priceSortStatus === 1) {
+          this.priceSortStatus = 2
+          this.orderType = 'asc'
+        }
+      }
+      this.getDataList()
+      this.$apply()
+    },
+    forbidScroll () {
+      this.scrollY = false
+      this.$apply()
+    },
+    navClosed () {
+      this.scrollY = true
+      this.$apply()
+    }
+  }
+  events = {}
+  onLoad (option) {
+    this.searchValue = option.searchValue
+    this.brand_id = option.brandId
+    this.cate_id = option.cateId
+    this.area_id = option.areaId
+    this.getDataList()
+    wx.setNavigationBarTitle({
+      title: option.searchText
+    })
+    this.$apply()
+  }
+  onUnload () {
+    this.resetData()
+  }
+
+  onShow (option) {
+    // this.searchValue = option.searchValue
+    // this.getDataList()
+    this.getCartNum()
+  }
+  getCartNum() {
+    this.carNumber = 0
+    this.carNumber = lf.user.getGoodNum()
+    this.$apply()
+  }
+  scrolltolower () {
+    let self = this
+    if (self.pageStart - 1 < parseInt(self.total / 10)) {
+      self.pageStart += 1
+      self.getDataList()
+    }
+    wepy.stopPullDownRefresh()
+  }
+
+  async getDataList () {
+    wepy.showLoading({
+      title: '加载中...'
+    })
+    var data = {
+      page_start: (this.pageStart - 1) * 10,
+      page_size: 10,
+      search: this.searchValue,
+      brand_id: this.brand_id,
+      cate_id: this.cate_id,
+      area_id: this.area_id,
+      order_by: this.orderBy,
+      order_type: this.orderType
+    }
+    try {
+      const result = await lf.net.post('/Api/Goods/goods_list', data)
+      if (result.code === 200) {
+        this.total = parseInt(result.data.num)
+        if (this.pageStart === 1) {
+          this.dataList = result.data.list
+        } else {
+          for (let i = 0; i < result.data.list.length; i++) {
+            this.dataList.push(result.data.list[i])
+          }
+        }
+        this.$apply()
+      } else {
+        wepy.showToast({
+          title: result.info,
+          icon: 'none'
+        })
+      }
+    } catch (err) {
+    }
+    wepy.hideLoading()
+  }
+}
+</script>

@@ -1,0 +1,455 @@
+<style lang="scss">
+  @import "../css/common";
+
+  page {
+    height: 100%;
+  }
+
+  .customers-container {
+    padding: torpx(20) torpx(20) torpx(6);
+    &.padding110{
+      padding-top: torpx(110);
+    }
+    view {
+      box-sizing: border-box;
+      font-family: PingFangSC-Medium;
+    }
+    .ellipsis-1 {
+      display: -webkit-box;
+      overflow: hidden;
+      white-space: normal !important;
+      text-overflow: ellipsis;
+      word-wrap: break-word;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+    }
+    .customers-item {
+      position: relative;
+      margin-bottom: torpx(20);
+      padding-left: torpx(162);
+      width: 100%;
+      background-color: #fff;
+      border-radius: torpx(5);
+      .header-image {
+        position: absolute;
+        width: torpx(126);
+        height: torpx(126);
+        border-radius: 50%;
+        top: torpx(39);
+        left: torpx(35);
+      }
+      .customers-details {
+        width: 100%;
+        background-color: #fff;
+        padding: torpx(43) torpx(26) torpx(39) torpx(36);
+        color: #333333;
+        font-size: torpx(24);
+        position: relative;
+        .title {
+          font-size: torpx(32);
+          font-weight: 600;
+          line-height: torpx(32);
+          padding-bottom: torpx(10);
+          text{
+            color: #333;
+            padding-left:torpx(30);
+            font-size: torpx(28);
+            font-weight: 400;
+          }
+        }
+        .personel {
+          position: relative;
+          padding: torpx(10) 0 torpx(20);
+          color: #999999;
+        }
+        .address {
+          padding: torpx(5) 0;
+          font-size: torpx(24);
+          line-height: torpx(24);
+          color: #999999;
+        }
+        image {
+          width: torpx(35);
+          height: torpx(40);
+          position: absolute;
+          top: 50%;
+          right: torpx(36);
+          transform: translateY(-50%);
+        }
+      }
+    }
+    .noData{
+      text-align: center;
+      padding-top:torpx(10);
+    }
+    .topBar{
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 90rpx;
+      padding: 0 30rpx;
+      text-align: center;
+      line-height: 90rpx;
+      box-sizing: border-box;
+      border-bottom: 1rpx solid #ddd;
+      color: #2ebc88;
+      font-size: 32rpx;
+      background: #fff;
+      z-index: 2;
+      image{
+        width: 16rpx;
+        height: 9rpx;
+        margin-left: 16rpx;
+        vertical-align: middle;
+      }
+    }
+    .salesmanList{
+      position: absolute;
+      top: 90rpx;
+      left: 0;
+      right: 0;
+      .mask{
+        position: fixed;
+        top:90rpx;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,.8);
+        z-index: 3;
+      }
+      .block{
+        background: #fff;
+        z-index: 4;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        max-height: 450rpx;
+        padding-left: 30rpx;
+        box-sizing: border-box;
+        .line{
+          line-height: 90rpx;
+          font-size: 28rpx;
+          border-bottom: 1rpx solid #ddd;
+          width: 100%;
+          padding-right: 30rpx;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
+          box-sizing: border-box;
+          image{
+            width: 33rpx;
+            height: 23rpx;
+            vertical-align: middle;
+          }
+          text{
+            height: 90rpx;
+          }
+        }
+      }
+    }
+    .btn{
+      color: #fff;
+      font-size: 26rpx;
+      border-radius: 8rpx;
+      background: red;
+      text-align: center;
+      background: #cf0210;
+      margin-top: 10rpx;
+      margin-left: 330rpx;
+      padding:10rpx;
+      box-sizing: border-box;
+    }
+    .btn-cancel{
+      box-sizing: border-box;
+      color: #999;
+      font-size: 26rpx;
+      border-radius: 8rpx;
+      text-align: center;
+      background: #fff;
+      border: 1rpx solid #999;
+      margin-top: 10rpx;
+      margin-left: 330rpx;
+      padding:10rpx;
+    }
+  }
+  .showToast {
+
+  }
+</style>
+<template>
+  <view class="customers-container {{role==60?'padding110':''}}">
+    <view wx:if="{{role==60}}" class="topBar ellipsis-1" bindtap="showPop">{{salerName}}的客户<image src="../images/customer/icon-down-on.png"></image></view>
+    <view class="salesmanList" wx:if="{{showPopStatus}}">
+      <view class="mask" bindtap="closePop"></view>
+      <scroll-view class="block" scroll-y>
+        <view class="line" bindtap="chooseSaler('','')">全部销售的客户<image wx:if="{{salerId==''}}" src="../images/customer/icon-9.png"></image></view>
+        <view class="line" wx:for="{{members}}" wx:for-item="item" wx:key="item.id" bindtap="chooseSaler({{item.id}},{{item.saler_name}})"><text class="ellipsis-1">{{item.saler_name}}的客户</text><image wx:if="{{salerId==item.id}}" src="../images/customer/icon-9.png"></image></view>
+      </scroll-view>
+    </view>
+    <scroll-view scroll-y="true" class="scrollView">
+      <view wx:if="{{customersList.length >0 }}" class="customers-item" wx:for="{{customersList}}" wx:key="unique">
+        <image class='header-image' src="{{item.avatar? item.avatar: cusimage}}"></image>
+        <view class="customers-details">
+          <view class="title">{{item.customers_name}}
+            <text>手机： {{item.customers_mobile}}</text>
+          </view>
+          <view class="address">
+            {{item.address ? item.address.district : ''}}
+          </view>
+          <view class="address">
+            客户类型：{{item.distributor_id==0?'普通客户':'分销商'}}
+          </view>
+          <view class="personel">
+            最近订单： {{item.order_title || ''}}
+          </view>
+          <view class="address">
+            下单时间： {{item.addtime}}
+          </view>
+          <view wx:if="{{role==60&&item.distributor_id==0}}" bindtap="showDialog({{item.address.mid}})" class="btn">设置分销商</view>
+          <!--<view bindtap="showDialog({{item.address.mid}})" class="btn-cancel">设置分销商</view>-->
+          <image src="../images/phone.png" @tap="toTel({{item.customers_mobile}})"></image>
+        </view>
+      </view>
+      <view wx:if="{{customersList.length ==0 }}" class="noData" style="color: #999">暂无客户</view>
+    </scroll-view>
+    <van-dialog id="van-dialog" />
+    <view class="showToast">
+      <van-popup show="{{ show }}" bind:close="onClose">
+        <image mode="widthFix" style="display: block" src="{{qr}}"></image>
+      </van-popup>
+    </view>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+import lf from 'lf'
+import Dialog from '../components/vant/dialog/dialog'
+
+export default class Customers extends wepy.page {
+  config = {
+    navigationBarTitleText: '客户',
+    navigationBarTextStyle: 'black',
+    backgroundTextStyle: 'light',
+    backgroundColor: '#2ebc88',
+    navigationBarBackgroundColor: '#fff',
+    usingComponents: {
+      'van-dialog': '/components/vant/dialog/index',
+      'van-popup': '/components/vant/popup/index'
+    }
+  }
+  data = {
+    showPopStatus: false,
+    role: '',
+    salerId: '',
+    salerName: '全部销售',
+    mid: '',
+    members: [],
+    cusimage: '../images/salesman/user_default_avatar.png',
+    customersList: [],
+    timer: null,
+    show: false,
+    qr: null
+  }
+
+  computed = {}
+  onClose() {
+    this.show = false
+    clearTimeout(this.timer)
+    this.$apply()
+  }
+  methods = {
+    chooseSaler (id, name) {
+      this.salerId = id
+      if (name === '') {
+        this.salerName = '全部销售'
+      } else {
+        this.salerName = name
+      }
+      this.getCustomers()
+      this.showPopStatus = false
+    },
+    showPop () {
+      this.showPopStatus = !this.showPopStatus
+    },
+    closePop() {
+      this.showPopStatus = false
+    },
+    toTel (number) {
+      var rep = /^[1][0-9]{10}$/
+      if (rep.test(number)) {
+        wepy.makePhoneCall({
+          phoneNumber: String(number)
+        })
+      }
+    },
+    showDialog (id) {
+      Dialog.confirm({
+        title: '标题',
+        message: '确定设该客户为分销商？'
+      }).then(() => {
+        if (this.qr) {
+          this.show = true
+          this.set(id)
+          this.$apply()
+        } else {
+          this.confirmation(id)
+        }
+      }).catch(() => {
+        // on cancel
+      })
+    }
+  }
+  events = {}
+  async confirmation (id) {
+    lf.showLoading('请稍后...')
+    const res = await lf.net.post('/Api/Distributor/distributor_add', {
+      customer_mid: id
+    })
+    lf.hideLoading()
+    if (res.code === 200) {
+      this.show = true
+      this.qr = res.data.distributor_qrcode
+      this.$apply()
+      this.set(id)
+    } else {
+      lf.toast(res.info)
+    }
+  }
+
+  async set (id) {
+    const res = await lf.net.post('/api/distributor/get_distributor_status', {
+      customer_mid: id
+    })
+    if (res.code === 200) {
+      if (this.timer) {
+        clearTimeout(this.timer)
+      }
+      this.show = false
+      this.init()
+      this.getDatas(0)
+      this.$apply()
+    } else {
+      this.timer = setTimeout(() => {
+        this.set(id)
+      }, 3000)
+    }
+  }
+  async getDatas (type) {
+    if (this.role === 60) {
+      try {
+        const res = await lf.net.post('/Api/dealer/performance', {
+          type: type
+        })
+        if (res.code === 200) {
+          res.data.members.forEach(v => {
+            if (v.mid !== this.mid) {
+              this.members.push(v)
+            }
+          })
+          this.$apply()
+        } else {
+          wepy.showToast({
+            title: res.info,
+            icon: 'none'
+          })
+        }
+      } catch (e) {
+        wepy.showToast({
+          title: '操作失败',
+          icon: 'none'
+        })
+      }
+    }
+  }
+  async init () {
+    try {
+      const role = lf.user.getRole()
+      let url = '/Api/dealer/customers'
+      if (role === 50) {
+        url = '/Api/seller/customers'
+      }
+      const r = await lf.net.post(url, {})
+      if (r.code === 200) {
+        if (r.data && r.data.list) {
+          r.data.list.forEach(v => {
+            if (v.member_info) {
+              v.avatar = v.member_info.avatar
+            } else {
+              v.avatar = ''
+            }
+          })
+          this.customersList = r.data.list || []
+          this.$apply()
+        }
+      } else {
+        wepy.showToast({
+          title: r.info,
+          icon: 'none'
+        })
+      }
+    } catch (e) {
+      wepy.showToast({
+        title: e.toString(),
+        icon: 'none'
+      })
+    }
+  }
+  async getCustomers () {
+    this.customersList = []
+    try {
+      const role = lf.user.getRole()
+      let url = ''
+      if (role >= 50) {
+        url = '/Api/dealer/customers'
+      }
+      const r = await lf.net.post(url, {
+        saler_id: this.salerId
+      })
+      if (r.code === 200) {
+        if (r.data && r.data.list) {
+          r.data.list.forEach(v => {
+            if (v.member_info) {
+              v.avatar = v.member_info.avatar
+            } else {
+              v.avatar = ''
+            }
+          })
+          this.customersList = r.data.list || []
+          this.$apply()
+        }
+      } else {
+        wepy.showToast({
+          title: r.info,
+          icon: 'none'
+        })
+      }
+    } catch (e) {
+      wepy.showToast({
+        title: e.toString(),
+        icon: 'none'
+      })
+    }
+  }
+  onLoad () {
+    this.role = lf.user.getRole()
+    this.mid = lf.storage.get('mid')
+    this.init()
+    this.getDatas(0)
+    this.$apply()
+  }
+  onUnload() {
+    this.customersList = []
+    this.members = []
+    this.showPopStatus = false
+    this.salerId = ''
+    this.salerName = '全部销售'
+    this.show = false
+    clearTimeout(this.timer)
+    this.$apply()
+  }
+}
+</script>

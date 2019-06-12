@@ -1,0 +1,223 @@
+<style lang="scss">
+  @import "../css/common";
+
+  .container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    scroll-view {
+      display: flex;
+      flex: 1;
+    }
+    .mes-list {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      width: 100%;
+      margin-top: 30 rpx;
+
+      .mes-item {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-direction: row;
+        background-color: #fff;
+        width: 100%;
+        height: 222 rpx;
+        margin-bottom: 20 rpx;
+        .mes-img {
+          width: 160 rpx;
+          height: 160 rpx;
+        }
+        .msg-content {
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          align-items: flex-start;
+          /*width: 80%;*/
+          .msg-title {
+            max-width: 500 rpx;
+            overflow: hidden;
+            font-size: 30 rpx;
+            color: #333333;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+          .msg-arcle {
+            margin-top: 20 rpx;
+            width: 500 rpx;
+            color: #666666;
+            font-size: 24 rpx;
+            word-break: break-all;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+          }
+          .time {
+            margin-top: 25 rpx;
+            color: #999999;
+            font-size: 18 rpx;
+          }
+        }
+      }
+      .take-space {
+        height: 130 rpx;
+        width: 100%;
+      }
+    }
+    swiper {
+      width: 100%;
+      height: 350 rpx;
+      image {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+
+  .table {
+    border: 1px solid red;
+    .tr {
+      display: flex;
+      border-bottom: 1px solid red;
+      &:last-child {
+        border-bottom: none;
+      }
+      .td {
+        font-size: torpx(40);
+      }
+      .label {
+        background: #666666;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        min-width: torpx(200);
+      }
+    }
+  }
+</style>
+<template>
+  <view>
+    <!--<image src="{{url}}" mode="widthFix" style="display: block;width: 100%;"></image>-->
+    <!--<canvas style="width: 524px; height: 774px; position: absolute; top: -10000rpx;" canvas-id="canvas"></canvas>-->
+    <button @tap="open">start</button>
+    <form name='pushMsgFm' report-submit bindsubmit='orderSign'>
+      enter product:<input type="text" name="product" value='' placeholder="enter your name" />
+      detail: <input type="text" name='detail' placeholder="enter desc" />
+      select sex:<switch type="switch" name='sex' />
+      <button form-type="submit">submit</button>
+    </form>
+    <!--<van-cell-group>-->
+      <!--<van-cell-->
+        <!--title="{{item.ip + ':' + item.port}}"-->
+        <!--value="{{item.serviceType}}"-->
+        <!--label="{{item.serviceName}}"-->
+        <!--wx:for="{{list}}"-->
+      <!--/>-->
+    <!--</van-cell-group>-->
+  </view>
+  <van-popup
+    show="{{ showReason }}"
+    position="bottom"
+  >
+    <van-picker columns="{{ columns }}" bind:change="onReasonChange" />
+  </van-popup>
+</template>
+
+<script>
+import wepy from 'wepy'
+import lf from 'lf'
+// import lfcanvas from './../js/lfcanvas'
+
+export default class Test extends wepy.page {
+  config = {
+    navigationBarTitleText: '测试',
+    usingComponents: {
+      'van-cell': '/components/vant/cell/index',
+      'van-cell-group': '/components/vant/cell-group/index',
+      'van-popup': '/components/vant/popup/index',
+      'van-picker': '/components/vant/picker/index'
+    }
+  }
+  components = {}
+  data = {
+    url: '',
+    list: [],
+    show: false,
+    showReason: false,
+    good: '',
+    columns: ['突然就不想要了', '24小时无理由退换货', '不小心拍错了']
+  }
+  computed = {}
+  methods = {
+    open () {
+      // const _this = this
+      this.show = true
+      wx.startLocalServiceDiscovery({
+        serviceType: '_http._tcp.',
+        // serviceType: 'tcp',
+        success (res) {
+          console.log(res)
+        },
+        fail (err) {
+          console.error(err)
+        }
+      })
+    },
+    stop () {
+
+    },
+    orderSign (e) {
+      lf.log.info('e:', e)
+    }
+  }
+  events = {}
+
+  onLocalService () {
+    const _this = this
+    // let that = this
+    // 监听服务发现事件
+    wx.onLocalServiceFound(function (obj) {
+      _this.list.push(obj)
+      _this.$apply()
+      console.log(obj)
+    })
+
+    // 监听服务解析失败事件
+    wx.onLocalServiceResolveFail(function (obj) {
+      console.log(obj)
+    })
+
+    // 监听服务离开
+    wx.onLocalServiceLost(function (obj) {
+      console.log(obj)
+    })
+
+    // 监听搜索停止
+    wx.onLocalServiceDiscoveryStop(function (obj) {
+      console.log('监听到搜索停止事件')
+      lf.toast('停止搜错')
+    })
+  }
+
+  onLoad () {
+    // const url = 'http://www.hidajian.com/images/1.jpg'
+    // lfcanvas.init()
+    // lfcanvas.draw(url, url, '酒水名字酒酒水名字水酒水名字名字', '92.00').then(res => {
+    //   console.log(res)
+    //   this.url = res
+    //   this.$apply()
+    // })
+    const _this = this
+    _this.onLocalService()
+  }
+
+  onShow () {
+  }
+}
+</script>

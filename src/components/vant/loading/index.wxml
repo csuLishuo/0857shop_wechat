@@ -1,0 +1,16 @@
+<view
+  class="van-loading custom-class"
+  style="width: {{ size }}; height: {{ size }}"
+> <text wx:if='{{tip}}' style='font-size: {{tipSize}};color:{{ color }};position: absolute;top: 50%;left: 50%;transform: translate(-50%,-50%);width:120px;text-align:center;'>{{tip}}</text>
+  <view
+    class="van-loading__spinner van-loading__spinner--{{ type }}"
+    style="color: {{ color }};"
+  >
+    <view
+      wx:if="{{ type === 'spinner' }}"
+      wx:for="item in 12"
+      wx:key="index"
+      class="van-loading__dot"
+    />
+  </view>
+</view>

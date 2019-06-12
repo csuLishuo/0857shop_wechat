@@ -1,0 +1,334 @@
+<style lang="scss">
+  @import "../../css/common";
+  page {
+    background-color: #f5f5f5;
+  }
+  .refundDetail {
+    padding-top: torpx(12);
+    .order_status {
+      background-color: #cf000e;
+      height: torpx(200);
+      padding-left: torpx(50);
+      box-sizing: border-box;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      color: white;
+      .yet {
+        font-size: torpx(32);
+        margin-bottom: torpx(15);
+      }
+      .countDown {
+        font-size: torpx(26);
+      }
+    }
+    .order_detail {
+      background-color: white;
+      margin-bottom: torpx(20);
+      .info {
+        padding: 0 torpx(20);
+        .logistics {
+          border-bottom: 1px solid #e4e4e4;
+          display: flex;
+          align-items: center;
+          .imgWarp {
+            width: torpx(62);
+            display: flex;
+            align-items: center;
+            .imgLeft {
+              width: torpx(42);
+              height: torpx(50);
+              display: block;
+            }
+          }
+          .rightInfo {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            .logisticsStatus{
+              padding-top: torpx(20);
+              color: #3a9833;
+              font-size: torpx(28);
+              line-height: torpx(36);
+              margin-bottom: torpx(10);
+            }
+            .time {
+              color: #999;
+              font-size: torpx(24);
+              margin-bottom: torpx(20);
+            }
+          }
+          .arrowRight {
+            width: torpx(75);
+            padding-right: torpx(5);
+            display: flex;
+            justify-content: flex-end;
+            .imgR {
+              align-self: center;
+              width: torpx(18);
+              height: torpx(32);
+            }
+          }
+        }
+        .address {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          font-size: torpx(28);
+          .addreeWarp {
+            display: flex;
+            align-items: center;
+            width: torpx(62);
+            .addressImg{
+              width: torpx(42);
+              height: torpx(50);
+              display: block;
+            }
+          }
+          .addressInfo {
+            flex: 1;
+            padding: torpx(25) 0;
+            .presonInfo {
+              width: 100%;
+              display: flex;
+              padding-bottom: torpx(10);
+              justify-content: space-between;
+            }
+            .address {
+              line-height: torpx(36);
+            }
+          }
+        }
+      }
+      .deliveryTime {
+        border-top: 1px solid #e4e4e4;
+        .timeWarp {
+          font-size: torpx(28);
+          line-height: torpx(80);
+          padding: 0 torpx(35);
+          box-sizing: border-box;
+          display: flex;
+          justify-content: space-between;
+        }
+      }
+    }
+    .goodsInfo {
+      position: relative;
+      margin-bottom: torpx(20);
+      .van-card {
+        background-color: white;
+        .van-card__img {
+          border: 1px solid #d0d0d0;
+        }
+        .van-card__title {
+          @extend .ellipsis-2
+        }
+      }
+      .no_reason {
+        font-size: torpx(24);
+        color: #cf000e;
+        background-color: #fbebec;
+        padding: torpx(10) torpx(15);
+        position: absolute;
+        left: 115px;
+        bottom: torpx(210);
+        border-radius: torpx(10);
+      }
+      .refundM {
+        background-color: white;
+        padding-top: torpx(25);
+        padding-right: torpx(30);
+        padding-bottom: torpx(10);
+        box-sizing: border-box;
+        text-align: right;
+        .refundMoney {
+          display: inline-block;
+          width: torpx(150);
+          height: torpx(60);
+          border-radius: torpx(30);
+          line-height: torpx(60);
+          text-align: center;
+          font-size: torpx(26);
+          color: #666;
+          border: 1px solid #cccccc;
+        }
+      }
+      .order_price {
+        background-color: white;
+        padding: 0 torpx(30);
+        box-sizing: border-box;
+        line-height: torpx(100);
+        display: flex;
+        justify-content: space-between;
+        font-size: torpx(28);
+      }
+    }
+    .orderTimeInfo {
+      margin-bottom: torpx(20);
+      padding: 0 torpx(30);
+      display: flex;
+      align-items: center;
+      background-color: white;
+      box-sizing: border-box;
+      flex-direction: column;
+      > view {
+        &:last-child{
+          border-bottom: none;
+        }
+        border-bottom: 1px solid #eee;
+        min-height: torpx(88);
+        font-size: torpx(28);
+        color: #333;
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        .tite {
+          width: torpx(150);
+        }
+        .t_desdes {
+          flex: 1;
+          white-space:normal;
+          word-wrap:break-word;
+          word-break:break-all;
+        }
+      }
+    }
+  }
+</style>
+<template>
+  <view class="refundDetail">
+    <view class="order_status">
+      <view class="yet">卖家已经发货</view>
+      <view class="countDown">还剩5天13时自动确认</view>
+    </view>
+    <view class="order_detail">
+      <view class="info">
+        <view class="logistics">
+          <view class="imgWarp">
+            <image class="imgLeft" src="./../../images/1_8.png"></image>
+          </view>
+          <view class="rightInfo">
+            <view class="logisticsStatus">【长沙市】您的订单已签收。感谢您在也买酒购物，欢迎再次光临，感谢使用顺丰快递，期待再次为您服务</view>
+            <view class="time">2019-04-08 12:30:56</view>
+          </view>
+          <view class="arrowRight">
+            <image class="imgR" src="./../../images/icon-8.png"></image>
+          </view>
+        </view>
+        <view class="address">
+          <view class="addreeWarp">
+            <image class="addressImg" src="./../../images/1_03.png"></image>
+          </view>
+          <view class="addressInfo">
+            <view class="presonInfo">
+              <view class="name">
+                <text>收货人：</text>
+                <text>何先生</text>
+              </view>
+              <view class="phone">
+                <text>+86-</text>
+                <text>18573047287</text>
+              </view>
+            </view>
+            <view class="address">
+              <text>收货地址:</text>
+              <text>说了这么多,现在进入今天的猪蹄,推出,有网购经验的同学应该对这个很熟悉,在淘宝的Android客户端里面,有一个功能是设置收货地址,不清楚的同学可以自己下载个淘宝客户端,自己添加一下看看</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="deliveryTime">
+        <view class="timeWarp">
+          <view style="font-weight: bold">配送时间</view>
+          <view>承诺04月02日送达</view>
+        </view>
+      </view>
+    </view>
+    <view class="goodsInfo">
+      <van-card
+        thumb="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1554784086160&di=50345add97931a5bab12f7b5b91fc4a2&imgtype=0&src=http%3A%2F%2Fm.360buyimg.com%2Fn12%2Fjfs%2Ft3016%2F73%2F397458831%2F180496%2Ff6f016a1%2F579ef7b9Na47116e1.jpg%2521q70.jpg"
+        title="红色限量版套装礼盒红色限量版套装礼盒红色限量版套装礼盒红色限量版套装礼盒红色限量版套装礼盒红色限量版套装礼盒"
+        desc="礼盒装"
+      >
+      </van-card>
+      <text class="no_reason">24小时无理由退货</text>
+      <view class="refundM">
+        <view class="refundMoney" @tap="refundMoney">退换</view>
+      </view>
+      <view class="order_price">
+        <view style="font-weight: bold">订单总价</view>
+        <view style="color: #cf000e">
+          <text>￥</text>
+          <text>989.0</text>
+        </view>
+      </view>
+    </view>
+    <view class="orderTimeInfo">
+      <view>
+        <text class="tite">交易号：</text>
+        <text class="t_desdes">20195495659536259596256549569820062359963496494614946</text>
+      </view>
+      <view>
+        <text class="tite">创建时间：</text>
+        <text class="t_desdes">2019-04-02 09:05:30</text>
+      </view>
+      <view>
+        <text class="tite">付款时间：</text>
+        <text class="t_desdes">2019-04-02 09:05:30</text>
+      </view>
+      <view>
+        <text class="tite">发货时间：</text>
+        <text class="t_desdes">2019-04-02 09:05:30</text>
+      </view>
+    </view>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+import lf from 'lf'
+export default class refundDtatils extends wepy.component {
+  config = {
+    backgroundTextStyle: 'light',
+    navigationBarBackgroundColor: '#fff',
+    navigationBarTitleText: '退款详情',
+    navigationBarTextStyle: 'black'
+  }
+  components = {}
+  mixins = []
+  data = {
+    orderId: null
+  }
+  computed = {}
+  events = {}
+  onLoad (opt) {
+  }
+  methods = {
+    refundMoney () {
+      this.$parent.$parent.globalData.refundInfo = {id: 20}
+      wx.navigateTo({
+        url: `applyStart`
+      })
+    }
+  }
+  onShow () {}
+  init (opt) {
+    let { orderId } = opt
+    this.orderId = orderId
+    this.getOrderDetail()
+  }
+  async getOrderDetail () {
+    try {
+      const r = await lf.net.post('/Api/Order/order_detail', { order_id: this.orderId })
+      if (r.code === 200) {
+        console.log(r)
+      } else {
+        lf.toast(r.info)
+      }
+    } catch (e) {
+      lf.toast('系统内部错误')
+    }
+  }
+}
+</script>

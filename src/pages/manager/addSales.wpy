@@ -1,0 +1,397 @@
+<style lang="less">
+  .btnBox {
+    width: 100%;
+    height: 90rpx;
+    padding: 0 24rpx;
+    box-sizing: border-box;
+    line-height: 90rpx;
+    text-align: center;
+    display: flex;
+    background: rgba(255, 255, 255, .8);
+    justify-content: space-between;
+  }
+
+  .pickerBox {
+    width: 100%;
+    height: 389rpx;
+    .picker-item {
+      line-height: 70rpx;
+      margin-left: 5rpx;
+      margin-right: 5rpx;
+      text-align: center;
+    }
+  }
+
+  .code-show {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    width: 670rpx;
+    height: 764rpx;
+    background-color: #ffffff;
+    border-radius: 15rpx;
+    .show-top {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      height: 84rpx;
+      width: 620rpx;
+      border-bottom: 1rpx solid #eee;
+      margin-bottom: 40rpx;
+      image {
+        position:absolute;
+        right:30rpx;
+        top:30rpx;
+        width:30rpx;
+        height:30rpx;
+      }
+    }
+    .code-content {
+      width: 477rpx;
+      height: 477rpx;
+    }
+    .code-tip {
+      margin-top: 35rpx;
+      font-size: 28rpx;
+      color: #666666;
+    }
+  }
+
+  .addressBox {
+    .addressItem {
+      padding: 0 54rpx 0 42rpx;
+      .left {
+        width: 280rpx;
+        height: 100rpx;
+        font-size: 28rpx;
+        line-height: 100rpx;
+        margin-right: 10rpx;
+      }
+      .right {
+        width: 100%;
+        height: 100rpx;
+        line-height: 100rpx;
+        text-align: left;
+      }
+      input {
+        text-align: left;
+        width: 100%;
+        height: 95rpx;
+        line-height: 100rpx;
+        font-size: 30rpx;
+        color: #333333;
+      }
+      .rightSelect{
+        align-self: center;
+        display: flex;
+        font-size: 28rpx;
+        color: #333;
+        justify-content: flex-end;
+        .image {
+          width: 18rpx;
+          height: 33rpx;
+          display: block;
+          align-self: center;
+        }
+      }
+
+    }
+    .send-good-info {
+      padding-left: 44rpx;
+      height: 75rpx;
+      line-height: 75rpx;
+      background-color: #f5f5f7;
+      font-size: 24rpx;
+      color: #888888;
+    }
+    textarea {
+      padding: 0 54rpx;
+      width: 630rpx;
+      height: 168rpx;
+    }
+    .btn-area {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 120rpx;
+      background-color: #F5f5f7;
+      padding-top: 50rpx;
+      padding-bottom: 36rpx;
+      .my-button {
+        width: 670rpx;
+        height: 90rpx;
+        color: #fff;
+        line-height: 90rpx;
+        background-color: #cf0210;
+        border-radius: 10rpx;
+      }
+    }
+  }
+
+  .selectedAddress {
+    width: 100%;
+    display: flex;
+    z-index: 99;
+    background-color: #ffffff;
+    background: rgba(0, 0, 0, .2);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 40vh;
+  }
+  .tip {
+    width: 100%;
+    text-align: center;
+    font-size: 24rpx;
+    color: #666666;
+  }
+
+
+  .margin-t {
+    margin-top: 20rpx;
+  }
+
+  .bgc-f {
+    background-color: #ffffff
+  }
+
+  .border-b {
+    border-bottom: 1rpx solid #eee;
+  }
+
+
+
+  .display-flex {
+    display: flex;
+  }
+
+  .flex-1 {
+    flex: 1;
+  }
+
+  .c-333 {
+    color: #333333;
+  }
+  .flex-direction{
+    justify-content: space-between;
+  }
+  .myBorder {
+    border-radius: 15rpx;
+  }
+
+  .c-gray-time {
+    color: #999999;
+  }
+
+  .font-s26 {
+    font-size: 26 rpx;
+  }
+</style>
+<template>
+  <view id="AddressAction">
+    <view class="addressBox margin-t bgc-f">
+        <view class="name addressItem bgc-f border-b display-flex">
+          <view class="left c-333 ">姓名</view>
+          <input type="text" maxlength="6" value="{{salesName}}" bindinput="InputSalesName" placeholder-class="placeholder" placeholder="请输入姓名"></input>
+        </view>
+      <view class="phone addressItem bgc-f border-b display-flex">
+        <view class="left c-333">手机</view>
+        <input type="number" value="{{salesPhone}}" bindinput="InputSalesPhone" maxlength="11" placeholder="请输入手机号"></input>
+      </view>
+      <picker bindchange="bindPickerChange" value="{{job}}" range="{{jobCategory}}">
+        <view  class="addressItem bgc-f border-b display-flex flex-direction" >
+          <view class="left c-333">工作性质</view>
+          <view class="rightSelect">
+            <text style="margin-right: 20rpx">{{jobCategory[job]}}</text>
+            <image class="image" src="./../../images/customer/icon-8.png"></image>
+          </view>
+        </view>
+      </picker>
+      <picker bindchange="bindPickerChangeTitle" value="{{occupation}}" range="{{occupationTitle}}">
+        <view  class="addressItem bgc-f border-b display-flex flex-direction" >
+          <view class="left c-333">职称</view>
+          <view class="rightSelect">
+            <text style="margin-right: 20rpx">{{occupationTitle[occupation]}}</text>
+            <image class="image" src="./../../images/customer/icon-8.png"></image>
+          </view>
+        </view>
+      </picker>
+      <view class="btn-area">
+        <button class="my-button" @tap.stop="submitForm">请确认</button>
+      </view>
+    </view>
+    <view class="tip">请销售员用微信扫描生成的二维码确认添加</view>　
+    <van-popup
+      show="{{ showCode }}"
+      @close="closeCode"
+      @click-overlay="closeCode"
+      custom-class="myBorder"
+    >
+      <view class="code-show">
+        <view class="show-top">
+          <view class="top-title" >生成二维码</view>
+          <image @tap.stop="closeCode" src="../../images/close.png"></image>
+        </view>
+        <image mode="aspectFit" class="code-content" src="{{order_qrcode}}"></image>
+        <view class="code-tip">请销售人员用微信扫描以上二维码确认销售身份</view>
+      </view>
+    </van-popup>
+    <view></view>
+  </view>
+  <view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import lf from 'lf'
+  export default class AddSales extends wepy.page {
+    config = {
+      backgroundTextStyle: 'light',
+      navigationBarBackgroundColor: '#cf0210',
+      navigationBarTitleText: '新增销售人员',
+      navigationBarTextStyle: 'white',
+      usingComponents: {
+        'van-area': '/components/vant/area/index',
+        'van-popup': '/components/vant/popup/index'
+      }
+    }
+    components = {
+    }
+    data = {
+      showCode: false,
+      order_qrcode: '',
+      salesName: '',
+      salesPhone: '',
+      jobCategory: ['全职', '兼职'],
+      occupationTitle: ['金牌销售', '店长', '高级设计师', '总监级设计师'],
+      job: null,
+      occupation: null,
+      timer: null
+    }
+    onLoad() {
+    }
+    onUnload () {
+      this.salesName = ''
+      this.salesPhone = ''
+      clearTimeout(this.timer)
+      this.$apply()
+    }
+
+    methods = {
+      InputSalesName (e) {
+        this.salesName = e.detail.value
+        this.$apply()
+      },
+      InputSalesPhone (e) {
+        this.salesPhone = e.detail.value
+        this.$apply()
+      },
+      submitForm: function (e) {
+        var submitData = {
+          salesName: this.salesName,
+          salesPhone: this.salesPhone,
+          job: this.job, // 关系
+          occupation: this.occupation // 职称
+        }
+        if (!submitData.salesPhone || !/^[1][0-9][0-9]{9}$/.test(submitData.salesPhone)) {
+          wepy.showToast({
+            title: '请填写合法手机号',
+            icon: 'none'
+          })
+          return
+        }
+        if (!submitData.salesName.length) {
+          wepy.showToast({
+            title: '请填写姓名',
+            icon: 'none'
+          })
+          return
+        }
+        if (!submitData.job) {
+          return wepy.showToast({
+            title: '请选择工作性质',
+            icon: 'none'
+          })
+        }
+        if (!submitData.occupation) {
+          return wepy.showToast({
+            title: '请选择职称',
+            icon: 'none'
+          })
+        }
+        this.updateSalesMessages(submitData)
+      }
+    }
+    bindPickerChange (e) {
+      const value = e.detail.value
+      this.job = value
+      this.$apply()
+    }
+    bindPickerChangeTitle(e) {
+      this.occupation = e.detail.value
+      this.$apply()
+    }
+    async updateSalesMessages (submitData) {
+      const user = lf.user.get()
+      if (+submitData.index === 0) {
+        submitData.index = 1
+      } else {
+        submitData.index = 2
+      }
+      var data = {
+        dealer_id: user.dealer_id,
+        mobile: submitData.salesPhone,
+        name: submitData.salesName,
+        working_type: Number(submitData.job) === 1 ? '2' : '1',
+        saler_rank: this.occupationTitle[submitData.occupation]
+      }
+      try {
+        wepy.showLoading({
+          title: '二维码生成中...'
+        })
+        const res = await lf.net.post('/Api/saler/saler_add', data)
+        wepy.hideLoading()
+        if (res.code === 200) {
+          this.order_qrcode = res.data.saler_qrcode
+          this.showCode = true
+          this.timer = setTimeout(this.getStatus.bind(this), 2000)
+          this.$apply()
+        } else {
+          wepy.showToast({
+            title: res.info,
+            icon: 'none'
+          })
+        }
+      } catch (err) {
+      }
+    }
+    async getStatus () {
+      try {
+        const res = await lf.net.post('/api/saler/get_saler_status', {
+          mobile: this.salesPhone
+        })
+        if (res.code === 200) {
+          this.showCode = false
+          wepy.navigateBack()
+          this.$apply()
+        } else {
+          this.timer = setTimeout(this.getStatus.bind(this), 2000)
+        }
+      } catch (err) {
+        this.timer = setTimeout(this.getStatus.bind(this), 2000)
+      }
+    }
+    closeCode () {
+      this.showCode = false
+      clearTimeout(this.timer)
+      this.$apply()
+    }
+  }
+</script>

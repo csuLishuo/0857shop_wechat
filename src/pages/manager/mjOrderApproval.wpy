@@ -1,0 +1,459 @@
+<style lang="scss">
+  @import "../../css/common";
+  page {
+    background-color: #fff;
+  }
+.orderApproval{
+  padding-bottom: 180rpx;
+  .ellipsis-1 {
+    display: -webkit-box;
+    overflow: hidden;
+    white-space: normal !important;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+  }
+  .ellipsis-2 {
+    display: -webkit-box;
+    overflow: hidden;
+    white-space: normal !important;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+  .ellipsis-3 {
+    display: -webkit-box;
+    overflow: hidden;
+    white-space: normal !important;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+  .orderInfo{
+    background: #cf000e;
+    padding:0 30rpx;
+    .line{
+      box-sizing: border-box;
+      line-height: 46rpx;
+      padding:17rpx 0;
+      font-size: 30rpx;
+      color: #fff;
+      border-bottom: 1rpx solid rgba(255, 255, 255, 0.2);
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: space-between;
+      .address {
+        width: 80%;
+        text-align: right;
+      }
+      &.addr{
+        border-bottom: none;
+        .detail{
+          width: 478rpx;
+          text-align: right;
+          max-height: 92rpx;
+          overflow: hidden;
+        }
+      }
+    }
+  }
+  .box{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    background:  #ba000d;
+    padding:35rpx 0;
+    .wrapper{
+      width: 33.3%;
+      box-sizing: border-box;
+      text-align: center;
+      &.center{
+        border-left: 1rpx solid #cf000e;
+        border-right: 1rpx solid #cf000e;
+      }
+      .title{
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 24rpx;
+        line-height: 30rpx;
+      }
+      .detail{
+        color: #fff;
+        font-size: 30rpx;
+        line-height: 36rpx;
+        margin-top: 20rpx;
+        word-break:break-all;
+        text{
+          font-size: 24rpx;
+        }
+      }
+    }
+  }
+  .orderList{
+    padding:0 30rpx;
+    background: #fff;
+    .wrapper{
+      padding:30rpx 0;
+      border-bottom: 1rpx solid #eee;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: space-between;
+      .img-box{
+        width: 158rpx;
+        height: 158rpx;
+        border: 1rpx solid #eee;
+        border-radius: 3rpx;
+        overflow: hidden;
+        margin-right: 15rpx;
+        image{
+          width: 100%;
+          height: 100%;
+          display: block;
+        }
+      }
+      .detail{
+        width: 498rpx;
+        height: 158rpx;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        .title{
+          line-height: 38rpx;
+          /*height: 76rpx;*/
+          text-align: justify;
+          font-size: 28rpx;
+          font-weight: bold;
+        }
+        .label{
+          display: flex;
+          flex-direction: row;
+          align-items: flex-start;
+          justify-content: space-between;
+          font-size: 24rpx;
+          line-height: 42rpx;
+          color: #666;
+        }
+        .price{
+          font-size: 36rpx;
+          color: #f2441c;
+          text{
+            font-size: 24rpx;
+            &.originPrice{
+              color: #666;
+              text-decoration: line-through;
+            }
+          }
+        }
+      }
+      .carNum {
+        font-size: 28rpx;
+        align-self: center;
+      }
+    }
+  }
+  .bottom-position {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    .bottom-btn-box {
+      .btn-box{
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+        padding:30rpx;
+        box-sizing: border-box;
+        background: #fff;
+        .btn{
+          width: 330rpx;
+          height: 90rpx;
+          line-height: 90rpx;
+          text-align: center;
+          font-size: 32rpx;
+          color: #fff;
+          font-weight: bold;
+          border-radius: 8rpx;
+          &.btn-left{
+            background: #7c7c7c;
+          }
+          &.btn-right{
+            background: #cf000e;
+          }
+          &.btn-pay{
+            width: 100%;
+            background: #cf000e;
+            /*display: none;*/
+          }
+        }
+      }
+    }
+  }
+  .myBorder {
+    border-radius: 15rpx;
+  }
+  .code-show {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    width: 670rpx;
+    padding-bottom: 30rpx;
+    background-color: #ffffff;
+    border-radius: 15rpx;
+    .show-top {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      height: 84rpx;
+      width: 620rpx;
+      border-bottom: 1rpx solid #cccc;
+      margin-bottom: 40rpx;
+      image {
+        position:absolute;
+        right:30rpx;
+        top:30rpx;
+        width:30rpx;
+        height:30rpx;
+      }
+    }
+    .code-content {
+      width: 470rpx;
+      height: 535rpx;
+    }
+    .code-tip {
+      margin-top: 35rpx;
+      font-size: 28rpx;
+      color: #666666;
+    }
+  }
+}
+</style>
+<template>
+<view class="orderApproval {{isPx ? 'pxHeight': ''}}">
+  <view class="orderInfo">
+    <view class="line">
+      <view class="title">订单号</view>
+      <view class="detail">{{detailData.order_no}}</view>
+    </view>
+    <view class="line">
+      <view class="title">客户</view>
+      <view class="detail">{{detailData.customers_name}}</view>
+    </view>
+    <view class="line">
+      <view class="title">状态</view>
+      <view class="detail">{{detailData.mt_status_text}}</view>
+    </view>
+    <view class="line">
+      <view class="title">电话</view>
+      <view class="detail" wx:if="{{detailData.receiver_mobile !== ''}}" @tap="toTel({{detailData.receiver_mobile}})">{{detailData.receiver_mobile}}</view>
+      <view class="detail" wx:else @tap="toTel({{detailData.customers_mobile}})">{{detailData.customers_mobile}}</view>
+    </view>
+    <view class="line">
+      <view class="title">地址</view>
+      <view class="detail address ellipsis-2">{{detailData.district+detailData.addr}}</view>
+    </view>
+    <view class="line">
+      <view class="title">经销商</view>
+      <view class="detail">{{detailData.dealer_name}}</view>
+    </view>
+    <view class="line addr">
+      <view class="title">所属经销商</view>
+      <view class="detail">{{detailData.dealer_info}}</view>
+    </view>
+  </view>
+  <view class="box">
+    <view class="wrapper">
+      <view class="title">销售员</view>
+      <view class="detail">{{detailData.saler_name}}</view>
+    </view>
+    <view class="wrapper center">
+      <view class="title">货品总数</view>
+      <view class="detail">{{sum}}<text>件</text></view>
+    </view>
+    <view class="wrapper">
+      <view class="title">订单总价</view>
+      <view class="detail">{{detailData.factory_amount}}<text>元</text></view>
+    </view>
+  </view>
+  <view class="orderList">
+    <view class="wrapper" wx:for="{{detailData.order_item_list}}" data-id="{{item.goods_id}}"  @tap="goToGoodsInfo"  wx:for-item="item" wx:key="item.id">
+      <view class="img-box"><image src="{{item.goods_cover_url}}" alt=""></image></view>
+      <view class="detail">
+        <view class="upInfo">
+          <view class="title ellipsis-2">{{item.goods_title}}</view>
+          <view class="label">{{item.goods_cate}} - {{item.goods_color}}</view>
+        </view>
+        <view class="price">￥{{item.factory_amount}}</view>
+        <!--<view class="price"><text>￥</text>{{item.discount_amount}} <text wx:if="{{item.discount_amount!==item.amount}}" class="originPrice">￥{{item.amount}}</text></view>-->
+      </view>
+      <view  class="carNum">x{{item.number}}</view>
+    </view>
+  </view>
+  <view class="bottom-position">
+    <view class="bottom-btn-box">
+      <view class="btn-box" wx:if="{{detailData.mt_status == 10}}">
+        <view class="btn btn-left" bindtap="delOrder">拒绝</view>
+        <view class="btn btn-right" bindtap="checkOrder">确认订单</view>
+      </view>
+    </view>
+    <phonexspace wx:if="{{isPx}}"></phonexspace>
+  </view>
+  <van-popup
+    show="{{ showCode }}"
+    bind:close="onClose"
+    custom-class="myBorder"
+  >
+    <view class="code-show">
+      <view class="show-top">
+        <view class="top-title" >生成二维码</view>
+      </view>
+      <image class="code-content" src="{{QRurl}}"></image>
+    </view>
+  </van-popup>
+</view>
+</template>
+
+<script>
+import wepy from 'wepy'
+import lf from 'lf'
+import CommonMixin from '../../mixins/common'
+import phoneXSpace from '../../components/phoneXSpace'
+
+export default class MjorderApproval extends wepy.page {
+  config = {
+    navigationBarTitleText: '订单详情',
+    navigationBarTextStyle: 'white',
+    backgroundTextStyle: 'light',
+    backgroundColor: '#cf000e',
+    navigationBarBackgroundColor: '#cf000e',
+    usingComponents: {
+      'van-popup': '/components/vant/popup/index'
+    }
+  }
+  mixins = [CommonMixin]
+  components = {
+    phonexspace: phoneXSpace
+  };
+  data = {
+    showCode: false,
+    detailId: '',
+    role: '',
+    dealer_status: '',
+    detailData: {},
+    sum: 0,
+    QRurl: '',
+    timer: null
+  }
+  computed = {
+  }
+  methods = {
+    toTel (number) {
+      wepy.makePhoneCall({
+        phoneNumber: String(number)
+      })
+    },
+    async delOrder () {
+      wx.navigateTo({
+        url: 'mjRejected?id=' + this.detailId
+      })
+    },
+    async checkOrder () {
+      wx.navigateTo({
+        url: 'confirmOrder?id=' + this.detailId
+      })
+    }
+//      let result = await lf.net.post('/Api/Factory/order_check_commit', {
+//        id: this.detailId
+//      })
+//      if (result.code === 200) {
+//        this.init()
+//      } else {
+//        wepy.showToast({
+//          title: result.info,
+//          icon: 'none'
+//        })
+//      }
+//    }
+  }
+  goToGoodsInfo (e) {
+    let id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: './../salesman/goodsInfo?id=' + id
+    })
+  }
+  async getOrderStatus () {
+    let self = this
+    let result = await lf.net.post('/Api/Order/get_order_status', {
+      order_id: self.detailId
+    })
+    if (result.code === 200) {
+      if (result.data.dealer_status.toString() !== '0') {
+        self.dealer_status = result.data.dealer_status
+        self.showCode = false
+        this.init()
+      } else {
+        this.timer = setTimeout(this.getOrderStatus.bind(this), 3000)
+      }
+    } else {
+      wepy.showToast({
+        title: result.info,
+        icon: 'none'
+      })
+    }
+  }
+  async getDetail () {
+    let result = await lf.net.post('/Api/factory/order_detail', {
+      order_id: this.detailId
+    })
+    if (result.code === 200) {
+      this.detailData = result.data
+      this.dealer_status = result.data.dealer_status
+      this.getSum(this.detailData.order_item_list)
+      this.$apply()
+    } else {
+      wepy.showToast({
+        title: result.info,
+        icon: 'none'
+      })
+    }
+  }
+  getSum (list) {
+    this.sum = 0
+    for (let i = 0; i < list.length; i++) {
+      this.sum += parseInt(list[i].number)
+    }
+  }
+  events = {}
+  onLoad (options) {
+    this.isPx = lf.util.isPx(this)
+    this.detailId = options.id
+  }
+  onShow () {
+    this.init()
+  }
+  onClose () {
+    this.showCode = false
+    this.isPx = lf.util.isPx(this)
+    this.init()
+    this.$apply()
+  }
+  init () {
+    this.getDetail()
+  }
+  onUnload() {
+    if (this.timer) {
+      clearTimeout(this.timer)
+    }
+  }
+}
+</script>

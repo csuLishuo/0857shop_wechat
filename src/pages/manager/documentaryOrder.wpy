@@ -1,0 +1,434 @@
+<style lang="scss">
+  @import "../../css/common";
+  page{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  .style {
+    width: 140rpx;
+    height: 100%;
+    text-align: center;
+    line-height: 255rpx;
+    color: #fff;
+    display: inline-block;
+  }
+  .hidden {
+    visibility: visible;
+  }
+  ::-webkit-scrollbar{
+    width: 0;
+    height: 0;
+    color: transparent;
+  }
+  .warp{
+    height: 100%;
+    .order_nav {
+      width: 100%;
+      height: 130rpx;
+      box-sizing: border-box;
+      background: #cf000e;
+      position: fixed;
+      top: 0;
+      left: 0;
+      .nav_item {
+        float: left;
+        height: 100%;
+        width: 20%;
+        text-align: center;
+        box-sizing: border-box;
+        image {
+          width: 52rpx;
+          height: 55rpx;
+          display: block;
+          margin-bottom: 25rpx;
+          position: relative;
+          top: 15rpx;
+          left: 52rpx;
+        }
+        view {
+          font-size: 22rpx;
+          color: white;
+        }
+      }
+    }
+    .scrollView{
+      /*position: relative;*/
+      /*top: -30rpx;*/
+      padding: 160rpx 0 10rpx 0;
+      height: 100%;
+      box-sizing: border-box;
+      .order_list {
+        padding: 0 30rpx;
+        box-sizing: border-box;
+        .newgoodsListItem{
+          margin-bottom:torpx(20);
+        }
+        .order_item {
+          padding-top: 34rpx;
+          /*margin-bottom: 30rpx;*/
+          height: 245rpx;
+          width: 100%;
+          box-sizing: border-box;
+          background: #fff;
+          border-radius: 8rpx;
+          display: flex;
+          justify-content: space-between;
+          border-bottom: torpx(1) solid #DDDDDD;
+          .img {
+            width: 172rpx; // 202
+            height: 100%;
+            position: relative;
+            image {
+              width: 130rpx;
+              height: 130rpx;
+              display: inline-block;
+              border-radius: 50%;
+              position: absolute;
+              left: 50%;
+              transform: translateX(-50%);
+            }
+          }
+          .list_right_padding {
+            padding-left: 30rpx;
+          }
+          .list_right{
+            flex: 1;
+            box-sizing: border-box;
+            position: relative;
+            top: -4rpx;
+            .title{
+              font-size: 33rpx;
+              color: #333;
+            }
+            .status{
+              color: #cf000e;
+              border: 1rpx solid #cf000e;
+              border-radius: 5rpx;
+              margin-left: 20rpx;
+              font-size: 20rpx;
+              position: relative;
+              top: -5rpx;
+              padding: 5rpx;
+            }
+            .checkPending{
+              color: #f2441c;
+              border: 1rpx solid #f2441c;
+            }
+            .confirmation{
+              color: #2eadbc;
+              border: 1rpx solid #2eadbc;
+            }
+            .factory{
+              color: white;
+              background: #f2441c;
+              border: none;
+            }
+            .orderTime{
+              font-size: 24rpx;
+              color: #999;
+              height: 30rpx;
+            }
+            .orderDesc{
+              margin-top: 15rpx;
+              margin-bottom: 18rpx;
+              font-size: 24rpx;
+              color: #333;
+              overflow: hidden;
+              width: 410rpx;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              box-sizing: border-box;
+            }
+            .priceInfo{
+              font-size: 24rpx;
+              .huhao{
+                color: #f2441c;
+                margin-right: 35rpx;
+                text{
+                  font-size: 36rpx;
+                }
+              }
+              .price{
+                color: #999;
+                position: relative;
+                text-decoration: line-through;
+                .del{
+                  height: 1rpx;
+                  width: 100%;
+                  background: #999;
+                  position: absolute;
+                  left: 0;
+                  top: 20rpx;
+                }
+              }
+            }
+          }
+          .right_arrow{
+            width: 74rpx;
+            height: 100%;
+            position: relative;
+            image{
+              width: 30rpx;
+              height: 48rpx;
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%,-85%);
+            }
+          }
+        }
+        .rightHidden {
+          height: 100%;
+          .changePrice {
+            @extend .style;
+            background: #f2441c;
+          }
+          .delGoods {
+            @extend .style;
+            background: #f2441c;
+          }
+        }
+        .dealer_content{
+          padding:torpx(30);
+          background-color: #fff;
+          .dealer_content_image{
+            width:torpx(31);
+            height:torpx(29);
+            margin-right:torpx(22);
+            vertical-align: middle;
+          }
+          .dealer_content_name{
+            font-size: torpx(26);
+            color: #333;
+            margin-right:torpx(34);
+          }
+          .dealer_content_title{
+            font-size: torpx(26);
+            color: #999999;
+          }
+        }
+      }
+      .noData{
+        text-align: center;
+        font-size: 30rpx;
+      }
+    }
+  }
+</style>
+<template>
+  <view class="warp">
+    <view class="order_nav">
+      <block wx:for="{{navStatus}}" wx:for-item="item" wx:for-index="index" wx:key="unique">
+        <view class="nav_item" bindtap="changeNav" data-navId="{{item.id}}">
+          <image wx:if="{{item.id===tapStauts}}" src="{{'./../../images/documentary/nav_icon_' + index + '.png'}}"></image>
+          <image wx:else src="{{'./../../images/documentary/nav_icon-'+ index +'.png'}}"></image>
+          <view>{{item.text}}</view>
+        </view>
+      </block>
+    </view>
+    <scroll-view scroll-y="true" class="scrollView" style="height: 100%" bindscrolltolower="scrolltolower">
+      <view wx:if="{{goodsList.length>0 && tapStauts!==0}}" class="order_list">
+        <block wx:for="{{goodsList}}" wx:for-index="index" wx:for-item="item" wx:key="unique">
+          <view bindtap="gotoInfo({{item.id}})" class="newgoodsListItem">
+            <view class="order_item" >
+              <view class="img">
+                <image src="{{item.dealer_avatar}}"></image>
+              </view>
+              <view class="list_right">
+                <text class="title">{{item.order_title}}</text>
+                <text class="status {{item.mt_status === '10'?'confirmation':''}}" wx:if="{{item.mt_status === '10'}}">{{item.mt_status_text}}</text>
+                <text class="status {{item.mt_status === '25'?'checkPending':''}}" wx:elif="{{item.mt_status === '25'}}">{{item.mt_status_text}}</text>
+                <text class="status {{item.mt_status === '20'?'factory':''}}" wx:elif="{{item.mt_status === '20'}}">{{item.mt_status_text}}</text>
+                <text class="status" wx:elif="{{item.mt_status === '30'}}">{{item.mt_status_text}}</text>
+                <view class="orderTime">{{item.addtime}}</view>
+                <view class="orderDesc">{{item.order_info}}</view>
+                <view class="priceInfo">
+                  总价：
+                  <text class="huhao">￥<text>{{item.factory_amount}}</text></text>
+                </view>
+              </view>
+              <view class="right_arrow">
+                <image src="./../../images/salesman/order_arrow.png"></image>
+              </view>
+            </view>
+            <view class="dealer_content">
+              <image class="dealer_content_image" src="./../../images/documentary/icon-80.png"></image>
+              <text class="dealer_content_name">{{item.dealer_name}}</text>
+              <text class="dealer_content_title">{{item.dealer_info}}</text>
+            </view>
+          </view>
+        </block>
+      </view>
+      <view wx:else class="noData" style="color: #999">暂无数据</view>
+      <phonexspace wx:if="{{isPx}}" :isTransparent.sync="isTransparent"></phonexspace>
+    </scroll-view>
+  </view>
+</template>
+<script>
+import wepy from 'wepy'
+import lf from 'lf'
+import CommonMixin from '../../mixins/common'
+import phoneXSpace from '../../components/phoneXSpace'
+import { onEvent, EVENT, TYPES } from '../../js/event'
+export default class DocumentaryOrder extends wepy.page {
+  config = {
+    navigationBarTitleText: '订单',
+    backgroundTextStyle: 'light',
+    backgroundColor: '#f7f7f7',
+    navigationBarTextStyle: 'white',
+    navigationBarBackgroundColor: '#cf000e',
+    usingComponents: {
+      'van-icon': '/components/vant/icon/index',
+      'van-popup': '/components/vant/popup/index',
+      'van-swipe-cell': '/components/vant/swipe-cell/index'
+    }
+  };
+  mixins = [CommonMixin]
+  components = {
+    phonexspace: phoneXSpace
+  };
+  data = {
+    goodsList: [],
+    navStatus: [
+      {
+        id: -1,
+        text: '全部'
+      },
+      {
+        id: 10,
+        text: '待审核'
+      },
+      {
+        id: 20,
+        text: '待付定金'
+      },
+      {
+        id: 25,
+        text: '待付余款'
+      },
+      {
+        id: 30,
+        text: '待发货'
+      }
+    ],
+    tapStauts: -1,
+    rightWidth: 0,
+    isTransparent: true,
+    pageStart: 1,
+    total: 0
+  };
+  computed = {};
+  methods = {
+    gotoInfo (id) {
+      wx.navigateTo({
+        url: 'mjOrderApproval?id=' + id
+      })
+    },
+    scrolltolower () {
+      let self = this
+      if (self.pageStart - 1 < parseInt(self.total / 10)) {
+        self.pageStart += 1
+        self.getGoodsList(this.tapStauts)
+      }
+      wepy.stopPullDownRefresh()
+    }
+  };
+  events = {};
+  getDelectWidth() {
+    var self = this
+    wx.createSelectorQuery().selectAll('.rightHidden').boundingClientRect(function(rect) {
+      self.rightWidth = rect[0].width
+    }).exec()
+    this.$apply()
+  }
+  onLoad () {
+    this.tapStauts = -1
+    this.pageStart = 1
+    this.getGoodsList(this.tapStauts)
+  }
+  onShow() {
+    onEvent(EVENT.ORDER, (e) => {
+      switch (e.type) {
+        case TYPES.ORDER_STATUS_CHANGES:
+          const changeId = e.data
+          const index = this.goodsList.findIndex(v => {
+            return changeId === v.id
+          })
+          if (index > -1) {
+            this.goodsList.splice(index, 1)
+          }
+          break
+        case TYPES.ORDER_ALL_DELECT_CHANGES:
+          const id = e.data
+          const inx = this.goodsList.findIndex(v => {
+            return id === v.id
+          })
+          if (inx > -1) {
+            this.goodsList.splice(inx, 1)
+          }
+          break
+      }
+    })
+  }
+  changeNav(event) {
+    this.pageStart = 1
+    this.goodsList = []
+    let navId = event.currentTarget.dataset.navid
+    if (navId === this.tapStauts) {
+      return
+    }
+    var id = navId
+    if (navId === -1) {
+      id = ''
+    }
+//    if (navId === -1) {
+//      navId = ''
+//    }
+    this.tapStauts = navId
+    this.getGoodsList(id)
+    this.$apply()
+  }
+  async getGoodsList(status = '') {
+    try {
+      let param = {
+        mt_status: status,
+        page_start: (this.pageStart - 1) * 10,
+        page_size: 10
+      }
+      if (status === '' || status === -1) {
+        delete param.mt_status
+      }
+      wepy.showLoading({
+        title: '加载中...'
+      })
+      const result = await lf.net.post('/Api/Factory/order_list', param)
+      if (result.code === 200) {
+        var dataLi = result.data.list || []
+        dataLi.forEach((v, i) => {
+          if (v.customer_commit_time && v.customer_commit_time === null) {
+            v.customer_commit_time = ''
+          }
+        })
+        if (this.pageStart === 1) {
+          this.goodsList = dataLi
+          console.log(this.goodsList)
+        } else {
+          for (let i = 0; i < dataLi.length; i++) {
+            this.goodsList.push(dataLi[i])
+          }
+        }
+        this.$apply()
+      }
+    } catch (e) {
+      wx.showToast({
+        title: '发生了错误',
+        icon: 'none',
+        mask: true
+      })
+    }
+    wepy.hideLoading()
+  }
+  onReachBottom () {}
+}
+</script>

@@ -1,0 +1,533 @@
+<style lang="scss">
+  @import "../css/common";
+
+  .container {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    align-items: center;
+    flex-direction: column;
+    font-size: torpx(30);
+    .top-show {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      background-color: #cf0210;
+      width: 100%;
+      height: torpx(320);
+      font-size: torpx(30);
+      color: #fff;
+      .money-title {
+        margin-bottom: torpx(32);
+      }
+      .money-content {
+        font-size: torpx(60);
+        margin-bottom: torpx(20);
+      }
+    }
+    .get-money {
+      position: absolute;
+      top: torpx(276);
+      display: flex;
+      width: torpx(690);
+      height: torpx(88);
+      border-radius: torpx(44);
+      background-color: #fff;
+      color: #ce000e;
+      box-shadow: torpx(0) torpx(8) torpx(9) torpx(0) rgba(0, 0, 0, 0.02);
+      line-height: torpx(88);
+      text-align: center;
+      font-size: torpx(36);
+      justify-content: center;
+      align-items: center;
+      .get-btn {
+      }
+    }
+    .money-come {
+      display: flex;
+      justify-content: flex-start;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 100%;
+      margin-top: torpx(80);
+      font-size: torpx(30);
+      position: absolute;
+      top: torpx(310);
+      bottom: 0;
+      .bottom-title {
+        height: torpx(78);
+        margin-left: torpx(30);
+        line-height: torpx(78);
+      }
+      vant-tabs {
+       display: flex;
+        flex: 1;
+      }
+      .scrollView {
+        display: flex;
+        flex: 1;
+        background-color: #fff;
+        .mouch-top {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          height: torpx(40);
+          font-size: torpx(24);
+          margin-left: torpx(30);
+          margin-right: torpx(30);
+          background-color: #f5f5f5;
+          .mouch-left {
+            margin-left: torpx(10);
+          }
+          .mouch-right {
+            margin-right: torpx(10);
+          }
+        }
+        .mouch-top:first-child {
+          margin-top: torpx(30);
+        }
+        .get-list {
+          display: flex;
+          justify-content: flex-start;
+          flex-direction: column;
+          align-items: center;
+          width: 100%;
+          .get-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-direction: row;
+            width: 100%;
+            height: torpx(132);
+            border-bottom: 1rpx solid #eee;
+            .get-left {
+              display: flex;
+              justify-content: space-around;
+              align-items: flex-start;
+              flex-direction: column;
+              margin-left: torpx(30);
+              max-width: torpx(500);
+              .get-time {
+                font-size: torpx(24);
+                color: rgba(28, 28, 28, 0.5);
+              }
+            }
+            .get-right {
+              color: #ce000e;
+              font-size: torpx(40);
+              margin-right: torpx(30);
+            }
+          }
+
+          .intergral-item {
+            width: 100%;
+            position: relative;
+            box-sizing: border-box;
+            padding:torpx(32) torpx(250) torpx(32) torpx(32);
+            border-bottom: torpx(1) solid #eeeeee;
+            background-color: #fff;
+            .integral-item-contens{
+              width: 100%;
+              .title{
+                color: #333333;
+                font-size: torpx(30);
+                line-height: torpx(42);
+                text{
+                  color: #cf0210;
+                }
+              }
+              .time{
+                color: rgba(28, 28, 28, 0.5);
+                font-size: torpx(24);
+                padding-top:torpx(12);
+              }
+            }
+            .integral-item-integral{
+              position: absolute;
+              top: 50%;
+              right:torpx(34);
+              color: #ce000e;
+              font-size: torpx(40);
+              transform: translateY(-50%);
+            }
+          }
+          .get-list.intergral-item:last-child {
+            border-bottom: none!important;
+          }
+        }
+        .show-default {
+          height: 400rpx;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: torpx(30);
+          .default-content {
+
+          }
+        }
+      }
+    }
+  }
+</style>
+<template>
+  <view class="container ">
+    <view class="top-show">
+      <view class="money-title">提成(元)</view>
+      <view class="money-content">{{commission}}</view>
+    </view>
+    <!--<view class="get-money" @tap="getMoney">-->
+      <!--<view class="get-btn">提现</view>-->
+    <!--</view>-->
+    <view class="money-come">
+      <!--<view class="bottom-title">提成来源</view>-->
+      <van-tabs active="{{ active }}" bind:change="onChange" style="width: 100%">
+        <van-tab title="销售提成">
+        </van-tab>
+        <van-tab title="经销商提成" wx:if="{{role === 60}}">
+        </van-tab>
+      </van-tabs>
+      <scroll-view scroll-y="true" class="scrollView" bindscrolltolower="scrollToLower('xiao')">
+        <block wx:if="{{dataList.length > 0}}"  >
+          <view class="get-list" wx:for="{{dataList}}" wx:key="unique" wx:for-index="index" wx:for-item="item" >
+            <view class="intergral-item">
+              <view class="integral-item-contens">
+                <view class="title">
+                  {{item.content}}
+                </view>
+                <view class="time">{{item.month}}</view>
+              </view>
+              <view class="integral-item-integral">{{item.income}}元</view>
+            </view>
+          </view>
+        </block>
+        <block wx:else>
+          <view class="show-default">
+            <view class="default-content">暂无提成</view>
+          </view>
+        </block>
+      </scroll-view>
+    </view>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+import lf from 'lf'
+// import { SERVER_BAS_URL } from '../js/define'
+
+export default class Test extends wepy.page {
+  config = {
+    backgroundTextStyle: 'light',
+    navigationBarBackgroundColor: '#cf0210',
+    navigationBarTitleText: '我的提成',
+    navigationBarTextStyle: 'white',
+    usingComponents: {
+      'van-cell': '/components/vant/cell/index',
+      'van-tabs': '/components/vant/tabs/index',
+      'van-tab': '/components/vant/tab/index'
+    }
+  }
+  components = {}
+  data = {
+    checked: true,
+    commission: 0,
+    pageStart: 1,
+    jpageStart: 1,
+    xpageStart: 1,
+    jdataList: [],
+    xdataList: [],
+    active: 0,
+    role: 50,
+    dataList: []
+  }
+  computed = {
+  }
+  methods = {
+    scrollToLower (type) {
+      wepy.showLoading({
+        title: '加载中'
+      })
+      this.pageStart += 1
+      this.getCommissionList(type)
+    },
+    async getMoney () {
+      if (this.commission === 0) {
+        wepy.showToast({
+          title: '暂无提成可提取',
+          icon: 'none'
+        })
+        return
+      }
+      try {
+        const r = await lf.net.post('/Api/member/member_account_withdraw', {})
+        if (r.code === 200) {
+          this.commission = 0
+          this.$apply()
+        } else {
+          wepy.showToast({
+            title: r.info,
+            icon: 'none'
+          })
+        }
+      } catch (e) {
+        wepy.showToast({
+          title: '系统内部错误',
+          icon: 'none'
+        })
+      }
+    },
+    onChange (event) {
+      var tabIndex = event.detail.index
+      this.pageStart = 1
+      switch (tabIndex) {
+        case 0:
+          this.getCommissionList('xiao')
+          break
+        case 1:
+          this.getCommissionList('jing')
+          break
+      }
+    }
+  }
+  events = {}
+
+  onLoad () {
+    // role-50 销售员 role-60 经销商
+    this.role = lf.user.getRole()
+    // this.test()
+  }
+  test () {
+    var dataList = [
+      {
+        'id': '534',
+        'goods_id': '2137',
+        'distributor_id': '87',
+        'receiptor_id': '86',
+        'month': '832',
+        'distributor_level': '2',
+        'income': '9.50',
+        'content': 'hhhy',
+        'goods_title': '泥房子马尔堡长相思白葡萄酒（原泥房子天鹅系列长相思干白葡萄酒）',
+        'addtime': '2018-11-12 13:49:56'
+      },
+      {
+        'id': '534',
+        'goods_id': '2137',
+        'month': '832',
+        'distributor_level': '2',
+        'income': '9.50',
+        'content': 'hhhy',
+        'distributor_id': '87',
+        'receiptor_id': '86',
+        'order_item_id': '832',
+        'distributor_income': '9.50',
+        'customer_name': 'hhhy',
+        'goods_title': '泥房子马尔堡长相思白葡萄酒（原泥房子天鹅系列长相思干白葡萄酒）',
+        'addtime': '2018-11-12 13:49:56'
+      },
+      {
+        'id': '534',
+        'goods_id': '2137',
+        'distributor_id': '87',
+        'receiptor_id': '86',
+        'month': '832',
+        'distributor_level': '2',
+        'income': '9.50',
+        'content': 'hhhy',
+        'goods_title': '泥房子马尔堡长相思白葡萄酒（原泥房子天鹅系列长相思干白葡萄酒）',
+        'addtime': '2018-11-12 13:49:56'
+      },
+      {
+        'id': '534',
+        'goods_id': '2137',
+        'month': '832',
+        'distributor_level': '2',
+        'income': '9.50',
+        'content': 'hhhy',
+        'distributor_id': '87',
+        'receiptor_id': '86',
+        'order_item_id': '832',
+        'distributor_income': '9.50',
+        'customer_name': 'hhhy',
+        'goods_title': '泥房子马尔堡长相思白葡萄酒（原泥房子天鹅系列长相思干白葡萄酒）',
+        'addtime': '2018-11-12 13:49:56'
+      },
+      {
+        'id': '534',
+        'goods_id': '2137',
+        'distributor_id': '87',
+        'receiptor_id': '86',
+        'month': '832',
+        'distributor_level': '2',
+        'income': '9.50',
+        'content': 'hhhy',
+        'goods_title': '泥房子马尔堡长相思白葡萄酒（原泥房子天鹅系列长相思干白葡萄酒）',
+        'addtime': '2018-11-12 13:49:56'
+      },
+      {
+        'id': '534',
+        'goods_id': '2137',
+        'month': '832',
+        'distributor_level': '2',
+        'income': '9.50',
+        'content': 'hhhy',
+        'distributor_id': '87',
+        'receiptor_id': '86',
+        'order_item_id': '832',
+        'distributor_income': '9.50',
+        'customer_name': 'hhhy',
+        'goods_title': '泥房子马尔堡长相思白葡萄酒（原泥房子天鹅系列长相思干白葡萄酒）',
+        'addtime': '2018-11-12 13:49:56'
+      },
+      {
+        'id': '534',
+        'goods_id': '2137',
+        'distributor_id': '87',
+        'receiptor_id': '86',
+        'month': '832',
+        'distributor_level': '2',
+        'income': '9.50',
+        'content': 'hhhy',
+        'goods_title': '泥房子马尔堡长相思白葡萄酒（原泥房子天鹅系列长相思干白葡萄酒）',
+        'addtime': '2018-11-12 13:49:56'
+      },
+      {
+        'id': '534',
+        'goods_id': '2137',
+        'month': '832',
+        'distributor_level': '2',
+        'income': '9.50',
+        'content': 'hhhy',
+        'distributor_id': '87',
+        'receiptor_id': '86',
+        'order_item_id': '832',
+        'distributor_income': '9.50',
+        'customer_name': 'hhhy',
+        'goods_title': '泥房子马尔堡长相思白葡萄酒（原泥房子天鹅系列长相思干白葡萄酒）',
+        'addtime': '2018-11-12 13:49:56'
+      },
+      {
+        'id': '534',
+        'goods_id': '2137',
+        'distributor_id': '87',
+        'receiptor_id': '86',
+        'month': '832',
+        'distributor_level': '2',
+        'income': '9.50',
+        'content': 'hhhy',
+        'goods_title': '泥房子马尔堡长相思白葡萄酒（原泥房子天鹅系列长相思干白葡萄酒）',
+        'addtime': '2018-11-12 13:49:56'
+      },
+      {
+        'id': '534',
+        'goods_id': '2137',
+        'month': '832',
+        'distributor_level': '2',
+        'income': '9.50',
+        'content': 'hhhy',
+        'distributor_id': '87',
+        'receiptor_id': '86',
+        'order_item_id': '832',
+        'distributor_income': '9.50',
+        'customer_name': 'hhhy',
+        'goods_title': '泥房子马尔堡长相思白葡萄酒（原泥房子天鹅系列长相思干白葡萄酒）',
+        'addtime': '2018-11-12 13:49:56'
+      },
+      {
+        'id': '534',
+        'goods_id': '2137',
+        'distributor_id': '87',
+        'receiptor_id': '86',
+        'month': '832',
+        'distributor_level': '2',
+        'income': '9.50',
+        'content': 'hhhy',
+        'goods_title': '泥房子马尔堡长相思白葡萄酒（原泥房子天鹅系列长相思干白葡萄酒）',
+        'addtime': '2018-11-12 13:49:56'
+      },
+      {
+        'id': '534',
+        'goods_id': '2137',
+        'month': '832',
+        'distributor_level': '2',
+        'income': '9.50',
+        'content': 'hhhy',
+        'distributor_id': '87',
+        'receiptor_id': '86',
+        'order_item_id': '832',
+        'distributor_income': '9.50',
+        'customer_name': 'hhhy',
+        'goods_title': '泥房子马尔堡长相思白葡萄酒（原泥房子天鹅系列长相思干白葡萄酒）',
+        'addtime': '2018-11-12 13:49:56'
+      }
+    ]
+    setTimeout(function () {
+      this.dataList = dataList
+      this.$apply()
+    }.bind(this), 1000)
+  }
+  getYearMonth() {
+    var date = new Date()
+    var year = date.getFullYear()
+    var month = date.getMonth() + 1
+    month = (month < 10 ? '0' + month : month)
+    var mydate = (year.toString() + month.toString())
+    return mydate
+  }
+  async getCommission () {
+    // role=50 销售员
+    var url = this.role === 50 ? '/Api/Ordercommission/saler_commission_detail' : '/Api/Ordercommission/dealer_commission_detail'
+    try {
+      const r = await lf.net.post(url, {})
+      if (r.code === 200) {
+        this.commission = r.data.all_income || 0
+        this.$apply()
+      } else {
+        wepy.showToast({
+          title: r.info,
+          icon: 'none'
+        })
+      }
+    } catch (e) {
+      wepy.showToast({
+        title: '系统内部错误',
+        icon: 'none'
+      })
+    }
+  }
+
+  async getCommissionList (type = 'xiao') {
+    var url = type === 'xiao' ? '/Api/Ordercommission/saler_commission_list' : '/Api/Ordercommission/dealer_commission_list'
+    var data = {
+      page_start: (this.pageStart - 1) * 10,
+      page_size: 10
+    }
+    lf.log.info('------', this.pageStart)
+    try {
+      const result = await lf.net.post(url, data)
+      if (result.code === 200) {
+        if (this.pageStart === 1) {
+          this.dataList = result.data.list || []
+        } else {
+          for (let i = 0; i < result.data.list.length; i++) {
+            this.dataList.push(result.data.list[i])
+          }
+        }
+        this.$apply()
+      }
+    } catch (err) {
+    }
+    wepy.hideLoading()
+  }
+
+  onShow () {
+    this.getCommission()
+    this.pageStart = 1
+    this.getCommissionList('xiao')
+  }
+
+  reachBottom () {
+  }
+}
+</script>

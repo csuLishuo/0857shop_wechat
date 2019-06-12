@@ -1,0 +1,88 @@
+<style lang="scss">
+  @import "../css/common";
+  .container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .content-body {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      flex-direction: column;
+      width: torpx(655);
+      height: torpx(946);
+      background:rgba(255,255,255,1);
+      box-shadow:0px torpx(10) torpx(10) 0px rgba(0, 0, 0, 0.1);
+      border-radius: torpx(10);
+      image {
+        margin-top: torpx(157);
+        width: torpx(500);
+        height: torpx(550);
+      }
+      .tip {
+        margin-top: torpx(108);
+        font-size: torpx(24);
+        width: torpx(420);
+        font-family: PingFangSC-Regular;
+        font-weight: 400;
+        color: rgba(51, 51, 51, 1);
+      }
+    }
+  }
+</style>
+
+<template>
+  <view class="container">
+    <view class="content-body">
+      <image src="{{ code }}"></image>
+      <view class="tip">
+        到店后请出示二维码给营业员，以方便
+        查看您的订单信息，感谢您的配合，
+        希望您购物愉快。
+      </view>
+    </view>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+import lf from 'lf'
+export default class ShowCode extends wepy.page {
+  config = {
+    navigationBarTitleText: '自提二维码',
+    usingComponents: {
+      'van-cell': '/components/vant/cell/index',
+      'van-cell-group': '/components/vant/cell-group/index',
+      'van-popup': '/components/vant/popup/index',
+      'van-picker': '/components/vant/picker/index'
+    }
+  }
+  components = {}
+  data = {
+    code: '',
+    orderId: null
+  }
+  computed = {}
+  methods = {
+  }
+  events = {}
+
+  onLoad (option) {
+    this.orderId = option.orderId
+  }
+
+  async onShow () {
+    lf.showLoading('加载中')
+    const codeData = await lf.net.post('/Api/Order/order_qrcode', {order_id: this.orderId})
+    if (codeData.code === 200) {
+      this.code = codeData.data.order_qrcode
+      this.$apply()
+    } else {
+      lf.toast(codeData.info)
+    }
+    lf.hideLoading()
+  }
+}
+</script>

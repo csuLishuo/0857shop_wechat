@@ -1,0 +1,152 @@
+<style lang="scss">
+  @import "../css/common";
+
+  page {
+    height: 100%;
+  }
+
+  .negotiate-container {
+    height: 100%;
+    background-color: #fff;
+    view {
+      box-sizing: border-box;
+    }
+    .scrollView{
+      height: 100%;
+    }
+    .negotiate-item {
+      padding: torpx(20) torpx(20) 0;
+      .inner{
+        background-color: rgba(253, 173, 148, 0.2);
+        border-radius: 10px;
+        padding: torpx(20) torpx(10);
+        .top{
+          display: flex;
+          display: -webkit-flex;
+          align-items: center;
+          flex-direction: row;
+          border-bottom: torpx(1) solid #ffe0d6;
+          padding-bottom:torpx(14);
+          image{
+            width: torpx(80);
+            height: torpx(80);
+            border-radius: 50%;
+            vertical-align: middle;
+          }
+          .top-left{
+            padding-right:torpx(20);
+          }
+          .top-right{
+            color: #333333;
+            font-size: torpx(22);
+            .name{
+              font-size: torpx(28);
+              padding-bottom:torpx(5);
+            }
+          }
+        }
+      }
+      .inner.costomerInner{
+        background-color: #ffeced;
+        .top{
+          border-bottom: torpx(1) solid #ffdadc;
+        }
+      }
+      .content{
+        padding: torpx(20) 0 torpx(10);
+        font-size: torpx(26);
+        line-height: torpx(40);
+        color: #666;
+      }
+    }
+    .noData {
+      text-align: center;
+      padding-top: torpx(20);
+    }
+    .blank{
+      background-color: #efefef;
+      height: torpx(20);
+    }
+  }
+</style>
+<template>
+  <view class="negotiate-container">
+    <view class="blank"></view>
+    <view wx:if="{{negotiateList.length >0 }}" class="negotiate-item" wx:for="{{negotiateList}}" wx:key="unique" wx:for-item="listItem">
+      <view class="inner {{listItem.role == 'customer' ? 'costomerInner' : ''}}" wx:if="{{listItem.content.length > 0 || listItem.action}}">
+        <view class="top">
+          <view class="top-left">
+            <image src="{{listItem.avatar}}"></image>
+          </view>
+          <view class="top-right">
+            <view class="name">{{listItem.role == 'customer' ? listItem.nickname : '商家'}}</view>
+            <view>{{listItem.addtime}}</view>
+          </view>
+        </view>
+        <view class="content">
+          <view>{{listItem.action}}</view>
+          <view wx:for="{{listItem.content}}" wx:key="unique" wx:for-item="con">
+            <text>{{con.title}}:</text>
+            {{con.content}}
+          </view>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{negotiateList.length ==0 }}" class="noData" style="color: #999">暂无数据</view>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+import lf from 'lf'
+
+export default class Negotiate extends wepy.page {
+  config = {
+    navigationBarTitleText: '协商详情',
+    navigationBarTextStyle: 'black',
+    backgroundTextStyle: 'light',
+    navigationBarBackgroundColor: '#fff',
+    usingComponents: {}
+  }
+  data = {
+    negotiateList: [],
+    orderId: ''
+  }
+
+  computed = {}
+
+  methods = {
+  }
+  events = {}
+
+  async init () {
+    try {
+      const r = await lf.net.post('/Api/Orderreturn/return_time_detail', {order_item_id: this.orderId})
+      if (r.code === 200) {
+        if (r.data && r.data.list) {
+          let mlist = r.data.list || []
+          this.negotiateList = mlist
+          this.$apply()
+        }
+      } else {
+        wepy.showToast({
+          title: r.info,
+          icon: 'none'
+        })
+      }
+    } catch (e) {
+      wepy.showToast({
+        title: e.toString(),
+        icon: 'none'
+      })
+    }
+    wepy.hideLoading()
+  }
+  onLoad (option) {
+    this.orderId = option.orderId
+    this.init()
+  }
+  onShow () {
+  }
+}
+</script>

@@ -1,0 +1,151 @@
+<style lang="scss">
+  @import "../css/common";
+
+  page {
+    height: 100%;
+  }
+
+  .container-intergral {
+    height: 100%;
+    padding-top: torpx(20);
+    box-sizing: border-box;
+    view {
+      box-sizing: border-box;
+    }
+    .scrollView{
+      height: 100%;
+    }
+    .intergral-item {
+      position: relative;
+      box-sizing: border-box;
+      padding:torpx(32);
+      border-bottom: torpx(1) solid #eeeeee;
+      background-color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-direction: row;
+      width: 100%;
+      .integral-item-contens{
+        display: flex;
+        justify-content: space-around;
+        align-items: flex-start;
+        flex-direction: column;
+        .title{
+          color: #333333;
+          font-size: torpx(30);
+          line-height: torpx(42);
+          text{
+            color: #cf0210;
+          }
+        }
+        .time{
+          color: rgba(28, 28, 28, 0.5);
+          font-size: torpx(24);
+          padding-top:torpx(12);
+        }
+      }
+      .integral-item-integral{
+        color: #ce000e;
+        font-size: torpx(40);
+      }
+    }
+    .noData {
+      text-align: center;
+      padding-top: torpx(20);
+    }
+    .list-intergal{
+      display: flex;
+      justify-content: flex-start;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+  }
+  .xcontainer-intergral{
+    padding-bottom: torpx(80);
+  }
+</style>
+<template>
+  <view class="container-intergral {{isPx ? 'xcontainer-intergral' : ''}}">
+    <scroll-view scroll-y="{{scrollY}}" class="scrollView" bindscrolltolower="reachBottom">
+      <view class="list-intergal">
+        <view wx:if="{{dataList.length >0 }}" class="intergral-item" wx:for="{{dataList}}" wx:key="unique" wx:for-item="listItem">
+          <view class="integral-item-contens">
+            <view class="title"><text>{{listItem.customer_name}}</text>{{listItem.goods_title}}</view>
+            <view class="time">{{listItem.addtime}}</view>
+          </view>
+          <view class="integral-item-integral">+{{listItem.distributor_income}}</view>
+        </view>
+        <view wx:if="{{dataList.length == 0 }}" class="noData" style="color: #999">暂无消息</view>
+      </view>
+    </scroll-view>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+import lf from 'lf'
+import CommonMixin from '../mixins/common'
+
+export default class Integral extends wepy.page {
+  config = {
+    backgroundTextStyle: 'light',
+    navigationBarBackgroundColor: '#fff',
+    navigationBarTitleText: '积分明细',
+    navigationBarTextStyle: 'black'
+  }
+  mixins = [CommonMixin]
+  components = {}
+  data = {
+    scrollY: true,
+    pageStart: 1,
+    dataList: []
+  }
+  computed = {}
+  methods = {
+  }
+  events = {}
+  onLoad () {
+  }
+
+  onShow () {
+    this.pageStart = 1
+    this.getDataList()
+    this.$apply()
+  }
+
+  reachBottom () {
+    wepy.showLoading({
+      title: '加载中...'
+    })
+    this.pageStart += 1
+    this.getDataList()
+    wepy.stopPullDownRefresh()
+  }
+
+  async getDataList () {
+    var data = {
+      page_start: (this.pageStart - 1) * 10,
+      page_size: 10
+    }
+    try {
+      const result = await lf.net.post('/Api/distributor/integral_list', data)
+      if (result.code === 200) {
+        var dataLi = result.data.list || []
+        if (this.pageStart === 1) {
+          this.dataList = dataLi
+          console.log(this.dataList)
+        } else {
+          for (let i = 0; i < dataLi.length; i++) {
+            this.dataList.push(dataLi[i])
+          }
+        }
+        this.$apply()
+      }
+    } catch (err) {
+    }
+    wepy.hideLoading()
+  }
+}
+</script>

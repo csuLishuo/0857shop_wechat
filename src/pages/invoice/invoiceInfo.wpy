@@ -1,0 +1,808 @@
+<style lang="scss">
+  @import "../../css/common";
+
+  ::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    color: transparent;
+  }
+
+  page {
+    background-color: #f3f3f3;
+    height: 100vmax;
+  }
+
+  .invoiceInfo {
+    height: 100%;
+    height: 100%;
+    position: fixed;
+    top: torpx(0);
+    left: 0;
+    width: 100%;
+    padding-bottom: torpx(112);
+    box-sizing: border-box;
+    color: #333;
+    font-size: torpx(36);
+    .scroll_y {
+      height: 100%;
+      position: fixed;
+      top: torpx(0);
+      left: 0;
+      width: 100%;
+      padding-bottom: torpx(112);
+      box-sizing: border-box;
+      color: #333;
+      font-size: torpx(36);
+      .invoiceChange {
+        @extend .padding40;
+        padding-top: torpx(55);
+        padding-bottom: torpx(40);
+        @extend .content;
+        .desc {
+          @extend .descContent;
+          margin-top: torpx(40);
+        }
+      }
+      .invoiceType {
+        padding-top: torpx(40);
+        @extend .padding40;
+        padding-bottom: torpx(35);
+        @extend .content;
+        .desc {
+          @extend .descContent;
+          margin-top: torpx(20);
+        }
+      }
+      .unitType {
+        @extend .padding40;
+        padding-top: torpx(28);
+        padding-bottom: torpx(25);
+        padding-right: torpx(0) !important;
+        @extend .content;
+        .formOne {
+          padding-top: torpx(48);
+          @extend .formItem;
+        }
+      }
+      .logInfo {
+        font-size: torpx(26);
+        @extend .padding40;
+        .title {
+          font-weight: bold;
+          color: rgba(0, 0, 0, 1);
+          padding-top: torpx(40);
+          padding-bottom: torpx(35);
+        }
+        .formTwo {
+          @extend .formItem;
+        }
+      }
+      .invoiceContent {
+        @extend .padding40;
+        padding-top: torpx(40);
+        padding-bottom: torpx(45);
+        .title {
+          padding-bottom: torpx(24);
+          .type {
+            font-size: torpx(26);
+            font-weight: bold;
+            margin-right: torpx(23);
+          }
+          .desc {
+            @extend .descContent;
+          }
+        }
+        .goodsDetail {
+          @extend .formItemExtend;
+          .itemGoods {
+            width: torpx(170);
+            box-sizing: content-box!important;
+            padding: 0!important;
+            margin-bottom: torpx(23);
+          }
+          .desc {
+            @extend .descContent;
+          }
+        }
+      }
+      .address {
+        padding-top: torpx(40);
+        padding-bottom: torpx(42);
+        @extend .padding40;
+        .getInvoiceInfo {
+          margin-bottom: torpx(28);
+          .title {
+            font-size: torpx(26);
+            font-weight: bold;
+            margin-right: torpx(20);
+          }
+        }
+        .location {
+          @extend .padding40;
+          min-height: torpx(100);
+          color: #000;
+          font-size: torpx(30);
+          margin-bottom: torpx(35);
+          padding: torpx(20) 0;
+          .noLocation {
+            min-height: torpx(100);
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            .locationIMG {
+              width: torpx(38);
+              height: torpx(48);
+              margin-right: torpx(15);
+            }
+          }
+          .haveLocation {
+            box-sizing: border-box;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            .headerTitle {
+              .phone {
+                color: #999999;
+                font-size: torpx(26);
+                margin-left: torpx(38);
+              }
+            }
+            .infoLocation {
+              margin-top: torpx(25);
+              color: #666;
+              font-size: torpx(26);
+              padding-bottom: torpx(10);
+            }
+          }
+        }
+        .addressInfo {
+          font-size: torpx(26);
+          .userInfo {
+            margin-bottom: torpx(30);
+            .name {
+              font-weight: bold;
+              margin-right: torpx(54);
+            }
+          }
+          .addr {
+            display: flex;
+            justify-content: space-between;
+            .addrContent {
+              color: #666;
+              width: torpx(523);
+              line-height: torpx(42);
+            }
+            .addrImg {
+              width: torpx(17);
+              height: torpx(31);
+            }
+          }
+        }
+      }
+      .btn {
+        height: torpx(114);
+        padding-left: torpx(40);
+        padding-right: torpx(40);
+        margin-top: torpx(24);
+        box-sizing: border-box;
+        width: 100%;
+        .bit {
+          background: linear-gradient(90deg, rgba(207, 0, 14, 1), rgba(239, 98, 39, 1));
+          box-shadow: 0px 4px 8px 0px rgba(226, 7, 0, 0.34);
+          border-radius: torpx(10);
+          height: torpx(90);
+          width: 100%;
+          text-align: center;
+          color: white;
+          line-height: torpx(90);
+        }
+      }
+    }
+    .select {
+      color: #e93323 !important;
+      border-color: #e93323 !important;
+      background-color: rgba(233, 51, 35, 0.05) !important;
+    }
+    .content {
+      .type {
+        padding-bottom: torpx(30);
+        font-size: torpx(26);
+        font-weight: bold;
+        color: black;
+      }
+      .option {
+        display: flex;
+        color: black;
+        align-items: center;
+        @extend .formItemExtend;
+      }
+    }
+    .formItemExtend {
+      .forItem {
+        font-weight: bold;
+        font-size: torpx(28);
+        text-align: center;
+        height: torpx(60);
+        min-width: torpx(170);
+        line-height: torpx(55);
+        padding: torpx(0) torpx(30);
+        box-sizing: border-box;
+        border: 1px solid #ddd;
+        border-radius: torpx(30);
+        margin-left: torpx(25);
+        &:first-child {
+          margin-left: torpx(0);
+        }
+      }
+    }
+    .descContent {
+      font-size: torpx(24);
+      color: #888;
+    }
+    .padding40 {
+      padding-left: torpx(40);
+      padding-right: torpx(40);
+      margin-bottom: torpx(10);
+      background-color: white;
+    }
+    .formItem {
+      .itemInfo {
+        font-weight: bold;
+        font-size: torpx(28);
+        display: flex;
+        justify-content: flex-start;
+        min-height: torpx(100);
+        line-height: torpx(100);
+        border-top: 1px solid #f2f2f2;
+        .itemInfoLeft {
+          .symbol {
+            color: #e93323;
+          }
+        }
+        .itemInfoRight {
+          flex: 1;
+          padding-right: torpx(35);
+          padding-bottom: torpx(20);
+          padding-top: torpx(20);
+          display: flex;
+          align-items: center;
+          box-sizing: border-box;
+          > .textareaContent {
+            width: 100%;
+            line-height: normal;
+            box-sizing: border-box;
+          }
+        }
+      }
+    }
+    .textareaCSS {
+      font-size: torpx(28);
+      color: #999;
+      line-height: 0;
+      font-weight: normal;
+    }
+  }
+</style>
+<template>
+  <view class="invoiceInfo">
+    <scroll-view scroll-y class="scroll_y" style="padding-bottom: {{isPx? '192rpx': '0rpx'}}" >
+      <view class="invoiceChange">
+        <view class="type">发票选项</view>
+        <view class="option">
+          <block wx:for="{{invoiceOptions}}" wx:key="unique">
+            <view class="forItem {{selectOption === index? 'select': ''}}" @tap="selectOption({{index}})">
+              {{item.type}}
+            </view>
+          </block>
+        </view>
+        <view class="desc">
+          也买酒统一提供纸质发票，暂不提供普通电子发票。
+        </view>
+      </view>
+      <block wx:if="{{selectOption === 1}}">
+          <view class="invoiceType">
+            <view class="type">发票类型</view>
+            <view class="option">
+              <block wx:for="{{invoiceType}}" wx:key="unique">
+                <view class="forItem {{selectInvoiceType === index? 'select': ''}}"
+                      @tap="onchangeInvoiceType({{index}})">
+                  {{item.type}}
+                </view>
+              </block>
+            </view>
+            <view class="desc">
+              增值税普通发票与增值税专用发票具备同等的法律效力，可支持报销入账。
+            </view>
+          </view>
+        <block wx:if="{{ selectInvoiceType ===0 }}">
+          <view class="unitType">
+            <view class="type">发票抬头</view>
+            <view class="option">
+              <block wx:for="{{unitType}}" wx:key="unique">
+                <view class="forItem  {{selectUnitType === index? 'select': ''}}" @tap="onchangeUnitType({{index}})">
+                  {{item.type}}
+                </view>
+              </block>
+            </view>
+            <block wx:if="{{selectUnitType === 1}}">
+              <view class="formOne">
+                <view class="itemInfo">
+                  <view class="itemInfoLeft">
+                    <text class="symbol">*</text>
+                    <text>发票抬头：</text>
+                  </view>
+                  <view class="itemInfoRight">
+                    <input type="text" disabled="{{disabled}}" class="textareaContent" fixed="true" maxlength="-1" auto-height placeholder-class="textareaCSS"
+                              bindinput="getPuInvoicetextareaTitle" placeholder="输入公司全称"
+                              value="{{pu.title}}"/>
+                  </view>
+                </view>
+                <view class="itemInfo">
+                  <view class="itemInfoLeft">
+                    <text class="symbol">*</text>
+                    <text>纳税人识别号：</text>
+                  </view>
+                  <view class="itemInfoRight">
+                    <input type="text" disabled="{{disabled}}" class="textareaContent" fixed="{{true}}" maxlength="20" auto-height placeholder="输入18位识别号" placeholder-class="textareaCSS"
+                              bindinput="getPuInvoicetextareaTaxId" value="{{pu.tax_id}}"/>
+                  </view>
+                </view>
+              </view>
+            </block>
+          </view>
+        </block>
+        <block wx:if="{{selectInvoiceType === 1}}">
+          <view class="logInfo">
+            <view class="title">发票信息</view>
+            <view class="formTwo">
+              <view class="itemInfo">
+                <view class="itemInfoLeft">
+                  <text class="symbol">*</text>
+                  <text>发票抬头：</text>
+                </view>
+                <view class="itemInfoRight">
+                  <input type="text" disabled="{{disabled}}" class="textareaContent" fixed="{{true}}" maxlength="-1"
+                            auto-height bindinput="getZengInvoicetextareaTitle" placeholder="输入公司全称" placeholder-class="textareaCSS"
+                            value="{{zeng.title}}" />
+                </view>
+              </view>
+              <view class="itemInfo">
+                <view class="itemInfoLeft">
+                  <text class="symbol">*</text>
+                  <text>纳税人识别号：</text>
+                </view>
+                <view class="itemInfoRight">
+                  <input type="text" disabled="{{disabled}}" class="textareaContent" fixed="{{true}}" maxlength="20"
+                            auto-height bindinput="getZengInvoicetextareaTaxId" placeholder="输入18位识别号" placeholder-class="textareaCSS"
+                            value="{{zeng.tax_id}}"/>
+                </view>
+              </view>
+              <view class="itemInfo">
+                <view class="itemInfoLeft">
+                  <text class="symbol">*</text>
+                  <text>注册地址：</text>
+                </view>
+                <view class="itemInfoRight">
+                  <input type="text" disabled="{{disabled}}" class="textareaContent" fixed="{{true}}" maxlength="-1"
+                            auto-height bindinput="getZengInvoicetextareaAddress" placeholder="输入公司注册地址" placeholder-class="textareaCSS"
+                            value="{{zeng.reg_address}}"/>
+                </view>
+              </view>
+              <view class="itemInfo">
+                <view class="itemInfoLeft">
+                  <text class="symbol">*</text>
+                  <text>注册电话：</text>
+                </view>
+                <view class="itemInfoRight">
+                  <input type="number" disabled="{{disabled}}" class="textareaContent" fixed="{{true}}" auto-height
+                            maxlength="25" bindinput="getZengInvoicetextareaPhone" placeholder="输入公司注册电话" placeholder-class="textareaCSS"
+                            value="{{zeng.reg_mobile}}"/>
+                </view>
+              </view>
+              <view class="itemInfo">
+                <view class="itemInfoLeft">
+                  <text class="symbol">*</text>
+                  <text>开户银行：</text>
+                </view>
+                <view class="itemInfoRight">
+                  <input type="text" disabled="{{disabled}}" class="textareaContent" fixed="{{true}}" maxlength="-1"
+                            auto-height bindinput="getZengInvoicetextareaBankName" placeholder="输入开户银行名称" placeholder-class="textareaCSS"
+                            value="{{zeng.reg_bank}}"/>
+                </view>
+              </view>
+              <view class="itemInfo">
+                <view class="itemInfoLeft">
+                  <text class="symbol">*</text>
+                  <text>银行账户：</text>
+                </view>
+                <view class="itemInfoRight">
+                  <input type="number" disabled="{{disabled}}" fixed="{{true}}" class="textareaContent" auto-height
+                            maxlength="19" bindinput="getZengInvoicetextareaBankAccount" placeholder="输入银行账号" placeholder-class="textareaCSS"
+                            value="{{zeng.reg_bank_account}}"/>
+                </view>
+              </view>
+            </view>
+          </view>
+        </block>
+        <view class="invoiceContent">
+          <view class="title">
+            <text class="type">发票内容</text>
+            <text class="desc">发票内容已根据税法调整，具体请以展示为准。</text>
+          </view>
+          <view class="goodsDetail" wx:if="{{selectInvoiceType === 0}}">
+            <view class="forItem select itemGoods">
+              商品明细
+            </view>
+            <view class="desc">发票内容将显示详细商品名称与价格信息，发票金额为实际支付金额，不含虚拟资产、优惠等扣减金额。</view>
+          </view>
+          <view class="goodsDetail" wx:if="{{selectInvoiceType === 1}}">
+            <view class="forItem select itemGoods">
+              明细
+            </view>
+            <view class="desc">增值税专用发票内容只支持“明细”</view>
+          </view>
+        </view>
+        <view class="address">
+          <view class="getInvoiceInfo">
+            <text class="title">收票人信息</text>
+            <text class="descContent">发票在您确认收货之后已快递到付方式寄出</text>
+          </view>
+          <view class="location" wx:if="{{!isSelectedLocation}}">
+            <view  class="noLocation" bind:tap="goToSelectAddress">
+              <image class="locationIMG" src="./../../images/myOrderLocation.png"></image>
+              <view>点击添加地址</view>
+            </view>
+          </view>
+          <view wx:else class="addressInfo">
+            <view class="userInfo">
+              <text class="name">{{address.name}}</text>
+              <text class="phone">{{address.mobile}}</text>
+            </view>
+            <view class="addr" @tap="goToSelectAddress">
+              <view class="addrContent">{{address.district}}{{address.addr}}</view>
+              <image class="addrImg" src="./../../images/icon-8.png"></image>
+            </view>
+          </view>
+        </view>
+        <view class="btn" wx:if="{{!disabled}}">
+          <view class="bit" @tap="addAndUpdataInvoice">
+            确定
+          </view>
+        </view>
+      </block>
+    </scroll-view>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+import lf from 'lf'
+import { fireEvent, EVENT, TYPES } from '../../js/event'
+
+export default class invoiceInfo extends wepy.page {
+  config = {
+    backgroundTextStyle: 'light',
+    navigationBarBackgroundColor: '#fff',
+    navigationBarTitleText: '发票',
+    navigationBarTextStyle: 'black',
+    usingComponents: {
+      'van-card': '/components/vant/card/index'
+    }
+  };
+  components = {};
+  mixins = [];
+  data = {
+    isSelectedLocation: null,
+    address: {
+      name: null
+    },
+    disabled: false,
+    id: null,
+    invoiceId: null,
+    mAddressId: null,
+    isPx: false,
+    invoiceOptions: [
+      { id: 0, type: '不开发票' },
+      { id: 1, type: '纸质发票' }
+    ],
+    selectOption: 0,
+    invoiceType: [
+      { id: 0, type: '增值税普通发票' },
+      { id: 1, type: '增值税专用发票' }
+    ],
+    selectInvoiceType: 0,
+    unitType: [
+      { id: 0, type: '个人' },
+      { id: 1, type: '企业' }
+    ],
+    selectUnitType: 0,
+    pu: {
+      title: '',
+      tax_id: ''
+    },
+    zeng: {
+      title: '',
+      tax_id: '',
+      reg_mobile: '',
+      reg_bank_account: '',
+      reg_bank: '',
+      reg_address: ''
+    },
+    defualt: []
+  };
+  computed = {};
+  events = {};
+  onLoad (opt) {
+    let { id, invoiceId } = opt
+    this.id = id
+    this.invoiceId = invoiceId
+    if (+invoiceId > 0) { // 可以
+      this.selectOption = 1
+      this.getSingleDetail(+invoiceId)
+      this.$apply()
+    } else {
+      this.getDefualt()
+    }
+    this.isPx = this.$parent.globalData.isIpx
+    this.$apply()
+  }
+  onUnload () {
+    lf.storage.remove('addr')
+    this.initData()
+    this.$apply()
+  }
+  initData () {
+    this.isSelectedLocation = null
+    this.address = {
+      name: null
+    }
+    this.disabled = false
+    this.id = null
+    this.invoiceId = null
+    this.mAddressId = null
+    this.isPx = false
+    this.invoiceOptions = [
+      { id: 0, type: '不开发票' },
+      { id: 1, type: '纸质发票' }
+    ]
+    this.selectOption = 0
+    this.invoiceType = [
+      { id: 0, type: '增值税普通发票' },
+      { id: 1, type: '增值税专用发票' }
+    ]
+    this.selectInvoiceType = 0
+    this.unitType = [
+      { id: 0, type: '个人' },
+      { id: 1, type: '企业' }
+    ]
+    this.selectUnitType = 0
+    this.pu = {
+      title: '',
+      tax_id: ''
+    }
+    this.zeng = {
+      title: '',
+      tax_id: '',
+      reg_mobile: '',
+      reg_bank_account: '',
+      reg_bank: '',
+      reg_address: ''
+    }
+    this.defualt = []
+  }
+  methods = {
+    selectOption (index) {
+      if (!this.disabled) {
+        this.selectOption = index
+        this.$apply()
+      }
+    },
+    onchangeInvoiceType (index) {
+      if (!this.disabled) {
+        this.selectInvoiceType = index
+        // this.setZhuanYongDefualt()
+        this.$apply()
+      }
+    },
+    onchangeUnitType (index) {
+      if (!this.disabled) {
+        this.selectUnitType = index
+        this.$apply()
+      }
+    }
+  };
+  goToSelectAddress() {
+    if (!this.disabled) {
+      wx.navigateTo({
+        url: './../addressList?select=invoice'
+      })
+    }
+  }
+  getPuInvoicetextareaTitle (e) {
+    let { value } = e.detail
+    this.pu.title = value
+    this.$apply()
+  }
+
+  getPuInvoicetextareaTaxId (e) {
+    let { value } = e.detail
+    this.pu.tax_id = value
+    this.$apply()
+  }
+
+  getZengInvoicetextareaTitle (e) {
+    let { value } = e.detail
+    this.zeng.title = value
+    this.$apply()
+  }
+
+  getZengInvoicetextareaTaxId (e) {
+    let { value } = e.detail
+    this.zeng.tax_id = value
+    this.$apply()
+  }
+
+  getZengInvoicetextareaAddress (e) {
+    let { value } = e.detail
+    this.zeng.reg_address = value
+    this.$apply()
+  }
+
+  getZengInvoicetextareaPhone (e) {
+    let { value } = e.detail
+    this.zeng.reg_mobile = value
+    this.$apply()
+  }
+
+  getZengInvoicetextareaBankName (e) {
+    let { value } = e.detail
+    this.zeng.reg_bank = value
+    this.$apply()
+  }
+
+  getZengInvoicetextareaBankAccount (e) {
+    let { value } = e.detail
+    this.zeng.reg_bank_account = value
+    this.$apply()
+  }
+
+  getSingleDetail (id) {
+    lf.net.post('/Api/Finance/invoice_detail', { is_invoice: id }).then(res => {
+      let titleType = +res.data.title_type
+      if (+res.data.status !== 0) {
+        this.disabled = true
+      }
+      this.selectUnitType = titleType === 0 ? 1 : titleType === 1 ? 0 : titleType
+      this.selectInvoiceType = +res.data.type
+      this.invoiceId = res.data.invoice_info.id
+      if (this.selectInvoiceType === 0) {
+        this.pu = {
+          title: res.data.invoice_info.title,
+          tax_id: res.data.invoice_info.tax_id
+        }
+      } else if (this.selectInvoiceType === 1) {
+        this.zeng = {
+          title: res.data.invoice_info.title,
+          tax_id: res.data.invoice_info.tax_id,
+          reg_mobile: res.data.invoice_info.reg_mobile,
+          reg_bank_account: res.data.invoice_info.reg_bank_account,
+          reg_bank: res.data.invoice_info.reg_bank,
+          reg_address: res.data.invoice_info.reg_address
+        }
+      }
+      if (res.data.adress.name) {
+        this.isSelectedLocation = true
+        this.address = res.data.adress
+      }
+      this.$apply()
+      this.getDefualt()
+    })
+  }
+  async getDefualt () {
+    lf.net.post('/Api/member/member_invoice_default').then(res => {
+      if (res.code === 200) {
+        this.defualt.push(res.data['type0'])
+        this.defualt.push(res.data['type1'])
+        if (+this.defualt[0].type === 0) { // putong
+          if (!this.pu.title && !+this.invoiceId) {
+            this.selectUnitType = 1
+            this.pu = {
+              title: this.defualt[0].title,
+              tax_id: this.defualt[0].tax_id
+            }
+          }
+        }
+        if (!this.zeng.title && !+this.invoiceId) {
+          this.zeng = {
+            title: this.defualt[1].title,
+            tax_id: this.defualt[1].tax_id,
+            reg_mobile: this.defualt[1].reg_mobile,
+            reg_bank_account: this.defualt[1].reg_bank_account,
+            reg_bank: this.defualt[1].reg_bank,
+            reg_address: this.defualt[1].reg_address
+          }
+        }
+        this.$apply()
+      } else {
+        lf.toast(res.info)
+      }
+    })
+  }
+  onShow () {
+    this.address = lf.storage.get('addr') ? JSON.parse(lf.storage.get('addr')) : { name: null }
+    if (this.address.name) {
+      this.isSelectedLocation = true
+    } else {
+      this.isSelectedLocation = false
+    }
+    this.$apply()
+  }
+
+  onReady () {}
+
+  addAndUpdataInvoice () {
+    if (+this.selectInvoiceType === 1) {
+      if (!this.zeng.title || this.zeng.title.trim() === '') {
+        return lf.toast('请输入公司全称')
+      }
+      var regu = '^([0-9a-zA-Z]{15}|[0-9a-zA-Z]{18}|[0-9a-zA-Z]{20})$'
+      var re = new RegExp(regu)
+      if (!this.zeng.tax_id || this.zeng.tax_id.trim() === '' || !re.test(this.zeng.tax_id)) {
+        return lf.toast('你输入的纳税人识别号需为15-20位数字或字母')
+      }
+      if (!this.zeng.reg_address || this.zeng.reg_address.trim() === '') {
+        return lf.toast('请输入公司注册地址')
+      }
+      var patt = /(^1\d{10}$)|(^0\d{2,3}-?\d{7,8}$)/
+      if (!patt.test(+this.zeng.reg_mobile)) {
+        return lf.toast('请输入正确的电话')
+      }
+      if (!this.zeng.reg_bank || this.zeng.reg_bank.trim() === '') {
+        return lf.toast('请输入开户银行名称')
+      }
+      var pattern = /^([0-9]{1})(\d{14}|\d{18})$/
+      if (!pattern.test(+this.zeng.reg_bank_account)) {
+        return lf.toast('请正确输入银行卡号')
+      }
+    } else if (+this.selectInvoiceType === 0 && +this.selectUnitType === 1) {
+      if (!this.pu.title || this.pu.title.trim() === '') {
+        return lf.toast('请输入公司全称')
+      }
+      var reg = '^([0-9a-zA-Z]{15}|[0-9a-zA-Z]{18}|[0-9a-zA-Z]{20})$'
+      var res = new RegExp(reg)
+      if (!this.pu.tax_id || this.pu.tax_id.trim() === '' || !res.test(this.pu.tax_id)) {
+        return lf.toast('你输入的纳税人识别号需为15,18或20位数字或字母')
+      }
+    }
+    if (!this.address.name) {
+      return lf.toast('请选择地址')
+    }
+    let pr = this.selectInvoiceType === 0 ? this.pu : this.zeng
+    let titleType = this.selectUnitType === 0 ? 1 : this.selectUnitType === 1 ? 0 : this.selectUnitType
+    let p = {
+      order_ids: this.id,
+      type: this.selectInvoiceType,
+      title_type: titleType,
+      member_address_id: this.address.id,
+      ...pr
+    }
+    lf.net.post('/Api/Finance/invoice_bind', p).then(res => {
+      if (res.code === 200) {
+        lf.toast('操作成功')
+        setTimeout(() => {
+          fireEvent(EVENT.ORDER, {
+            type: TYPES.FUNCTIONCHANGE,
+            data: 'H'
+          })
+          wx.navigateBack({
+            delta: 1
+          })
+        }, 1600)
+      } else {
+        lf.toast(res.info)
+      }
+    })
+  }
+}
+</script>

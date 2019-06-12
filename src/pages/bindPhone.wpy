@@ -1,0 +1,237 @@
+<style lang="scss">
+  @import "../css/common";
+  .container {
+    .function-list {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      width: 100%;
+      margin-top: 21rpx;
+      background-color: #fff;
+      .row-item {
+        width: 662rpx;
+        height: 100rpx;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 30rpx;
+        color: #1c1c1c;
+        .function-title {
+          font-size: 28rpx;
+          color: #333333;
+        }
+        image {
+          width: 18rpx;
+          height: 33rpx;
+        }
+        .item-content {
+
+        }
+        .btn {
+          background-color: rgba(227, 159, 61, 0);
+          border: none;
+          font-size: 30rpx;
+          color: #1c1c1c;
+        }
+      }
+      .add-bottom {
+        border-bottom: 1rpx solid #cccc;
+      }
+      .first-row {
+        border-bottom: 1rpx solid #cccc;
+        padding-bottom: 19rpx;
+      }
+    }
+    .tip {
+      margin: 40rpx auto;
+      width: 100%;
+      text-align: center;
+      font-size: 24rpx;
+      color: #666666;
+    }
+    .btn-area {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 90rpx;
+      background-color: #F5f5f7;
+      padding-top: 20rpx;
+      padding-bottom: 36rpx;
+      .my-button {
+        width: 670rpx;
+        height: 90rpx;
+        color: #fff;
+        line-height: 90rpx;
+        background-color: #cf0210;
+        border-radius: 10rpx;
+      }
+    }
+  }
+</style>
+<template>
+  <view class="container">
+    <view class="function-list">
+      <view  class="row-item add-bottom">
+        <!--<view class="function-title">修改手机号码</view>-->
+        <!--<image src="../images/customer/icon-8.png"></image>-->
+        <input name="tell" type="number" maxlength="11" value="{{mobile}}" bindinput='onBindPhone' placeholder="请输入手机号码"/>
+        <button class="btn" disabled="{{codeRuning}}" @tap="getCode">{{desc}}</button>
+      </view>
+      <view class="row-item">
+        <input class="yzm-input" maxlength="6" name="yzm" type="number" value="{{yzm}}" bindinput='onBindYzm' placeholder="请输入验证码"/>
+      </view>
+    </view>
+    <view class="tip">一个手机号只能作为一个帐号的登录名</view>
+    <view class="btn-area">
+      <button class="my-button" @tap="loginByPhone">确定</button>
+    </view>
+  </view>
+
+</template>
+
+<script>
+import wepy from 'wepy'
+import lf from 'lf'
+export default class BindPhone extends wepy.page {
+  config = {
+    backgroundTextStyle: 'light',
+    navigationBarBackgroundColor: '#cf0210',
+    navigationBarTitleText: '更换手机号',
+    navigationBarTextStyle: 'white',
+    usingComponents: {
+    }
+  }
+  components = {}
+  data = {
+    thirdId: '',
+    desc: '获取验证码',
+    time: 60,
+    int: null,
+    codeRuning: false,
+    mobile: '',
+    yzm: ''
+  }
+  computed = {
+    isNotSubmit: function () {
+      let flag
+      if (this.mobile && this.yzm && /^[1][0-9][0-9]{9}$/.test(this.mobile)) {
+        flag = true
+      } else {
+        flag = false
+      }
+      return flag
+    }
+  }
+  methods = {
+    onBindPhone (e) {
+      this.mobile = e.detail.value
+    },
+    onBindYzm (e) {
+      this.yzm = e.detail.value
+    },
+    async loginByPhone () {
+      if (!this.isNotSubmit) {
+        wepy.showToast({
+          title: '请填写手机号和验证码!',
+          icon: 'none'
+        })
+        return
+      }
+      try {
+        wepy.showLoading({
+          title: '提交中...'
+        })
+        const userData = await lf.net.post('/Api/member/phone_bind', {
+          mobile: this.mobile,
+          verify: this.yzm
+        })
+        wepy.hideLoading()
+        if (userData.code !== 200) {
+          wepy.showToast({
+            title: userData.info,
+            icon: 'none'
+          })
+        } else {
+          wepy.showToast({
+            title: '更换手机号成功',
+            icon: 'none'
+          })
+          this.mobile = ''
+          this.yzm = ''
+          clearInterval(this.int)
+          this.int = null
+          this.desc = '获取验证码'
+          this.codeRuning = false
+          this.time = 60
+          this.$apply()
+        }
+      } catch (e) {
+        console.error(e)
+        wepy.hideLoading()
+      } finally {
+      }
+    },
+    async getCode () {
+      if (!this.mobile || !/^[1][0-9][0-9]{9}$/.test(this.mobile)) {
+        wepy.showToast({
+          title: '请填写合法手机号',
+          icon: 'none'
+        })
+        return
+      }
+      try {
+        wepy.showLoading({
+          title: '发送中...'
+        })
+        const res = await lf.net.post('/Api/public/sendVerify', {
+          phone: this.mobile
+        })
+        wepy.hideLoading()
+        if (res.code === 200) {
+          lf.toast(res.info)
+          this.codeRuning = true
+          this.desc = this.time + 's'
+          this.$apply()
+          this.int = setInterval(() => {
+            this.time--
+            if (this.time <= 0) {
+              clearInterval(this.int)
+              this.int = null
+              this.desc = '获取验证码'
+              this.codeRuning = false
+              this.time = 60
+              this.$apply()
+              return
+            }
+            this.desc = this.time + 's'
+            this.$apply()
+          }, 1000)
+        } else {
+          wepy.showToast({
+            title: res.info,
+            icon: 'none'
+          })
+        }
+      } catch (e) {
+        wepy.hideLoading()
+        wepy.showToast({
+          title: '操作失败',
+          icon: 'none'
+        })
+      }
+    }
+  }
+  events = {}
+  onLoad () {}
+  onUnload () {
+    this.thirdId = ''
+    this.int = null
+    this.codeRuning = false
+    this.mobile = ''
+    this.yzm = ''
+  }
+}
+</script>

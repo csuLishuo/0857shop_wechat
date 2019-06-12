@@ -1,0 +1,63 @@
+<style lang="scss">
+</style>
+<template>
+  <view class="" style="height: 100%;">
+    <block wx:if="{{type == 2}}">
+      <navbar></navbar>
+    </block>
+    <block wx:else>
+      <ategorypage></ategorypage>
+    </block>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+// import { SERVER_BAS_URL } from '../js/define'
+import ategoryPage from '../components/categoryPage'
+import navbar from '../components/navbar'
+import commonMixin from '../mixins/common'
+
+export default class CategoryPage extends wepy.page {
+  config = {
+    backgroundTextStyle: 'light',
+    navigationBarBackgroundColor: '#fff',
+    navigationBarTitleText: '分类',
+    navigationBarTextStyle: 'black',
+    usingComponents: {
+      'van-search': '/components/vant/search/index',
+      'van-icon': '/components/vant/icon/index',
+      'van-popup': '/components/vant/popup/index',
+      'van-cell-group': '/components/vant/cell-group/index',
+      'van-swipe-cell': '/components/vant/swipe-cell/index'
+    }
+  }
+  mixins = [commonMixin]
+  components = {
+    navbar: navbar,
+    ategorypage: ategoryPage
+  }
+  data = {
+    type: 1
+  }
+  computed = {}
+  methods = {}
+  events = {}
+
+  onLoad () {
+  }
+
+  onShow () {
+    wepy.$instance.showOrderRedDot()
+    if (this.$parent.globalData.isKD) {
+      this.type = 2
+      wx.setNavigationBarTitle({
+        title: '出单'
+      })
+      this.$invoke('navbar', 'init')
+    } else {
+      this.type = 1
+    }
+  }
+}
+</script>

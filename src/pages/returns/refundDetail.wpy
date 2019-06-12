@@ -1,0 +1,674 @@
+<style lang="scss">
+  @import "../../css/common";
+  page {
+    background-color: #f5f5f5;
+  }
+  .refundDetail {
+    padding-top: torpx(12);
+    .order_status {
+      background-color: #cf000e;
+      height: torpx(200);
+      padding-left: torpx(50);
+      box-sizing: border-box;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      color: white;
+      }
+    .status_ti {
+      justify-content: space-between;
+      align-items: center;
+      flex-direction: row;
+      padding-right: torpx(50);
+      .top-left {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: space-between;
+        font-size: torpx(32);
+        .left-tip-s {
+          font-size: torpx(26);
+        }
+      }
+      .top-right {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        font-size: torpx(22);
+        .right-tip {
+          width: torpx(125);
+        }
+        image {
+          margin-left: torpx(10);
+          width: torpx(68);
+          height: torpx(68);
+        }
+      }
+    }
+      .yet {
+        font-size: torpx(32);
+        margin-bottom: torpx(15);
+      }
+      .countDown {
+        font-size: torpx(26);
+      }
+    }
+  .order_detail {
+    background-color: white;
+    margin-bottom: torpx(20);
+    .info {
+      padding: 0 torpx(20);
+      .logistics {
+        border-bottom: 1px solid #e4e4e4;
+        display: flex;
+        align-items: center;
+        .imgWarp {
+          width: torpx(62);
+          display: flex;
+          align-items: center;
+          .imgLeft {
+            width: torpx(42);
+            height: torpx(50);
+            display: block;
+          }
+        }
+        .rightInfo {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          .logisticsStatus{
+            padding-top: torpx(20);
+            color: #3a9833;
+            font-size: torpx(28);
+            line-height: torpx(36);
+            margin-bottom: torpx(10);
+          }
+          .time {
+            color: #999;
+            font-size: torpx(24);
+            margin-bottom: torpx(20);
+          }
+        }
+        .arrowRight {
+          width: torpx(75);
+          padding-right: torpx(5);
+          display: flex;
+          justify-content: flex-end;
+          .imgR {
+            align-self: center;
+            width: torpx(18);
+            height: torpx(32);
+          }
+        }
+      }
+      .address {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        font-size: torpx(28);
+        .addreeWarp {
+          display: flex;
+          align-items: center;
+          width: torpx(62);
+          .addressImg{
+            width: torpx(42);
+            height: torpx(50);
+            display: block;
+          }
+        }
+        .addressInfo {
+          flex: 1;
+          padding: torpx(25) 0;
+          .presonInfo {
+            width: 100%;
+            display: flex;
+            padding-bottom: torpx(10);
+            justify-content: space-between;
+          }
+          .addressFlex {
+            line-height: torpx(36);
+            .t_info {
+              @extend .h
+            }
+          }
+        }
+        .addressPick {
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          align-items: flex-start;
+          font-size: torpx(26);
+          color:rgba(102,102,102,1);
+          padding: torpx(20) torpx(0);
+          padding-right: torpx(30);
+          text {
+            color:rgba(0,0,0,1);
+          }
+          .address-title {
+            font-size: torpx(30);
+            color:rgba(0,0,0,1);
+          }
+          .address-detail {
+            margin-bottom: torpx(20);
+          }
+          .item{
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            flex-direction: row;
+            .item-left {
+                width: torpx(150);
+            }
+            .item-right {
+
+            }
+          }
+        }
+      }
+    }
+    .deliveryTime {
+      border-top: 1px solid #e4e4e4;
+      .timeWarp {
+        font-size: torpx(28);
+        line-height: torpx(80);
+        padding: 0 torpx(35);
+        box-sizing: border-box;
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+  }
+  .goodsInfo {
+    .goodsCard {
+      position: relative;
+    }
+    .van-card {
+      background-color: white;
+      .van-card__img {
+        border: 1px solid #d0d0d0;
+      }
+      .van-card__title {
+        @extend .ellipsis-2
+      }
+    }
+    .no_reason {
+      font-size: torpx(24);
+      color: #cf000e;
+      background-color: #fbebec;
+      padding: torpx(10) torpx(15);
+      position: absolute;
+      left: 115px;
+      bottom: torpx(10);
+      border-radius: torpx(10);
+    }
+    .refundM {
+      background-color: white;
+      padding-top: torpx(25);
+      padding-right: torpx(30);
+      padding-bottom: torpx(10);
+      box-sizing: border-box;
+      text-align: right;
+      .refundMoney {
+        line-height: torpx(60);
+        text-align: center;
+        font-size: torpx(26);
+        color: #666;
+        display: flex;
+        justify-content: flex-end;
+        .childView {
+          margin-left: torpx(20);
+          display: inline-block;
+          width: torpx(150);
+          height: torpx(60);
+          border: 1px solid #cccccc;
+          border-radius: torpx(30);
+        }
+      }
+    }
+  }
+  .order_price {
+    border-top: 1px solid #e6e6e7;
+    background-color: white;
+    padding: 0 torpx(30);
+    box-sizing: border-box;
+    line-height: torpx(100);
+    margin-bottom: torpx(20);
+    display: flex;
+    justify-content: space-between;
+    font-size: torpx(28);
+  }
+  .order_bill {
+    background-color: white;
+    padding: 0 torpx(30);
+    box-sizing: border-box;
+    line-height: torpx(100);
+    margin-bottom: torpx(20);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: torpx(28);
+    .start_bill {
+      width: torpx(170);
+      height: torpx(60);
+      border-radius: torpx(10);
+      border:torpx(1) solid rgba(204,204,204,1);
+      border-radius: torpx(30);
+      line-height: torpx(60);
+      text-align: center;
+    }
+  }
+  .orderTimeInfo {
+    margin-bottom: torpx(20);
+    padding: 0 torpx(30);
+    display: flex;
+    align-items: center;
+    background-color: white;
+    box-sizing: border-box;
+    flex-direction: column;
+    > view {
+      &:last-child{
+        border-bottom: none;
+      }
+      border-bottom: 1px solid #eee;
+      min-height: torpx(88);
+      font-size: torpx(28);
+      color: #333;
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      .tite {
+        width: torpx(150);
+      }
+      .t_desdes {
+        @extend .h
+      }
+    }
+  }
+  .h {
+    flex: 1;
+    white-space:normal;
+    word-wrap:break-word;
+    word-break:break-all;
+  }
+</style>
+<template>
+  <view class="refundDetail">
+    <view class="order_status" wx:if="{{ goodsInfo.is_pickup === '0' }}">
+        <block wx:if="{{logisticsTime}}">
+          <view class="yet">{{goodsInfo.order_status_text}}</view>
+          <view class="countDown" wx:if="{{goodsInfo.order_status == 30}}">
+            <text wx:if="{{logisticsTime}}">还剩{{logisticsTime.day}}天{{logisticsTime.hour}}时自动确认</text>
+            <text wx:else>卖家已发货</text>
+          </view>
+        </block>
+        <block wx:elif="{{logisticsTime.noData}}">
+          <view class="yet" style="margin-bottom: 0">已自动确认收货</view>
+        </block>
+        <block wx:else>
+          <view class="yet" style="margin-bottom: 0">{{goodsInfo.order_status_text}}</view>
+        </block>
+    </view>
+      <view class="order_status status_ti" wx:else>
+        <view class="top-left">
+          <view class="left-tip">您的商品为自提</view>
+          <view class="left-tip-s">{{ goodsInfo.order_status === 20 || goodsInfo.order_status === 30 ? '等待您到店提件' : '已完成到店提件' }}</view>
+        </view>
+        <view class="top-right">
+          <block wx:if="{{ goodsInfo.order_status === 20 || goodsInfo.order_status === 30 }}">
+            <view class="right-tip">到店请出示二维码</view>
+            <image src="./../../images/codeshape.png" @tap="goTo('./../showCode?orderId={{orderId}}')"></image>
+          </block>
+        </view>
+      </view>
+    </view>
+    <view class="order_detail" @tap="goToLogistics">
+      <block wx:if="{{ goodsInfo.is_pickup === '0' }}">
+        <view class="info">
+          <view class="logistics"  wx:if="{{logisticsList}}">
+            <view class="imgWarp">
+              <image class="imgLeft" src="./../../images/1_8.png" ></image>
+            </view>
+            <view class="rightInfo">
+              <view class="logisticsStatus">{{logisticsList[logisticsList.length - 1].countent ? logisticsList[logisticsList.length -1].countent : '暂无物流信息'}}</view>
+              <view class="time">{{logisticsList[logisticsList.length -1].time}}</view>
+            </view>
+            <view class="arrowRight">
+              <image class="imgR" src="./../../images/icon-8.png" ></image>
+            </view>
+          </view>
+          <view class="address">
+            <view class="addreeWarp">
+              <image class="addressImg" src="./../../images/1_03.png"></image>
+            </view>
+            <view class="addressInfo">
+              <view class="presonInfo">
+                <view class="name">
+                  <text>收货人：</text>
+                  <text>{{goodsInfo.receiver_name}}</text>
+                </view>
+                <view class="phone">
+                  <text wx:if="{{goodsInfo.receiver_mobile.length === 11}}">86-</text>
+                  <text>{{goodsInfo.receiver_mobile}}</text>
+                </view>
+              </view>
+              <view class="addressFlex">
+                <text class="t">收货地址:</text>
+                <text class="t_info">{{goodsInfo.district}}{{goodsInfo.addr}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="deliveryTime">
+          <view class="timeWarp"  wx:if="{{goodsInfo.promise_get_date }}">
+            <view style="font-weight: bold">配送时间</view>
+            <view>{{goodsInfo.promise_get_date }}</view>
+          </view>
+        </view>
+      </block>
+      <block wx:else>
+        <view class="info">
+          <view class="logistics" wx:if="{{goodsInfo.is_pickup == 0}}">
+            <view class="imgWarp">
+              <image class="imgLeft" src="./../../images/1_8.png"></image>
+            </view>
+            <view class="rightInfo">
+              <view class="logisticsStatus">
+                <text wx:if="{{goodsInfo.order_status == 50}}">
+                  {{logisticsList[logisticsList.length - 1].countent}}
+                </text>
+                <text wx:if="{{goodsInfo.is_pickup == 0}}">
+                  【{{dealer_address}}】您的订单待提, 请尽快前往{{ goodsInfo.dealer_name }}取件
+                </text>
+              </view>
+              <view class="time">{{logisticsList[logisticsList.length - 1].time}}</view>
+            </view>
+            <view class="arrowRight">
+              <image class="imgR" src="./../../images/icon-8.png" ></image>
+            </view>
+          </view>
+          <view class="address">
+            <view class="addreeWarp">
+              <image class="addressImg" src="./../../images/1_03.png"></image>
+            </view>
+            <view class="addressPick">
+              <view class="address-title">取件地址: {{goodsInfo.dealer_name}}</view>
+              <view class="address-detail">{{ goodsInfo.dealer_address}}</view>
+              <view class="item">
+                <view class="item-left">
+                  门店电话
+                </view>
+                <view class="item-right">
+                  <text>{{ goodsInfo.dealer_mobile }}</text>
+                </view>
+              </view>
+              <view class="item">
+                <view class="item-left">
+                  营业时间
+                </view>
+                <view class="item-right">
+                  <text>{{ goodsInfo.dealer_online_time }}</text>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+    <block wx:for="{{goodsInfo.order_item_list}}" wx:key="unique">
+      <view class="goodsInfo">
+        <view bind:tap="goToGoodsInfo({{item.goods_id}})" class="goodsCard">
+          <van-card
+              thumb="{{item.goods_cover_url}}"
+              title="{{item.goods_title}}"
+              desc="{{item.cate_id_text}}"
+              num="{{item.number}}"
+              price="{{item.discount_amount}}"
+            >
+          </van-card>
+          <text class="no_reason">24小时无理由退货</text>
+        </view>
+        <view class="refundM">
+          <view class="refundMoney" wx:if="{{item.return_status == 35 }}" >
+            <view class="childView" catch:tap="tipUser">已拒绝</view>
+            <view class="childView" catch:tap="refundMoney({{item}})">详情</view>
+          </view>
+          <view class="refundMoney" wx:if="{{item.return_status == 9 && goodsInfo.order_status != 60}}">
+            <!--<view class="childView" catch:tap="refundMoney({{item}}, {{item.return_status}})">详情</view>-->
+            <view class="childView" catch:tap="gotoStatus({{item}})">退换</view>
+          </view>
+          <view class="refundMoney" wx:if="{{item.return_status != 35 && item.return_status != 9 }}" catch:tap="refundMoney({{item}})">
+            <view class="childView" wx:if="{{item.is_return == 0}}" style="border: {{goodsInfo.order_status == 60 ? 'none': '1px soild #ccc'}}">{{goodsInfo.order_status == 60 ? '' : '退换'}}</view>
+            <view class="childView" wx:if="{{item.is_return == 1}}">退款中</view>
+            <view class="childView" wx:if="{{item.is_return == 2}}">退货完成</view>
+          </view>
+        </view>
+      </view>
+    </block>
+    <view class="order_price">
+      <view style="font-weight: bold">订单总价</view>
+      <view style="color: #cf000e">
+        <text>￥</text>
+        <text>{{goodsInfo.order_amount}}</text>
+      </view>
+    </view>
+    <view class="order_bill" wx:if="{{invoice_open === 1 && invoice_type === 1}}">
+      <view  style="font-weight: bold">发票类型:
+        <text style="font-weight: normal">{{ billInfo.info }}</text>
+      </view>
+      <view wx:if="{{billInfo.printBill}}" @tap="goToInvoice"  class="start_bill">
+        申请开票
+      </view>
+    </view>
+    <view class="orderTimeInfo">
+      <view>
+        <text class="tite">交易号：</text>
+        <text class="t_desdes">{{goodsInfo.order_no}}</text>
+      </view>
+      <view>
+        <text class="tite">创建时间：</text>
+        <text class="t_desdes">{{goodsInfo.addtime}}</text>
+      </view>
+      <view>
+        <text class="tite">付款时间：</text>
+        <text class="t_desdes">{{goodsInfo.pay_time}}</text>
+      </view>
+      <view>
+        <text class="tite">发货时间：</text>
+        <text class="t_desdes">{{goodsInfo.logistics_time == null ? '' : goodsInfo.logistics_time}}</text>
+      </view>
+    </view>
+  <view wx:if="{{isPx}}" style="height: 80rpx"></view>
+</template>
+
+<script>
+import wepy from 'wepy'
+import lf from 'lf'
+export default class refundDtatils extends wepy.page {
+  config = {
+    backgroundTextStyle: 'light',
+    navigationBarBackgroundColor: '#fff',
+    navigationBarTitleText: '订单详情',
+    navigationBarTextStyle: 'black',
+    usingComponents: {
+      'van-card': '/components/vant/card/index'
+    }
+  }
+  components = {}
+  mixins = []
+  data = {
+    orderId: null,
+    goodsInfo: null,
+    logisticsTime: false,
+    billInfo: {},
+    invoiceId: 0,
+    // goddsInfo.order_status 20-待收货 30-已发货 50已确认货 60-确认收货
+    invoice_open: null,
+    invoice_type: null,
+    logisticsList: null,
+    dealer_address: null
+  }
+  computed = {}
+  events = {}
+  onLoad (opt) {
+    let { orderId } = opt
+    this.orderId = orderId
+    this.isPx = this.$parent.globalData.isIpx
+    this.systemConfig()
+    this.getLogistics()
+    this.$apply()
+  }
+  onUnload() {
+    this.orderId = null
+    this.goodsInfo = null
+    this.logisticsTime = false
+    this.billInfo = null
+    this.$apply()
+  }
+  async getLogistics () {
+    try {
+      const r = await lf.net.post('/Api/order/logistics_info', {order_id: this.orderId})
+      if (r.code === 200) {
+        if (r.data && r.data.list) {
+          let mlist = r.data.list || []
+          mlist.forEach(v => {
+            v.timeTop = v.time.slice(5, 10)
+            v.timeBottom = v.time.slice(11, 16)
+          })
+          this.logisticsList = mlist
+          this.$apply()
+        }
+      } else {
+        wepy.showToast({
+          title: r.info,
+          icon: 'none'
+        })
+      }
+    } catch (e) {
+      wepy.showToast({
+        title: e.toString(),
+        icon: 'none'
+      })
+    }
+    wepy.hideLoading()
+  }
+  goToInvoice () {
+    wx.navigateTo({
+      url: './../invoice/invoiceInfo?invoiceId=' + this.invoiceId + '&id=' + this.orderId
+    })
+  }
+  goToNegotiate () {
+    wx.navigateTo({
+      url: `./../negotiate?orderId=${this.goodsInfo.order_item_list.id}`
+    })
+  }
+  goToLogistics () {
+    wx.navigateTo({
+      url: `../logistics?orderId=${this.orderId}`
+    })
+  }
+  async systemConfig () {
+    try {
+      const res = await lf.net.post('/Api/public/system_config', {})
+      if (res.code === 200) {
+        this.invoice_open = +res.data.invoice_open
+        this.invoice_type = +res.data.invoice_type
+      } else {
+        lf.toast(res.info)
+      }
+      this.$apply()
+    } catch (e) {
+      lf.toast('系统内部错误')
+    }
+  }
+  methods = {
+    goTo (url) {
+      wepy.navigateTo({
+        url: url
+      })
+    },
+    goToGoodsInfo (id) {
+      wx.navigateTo({
+        url: `./../wineInfo?goodsId=${id}`
+      })
+    },
+    tipUser () {
+      wx.showModal({
+        title: '提示',
+        content: '申请被拒，请联系客服'
+      })
+    },
+    gotoStatus (item) {
+      if (this.goodsInfo.order_status === 30) {
+        return lf.toast('抱歉，已经发货，不能退换')
+      }
+      wx.navigateTo({
+        url: `refundStatus?orderId=${this.orderId}&item=${JSON.stringify(item)}&devTime=${JSON.stringify(this.logisticsTime)}`
+      })
+    },
+    refundMoney (item, status) {
+      if (this.goodsInfo.order_status === 30) {
+        return lf.toast('抱歉，已经发货，不能退换')
+      }
+      if (+item.is_return < 1 && +item.return_status !== 35) {
+        this.$parent.globalData.returnOrderId = item.id
+        this.$parent.globalData.refundInfo = JSON.stringify(item)
+        wx.navigateTo({
+          url: `applyStart`
+        })
+      } else {
+        wx.navigateTo({
+          url: `refundStatus?orderId=${this.orderId}&item=${JSON.stringify(item)}&devTime=${JSON.stringify(this.logisticsTime)}`
+        })
+      }
+    }
+  }
+  onShow () {
+    this.getOrderDetail()
+  }
+  getbillInfo (data) {
+    var billInfo = {
+      'info': '不开发票',
+      'printBill': data.allow_invoice === 1
+    }
+    if (parseInt(data.is_invoice)) {
+      let titleType = parseInt(data.is_invoice_info.title_type) === 0 ? '企业' : '个人'
+      let info = parseInt(data.is_invoice_info.type) === 0 ? '普通发票' : '增值发票'
+      billInfo.info = titleType + info
+    }
+    return billInfo
+  }
+  async getOrderDetail () {
+    this.$apply()
+    try {
+      const r = await lf.net.post('/Api/Order/order_detail', { order_id: this.orderId })
+      if (r.code === 200) {
+        this.goodsInfo = r.data
+        this.goodsInfo.order_status = parseInt(this.goodsInfo.order_status)
+        this.billInfo = this.getbillInfo(r.data)
+        if (r.data.is_invoice_info) {
+          this.invoiceId = r.data.is_invoice_info.id
+        }
+          // || '2019-04-05 12:20:13'
+        if (r.data.logistics_time) {
+          let time = r.data.logistics_time.replace(/-/g, '/')
+          this.logisticsTime = lf.calcReceiving(time)
+        }
+        let add = r.data.dealer_address
+        let startIndex = add ? add.indexOf('省') + 1 : -1
+        let endIndex = add ? add.indexOf('市') + 1 : -1
+        if (startIndex !== -1 && endIndex !== -1) {
+          this.dealer_address = add.slice(startIndex, endIndex)
+        }
+
+        this.$apply()
+      } else {
+        lf.toast(r.info)
+      }
+    } catch (e) {
+      lf.log.info(e)
+      lf.toast('系统内部错误')
+    }
+  }
+}
+</script>

@@ -1,0 +1,87 @@
+<style lang="scss">
+  ::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    color: transparent;
+  }
+</style>
+<template>
+  <view class="page-container {{isPx ? 'is-px' : ''}}">
+    <block wx:if="{{type == 1}}">
+      <customershopcart></customershopcart>
+    </block>
+    <block wx:elif="{{type == 2}}">
+      <managershopcart></managershopcart>
+    </block>
+    <block wx:else>
+    </block>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+import lf from 'lf'
+import CustomerShopCart from '../components/customerShopCart'
+import managerShopCart from '../components/managerShopCart'
+import navbar from '../components/navbar'
+import commonMixin from '../mixins/common'
+
+export default class ShopCart extends wepy.page {
+  config = {
+    navigationBarTitleText: '购物车',
+    disableScroll: true,
+    usingComponents: {
+      'van-icon': '/components/vant/icon/index',
+      'van-popup': '/components/vant/popup/index',
+      'van-cell-group': '/components/vant/cell-group/index',
+      'van-swipe-cell': '/components/vant/swipe-cell/index',
+      'van-checkbox': '/components/vant/checkbox/index',
+      'van-checkbox-group': '/components/vant/checkbox-group/index',
+      'van-stepper': '/components/vant/stepper/index',
+      'van-submit-bar': '/components/vant/submit-bar/index'
+    }
+  }
+  mixins = [commonMixin]
+  components = {
+    customershopcart: CustomerShopCart,
+    managershopcart: managerShopCart,
+    navbar: navbar
+  }
+  data = {
+    type: 1
+  }
+  computed = {
+
+  }
+  methods = {
+    changeOrder () {
+    }
+  }
+  events = {}
+  onLoad () {
+    this.type = lf.user.getRole() >= 50 ? 2 : 1
+  }
+  onShow () {
+    wepy.$instance.showOrderRedDot()
+    this.type = lf.user.getRole() >= 50 ? 2 : 1
+    this.$parent.changeTabbar()
+    this.invokeShopCart('init')
+    setTimeout(() => {
+      wepy.hideTabBarRedDot({
+        index: 2
+      })
+    }, 0)
+  }
+  onHide () {
+    wepy.$instance.showShopRedDot()
+  }
+
+  invokeShopCart (methodName) {
+    if (this.type === 1) {
+      this.$invoke('customershopcart', methodName)
+    } else {
+      this.$invoke('managershopcart', methodName)
+    }
+  }
+}
+</script>

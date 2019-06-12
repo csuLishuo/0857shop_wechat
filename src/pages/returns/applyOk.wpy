@@ -1,0 +1,98 @@
+<style lang="scss">
+  @import "../../css/common";
+  .container {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    align-items: center;
+    flex-direction: column;
+    font-size: torpx(30);
+    background-color: #fff;
+    height: 100vh;
+    .content-body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      margin-top: torpx(153);
+      .top-img {
+        width: torpx(180);
+        height: torpx(180);
+        margin-bottom: torpx(60);
+        image {
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .middle-tip {
+        margin-bottom: torpx(48);
+        font-size: torpx(36);
+      }
+      .bottom-tip {
+        width: torpx(557);
+        font-size: torpx(28);
+        color: #0c0c0c;
+      }
+    }
+  }
+</style>
+<template>
+  <view class="container ">
+    <view class="content-body">
+      <view class="top-img">
+        <image src="../../images/return/ok.png"></image>
+      </view>
+      <view class="middle-tip">商家已收到您的退款申请</view>
+      <view class="bottom-tip">商家会尽快处理您的退款，如在5个工作日内
+        未进行处理，款项将自动退还至您的支付账号</view>
+    </view>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+// import lf from 'lf'
+import navbar from '../../components/navbar'
+// import { SERVER_BAS_URL } from '../js/define'
+import commonMixin from '../../mixins/common'
+
+export default class ApplyOk extends wepy.page {
+  config = {
+    backgroundTextStyle: 'light',
+    navigationBarBackgroundColor: '#fff',
+    navigationBarTitleText: '申请退款',
+    navigationBarTextStyle: 'black',
+    usingComponents: {
+      'van-icon': '/components/vant/icon/index',
+      'van-popup': '/components/vant/popup/index',
+      'van-cell-group': '/components/vant/cell-group/index',
+      'van-swipe-cell': '/components/vant/swipe-cell/index',
+      'van-cell': '/components/vant/cell/index'
+    }
+  }
+  components = {
+    navbar
+  }
+  mixins = [commonMixin]
+  data = {
+  }
+  computed = {}
+  methods = {
+    GoTo (path) {
+      if (path !== 'manager/feature' && !this.isLogin) {
+        path = 'login'
+      }
+      wepy.navigateTo({
+        url: `../${path}`
+      })
+    }
+  }
+  events = {}
+
+  onLoad () {
+  }
+
+  onShow () {
+  }
+}
+</script>

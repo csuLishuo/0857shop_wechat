@@ -1,0 +1,184 @@
+{
+	"description": "项目配置文件",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": false,
+		"es6": false,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.6.2",
+	"appid": "wxda41d1b990a658ef",
+	"projectname": "myjj_wechat",
+	"miniprogramRoot": "dist/",
+	"debugOptions": {
+		"hidedInDevtools": []
+	},
+	"scripts": {},
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"list": []
+		},
+		"miniprogram": {
+			"current": 19,
+			"list": [
+				{
+					"id": 0,
+					"name": "佣金",
+					"pathName": "pages/commission",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的",
+					"pathName": "pages/myCenter",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "积分",
+					"pathName": "pages/integral",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "安全",
+					"pathName": "pages/security",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "认证",
+					"pathName": "pages/certified",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "家里",
+					"pathName": "pages/home",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 6,
+					"name": "地址详情",
+					"pathName": "pages/manager/placeAnOrder",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 7,
+					"name": "applyReturn",
+					"pathName": "pages/returns/applyReturn",
+					"query": "param=1",
+					"scene": null
+				},
+				{
+					"id": 8,
+					"name": "applyStart",
+					"pathName": "pages/returns/applyStart",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "applyOK",
+					"pathName": "pages/returns/applyOk",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "applyStart",
+					"pathName": "pages/test",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "测试",
+					"pathName": "pages/test",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "estimate",
+					"pathName": "pages/estimate",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "提成",
+					"pathName": "pages/payment",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 14,
+					"name": "显示二维码",
+					"pathName": "pages/showCode",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "订单详情",
+					"pathName": "pages/returns/refundDetail",
+					"query": "orderId=1228",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "测试",
+					"pathName": "pages/test",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 17,
+					"name": "测试待支付",
+					"pathName": "pages/myCenter",
+					"query": "url=sendGoodsInfo&orderId=11",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "开票列表",
+					"pathName": "pages/invoice/orderInvoiceList",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "支付",
+					"pathName": "pages/myCenter",
+					"query": "orderId=1408&url=myOrder",
+					"scene": null
+				}
+			]
+		}
+	}
+}
