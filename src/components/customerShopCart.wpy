@@ -243,7 +243,7 @@
                 </view>
                 <view slot="right" class="del-good">
                   <text>删除</text>
-                  <image src="../images/myImage/icon01.png"></image>
+                  <image src="../images/images_0857/icon01.png"></image>
                 </view>
               </van-swipe-cell>
             </block>
