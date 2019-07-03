@@ -14,9 +14,6 @@
 <script>
 import wepy from 'wepy'
 // import { SERVER_BAS_URL } from '../js/define'
-import ategoryPage from '../components/categoryPage'
-import navbar from '../components/navbar'
-import commonMixin from '../mixins/common'
 
 export default class CategoryPage extends wepy.page {
   config = {
@@ -32,10 +29,7 @@ export default class CategoryPage extends wepy.page {
       'van-swipe-cell': '/components/vant/swipe-cell/index'
     }
   }
-  mixins = [commonMixin]
   components = {
-    navbar: navbar,
-    ategorypage: ategoryPage
   }
   data = {
     type: 1

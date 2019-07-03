@@ -7,7 +7,13 @@
     justify-content: space-between;
     box-sizing: border-box;
   }
-
+  view, input{
+    display: block;
+    box-sizing: border-box;
+  }
+  image{
+    display: block;
+  }
   page {
     background: #f5f5f7;
   }
@@ -62,63 +68,10 @@ export default class extends wepy.app {
   config = {
     pages: [
       'pages/home',
-      'pages/login',
-      'pages/searchPage',
       'pages/categoryPage',
       'pages/shopCart',
-      'pages/test',
       'pages/myCenter',
-      'pages/commission',
-      'pages/addressList',
-      'pages/editAddress',
-      'pages/payment',
-      'pages/myOrderInfo',
-      'pages/wineInfo',
-      'pages/orderList',
-      'pages/integral',
-      'pages/manager/order',
-      'pages/manager/placeAnOrder',
-      'pages/returns/applyStart',
-      'pages/returns/applyReturn',
-      'pages/returns/applyOk',
-      'pages/message',
-      'pages/manager/feature',
-      'pages/manager/featureCon',
-      'pages/manager/myResults',
-      'pages/security',
-      'pages/certified',
-      'pages/bindPhone',
-      'pages/manager/salesman/confirm',
-      'pages/manager/addSales',
-      'pages/manager/achievement',
-      'pages/myOrder', // 客户订单详情
-      'pages/orderApproval', // 销售、经销商订单详情
-      'pages/rejected',
-      'pages/customers',
-      'pages/manager/documentaryOrder',
-      'pages/manager/confirmOrder',
-      'pages/manager/mjOrderApproval',
-      'pages/manager/mjRejected',
-      'pages/confirmDistributor',
-      'pages/showCode',
-      'pages/estimate',
-      'pages/fillNum', // 填写物流单号
-      'pages/companyList', // 选择快递公司
-      'pages/negotiate',
-      'pages/logistics',
-      'pages/returns/refundDetail',
-      'pages/returns/refundStatus',
-      'pages/storeChoose',
-      'pages/returnGoods', // 经销商退换货
-      'pages/fillNumDealer', // 经销商退货物流详情
-      'pages/audit/refundAudit',
-      'pages/audit/sendGoodsInfo',
-      'pages/invoice/invoiceList',
-      'pages/invoice/orderInvoiceList',
-      'pages/invoice/invoiceInfo',
-      'pages/invoice/invoiceLast',
-      'pages/invoice/editInvoice',
-      'pages/sendOrder' // 客户自提
+      'pages/test'
     ],
     window: {
       backgroundTextStyle: 'dark',
@@ -339,9 +292,9 @@ export default class extends wepy.app {
         }
       }
     })
-    this.changeTabbar()
-    this.showShopRedDot()
-    this.initArea()
+    // this.changeTabbar()
+    // this.showShopRedDot()
+    // this.initArea()
   }
 
   onShow (opt) {

@@ -1,32 +1,282 @@
 <style lang="scss">
-  ::-webkit-scrollbar {
-    width: 0;
-    height: 0;
-    color: transparent;
+  @import "../css/common";
+
+  .customerShopCart {
+    .no-data {
+      margin-top: torpx(215);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .img {
+        height: torpx(188);
+        width: torpx(188);
+        border-radius: 50%;
+        overflow: hidden;
+        background: #e9e9e9;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        & > image {
+          width: torpx(87);
+          height: torpx(83);
+        }
+      }
+      .tip1 {
+        color: #333333;
+        font-size: torpx(30);
+        margin: torpx(37) 0 torpx(16) 0;
+      }
+      .tip2 {
+        color: #999999;
+        font-size: torpx(30);
+      }
+    }
+    .list-container {
+      padding: torpx(20) 0;
+      .list {
+        padding-bottom: 86px;
+      }
+      .item {
+        background: #ffffff;
+        padding: torpx(30) torpx(20);
+        display: flex;
+        position: relative;
+        &::after {
+          content: ' ';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          height: 1px;
+          transform: translateY(0.5);
+          background: #eeeeee;
+        }
+      }
+      .c {
+        display: flex;
+        align-items: center;
+      }
+      .good-image {
+        width: 184rpx;
+        height: 184rpx;
+        margin: 0 torpx(20);
+        background: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10rpx;
+        overflow: hidden;
+        image {
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        .name {
+          color: #333333;
+          font-size: 24rpx;
+          line-height: 34rpx;
+          height: 68rpx;
+        }
+        .desc {
+          color: #757575;
+          font-size: 20rpx;
+          line-height: 34rpx;
+        }
+        .b {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
+          margin-top: 42rpx;
+        }
+        .price {
+          color: #f95822;
+          font-size: 30rpx;
+          margin-bottom: torpx(10);
+        }
+        .good-step-view {
+          display: flex;
+          /*width: 100%;*/
+          flex-direction: row-reverse;
+        }
+      }
+      .del-good {
+        width: 70px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: #ff0000;
+        color: #ffffff;
+        font-size: 28rpx;
+        height: 100%;
+        image{
+          width: 39rpx;
+          height: 41rpx;
+          margin-top: 22rpx;
+        }
+      }
+    }
+    .bottom {
+      .all {
+        padding-left: torpx(20);
+      }
+      &.isPx {
+      }
+    }
+    .van-submit-bar__bar--safe {
+      padding-bottom: 0 !important;
+    }
+    .van-submit-bar {
+      /*.van-button {*/
+        /*background-color: #cf000e;*/
+        /*border: 1px solid #cf000e*/
+      /*}*/
+      .van-submit-bar__price {
+        color: #e64615;
+        font-size: torpx(26);
+      }
+    }
+    .tip {
+      color: #333333;
+      .tip-choose {
+        text-decoration: underline;
+      }
+      .red {
+        color: #cf000e;
+      }
+    }
+    .van-stepper__input-wrapper{
+      width: 72rpx;
+      height: 40rpx;
+      font-size: 24rpx;
+    }
+    .van-stepper__plus, .van-stepper__minus{
+      width: 44rpx;
+      height: 40rpx;
+      font-size: 24rpx;
+    }
+    .van-submit-bar__button button {
+      width:192rpx;
+      height:80rpx;
+      line-height:80rpx;
+      margin-right:24rpx;
+      border-radius:40rpx;
+      background-color:#ff4032 !important;
+      border:none !important;
+      font-size: 32rpx;
+    }
   }
+  .van-submit-bar__bar {
+    position: relative;
+    .payButton {
+      width: 110px;
+      height: 110px;
+      position: absolute;
+      background-color: transparent;
+      right: 0;
+      top: 0;
+      z-index: 9999;
+    }
+  }
+
 </style>
 <template>
-  <view class="page-container {{isPx ? 'is-px' : ''}}">
-    <block wx:if="{{type == 1}}">
-      <customershopcart></customershopcart>
-    </block>
-    <block wx:elif="{{type == 2}}">
-      <managershopcart></managershopcart>
-    </block>
-    <block wx:else>
-    </block>
+  <view class="customerShopCart">
+    <!--<view class="no-data" wx:if="{{list.length <= 0}}">
+      <view class="img">
+        <image src="../images/no_shop.png"></image>
+      </view>
+      <text class="tip1">你购物车里还没有商品</text>
+      <text class="tip2">快去逛逛吧!</text>
+    </view>-->
+    <scroll-view scroll-y style="height: 100vmax">
+      <view class="list-container">
+        <view class="list">
+          <van-checkbox-group value="{{ result }}" bind:change="onChange">
+            <block wx:for="{{8}}" wx:key="unique">
+              <van-swipe-cell
+                data-index="1"
+                right-width="{{ 70 }}"
+                bind:click="delGood"
+              >
+                <view class="item" @tap="gotoInfo({{ item.id }})">
+                  <view
+                    class="c"
+                    catchtap="loop"
+                  >
+                    <van-checkbox
+                      checked-color="#ff0000"
+                      name="123"
+                    >
+                    </van-checkbox>
+                  </view>
+                  <view class="good-image">
+                    <image mode="aspectFit" src="../images/1_03.png"></image>
+                  </view>
+                  <view class="content">
+                    <view class="a">
+                      <view class="name ellipsis-2">蒙古包特产马奶酒互动式疏堵是地负海涵烧烤活动啊蒙古包特产马奶酒互动式疏堵是地负海涵烧烤活动啊</view>
+                      <view class="desc ellipsis-1">2瓶1000ml【送小瓶品尝酒】</view>
+                    </view>
+                    <view class="b">
+                      <view class="price">￥2222</view>
+                      <view class="good-step-view">
+                        <van-stepper
+                          custom-class="good-step"
+                          min="1"
+                          max="99"
+                          value="8"
+                          integer="{{true}}"
+                          catchtap="loop"
+                          bind:change="onNumChange"
+                          data-index="1"
+                        />
+                      </view>
+                    </view>
+                  </view>
+                </view>
+                <view slot="right" class="del-good">
+                  <text>删除</text>
+                  <image src="../images/images_0857/icon01.png"></image>
+                </view>
+              </van-swipe-cell>
+            </block>
+          </van-checkbox-group>
+        </view>
+      </view>
+    </scroll-view>
+    <van-submit-bar
+      custom-class="bottom {{isIpx ? 'isPx' : ''}}"
+      price="{{ totalAmount }}"
+      button-text="{{subText}}"
+      disabled="{{subText == '结算'}}"
+    >
+      <view class="all">
+        <van-checkbox
+          checked-color="#ff0000"
+          value="{{ allChecked }}"
+          bind:change="allChange"
+        >
+          全选
+        </van-checkbox>
+      </view>
+      <form report-submit bindsubmit="goPay">
+        <button  class="payButton" form-type="submit"></button>
+      </form>
+    </van-submit-bar>
   </view>
 </template>
-
 <script>
 import wepy from 'wepy'
 import lf from 'lf'
-import CustomerShopCart from '../components/customerShopCart'
-import managerShopCart from '../components/managerShopCart'
-import navbar from '../components/navbar'
-import commonMixin from '../mixins/common'
 
-export default class ShopCart extends wepy.page {
+export default class CustomerShopCart extends wepy.page {
   config = {
     navigationBarTitleText: '购物车',
     disableScroll: true,
@@ -41,47 +291,225 @@ export default class ShopCart extends wepy.page {
       'van-submit-bar': '/components/vant/submit-bar/index'
     }
   }
-  mixins = [commonMixin]
-  components = {
-    customershopcart: CustomerShopCart,
-    managershopcart: managerShopCart,
-    navbar: navbar
-  }
+  props = {}
   data = {
-    type: 1
+    isIpx: false,
+    timeEvent: null,
+    allChecked: false,
+    list: [],
+    result: [],
+    store: {},
+    tip: false
   }
-  computed = {
 
-  }
-  methods = {
-    changeOrder () {
+  computed = {
+    subText () {
+      let l = 0
+      this.result.forEach(v => {
+        l++
+      })
+      if (l === 0) {
+        return '去结算'
+      }
+      return `去结算(${l})`
+    },
+    totalAmount () {
+      let r = 0
+      let index = -1
+      this.result.forEach(v => {
+        index = this.getIndexById(v)
+        if (index > -1) {
+          r += lf.mult(+this.list[index].num, +this.list[index].goods_price)
+        }
+      })
+      return lf.mult(r, 100)
     }
   }
   events = {}
-  onLoad () {
-    this.type = lf.user.getRole() >= 50 ? 2 : 1
-  }
-  onShow () {
-    wepy.$instance.showOrderRedDot()
-    this.type = lf.user.getRole() >= 50 ? 2 : 1
-    this.$parent.changeTabbar()
-    this.invokeShopCart('init')
-    setTimeout(() => {
-      wepy.hideTabBarRedDot({
-        index: 2
+  methods = {
+    updateStore () {
+      wepy.navigateTo({
+        url: 'storeChoose'
       })
-    }, 0)
-  }
-  onHide () {
-    wepy.$instance.showShopRedDot()
+    },
+    loop () {},
+    delGood (event) {
+      if (event.detail !== 'right') {
+        return
+      }
+      const id = event.currentTarget.dataset.index
+      const index = this.getIndexById(id)
+      const rIndex = this.result.findIndex(v => {
+        return v === id.toString()
+      })
+      if (rIndex > -1) {
+        this.result.splice(rIndex, 1)
+        if (this.result.length === 0) {
+          this.allChecked = false
+        }
+      }
+      // const list = JSON.parse(JSON.stringify(this.list))
+      // list.splice(index, 1)
+      // this.list = list
+      this.list.splice(index, 1)
+      this.multSaveList()
+      this.$apply()
+    },
+    gotoInfo (goodsId) {
+      wx.navigateTo({
+        url: 'wineInfo?goodsId=' + goodsId
+      })
+    },
+    onNumChange (event) {
+      let index = event.currentTarget.dataset.index
+      index = this.getIndexById(index)
+      this.list[index].num = event.detail
+      this.multSaveList()
+    },
+    onChange (event) {
+      this.result = event.detail
+      if (this.result.length === this.list.length) {
+        this.allChecked = true
+      } else {
+        this.allChecked = false
+      }
+      this.changeListChecked()
+    },
+    allChange (event) {
+      if (this.result.length === this.list.length) {
+        this.result = []
+        this.allChecked = false
+      } else {
+        this.result = this.list.map((v, i) => {
+          return v.id
+        })
+        this.allChecked = true
+      }
+      this.changeListChecked()
+    },
+    async goPay (e) {
+      let formId = e.detail.formId
+      if (!lf.user.isLogin()) {
+        wepy.navigateTo({
+          url: 'login'
+        })
+        return
+      }
+      try {
+        if (lf.user.getGoodList().length <= 0) {
+          return lf.toast('请先加入商品')
+        }
+        lf.showLoading()
+        let params = lf.user.getChooseGoodList().map(v => {
+          return {
+            goods_id: v.id,
+            number: v.num
+          }
+        })
+        let dealerId = ''
+        if (this.store && this.tip) {
+          dealerId = this.store.id
+        }
+        const res = await lf.net.post('/Api/Order/order_init', {
+          dealer_id: dealerId,
+          goods_json: JSON.stringify(params),
+          form_id: formId
+        })
+        if (res.code !== 200) {
+          lf.toast(res.info)
+          return
+        }
+        lf.user.clearShop()
+        wepy.navigateTo({
+          url: `myOrderInfo?orderId=${res.data.id}&shop=shop`
+        })
+        lf.hideLoading()
+      } catch (e) {
+        console.error(e)
+        lf.toast(e.info || e.toString())
+        lf.hideLoading()
+      }
+    }
   }
 
-  invokeShopCart (methodName) {
-    if (this.type === 1) {
-      this.$invoke('customershopcart', methodName)
-    } else {
-      this.$invoke('managershopcart', methodName)
+  getIndexById (id) {
+    const index = this.list.findIndex(v => {
+      return v.id.toString() === id.toString()
+    })
+    return index
+  }
+
+  changeListChecked () {
+    this.list.forEach((v, i) => {
+      if (this.result.indexOf(v.id) > -1) {
+        v.checked = true
+      } else {
+        v.checked = false
+      }
+    })
+    this.multSaveList()
+  }
+
+  multSaveList () {
+    if (this.timeEvent) {
+      clearTimeout(this.timeEvent)
+      this.timeEvent = null
     }
+    this.timeEvent = setTimeout(this.saveGoodList.bind(this), 500)
+  }
+
+  saveGoodList () {
+    lf.user.setGoodList(this.list)
+  }
+
+  getGoodList () {
+    this.list = []
+    this.result = []
+    // this.$apply()
+    const res = lf.user.getGoodList()
+    this.list = res
+    this.list.forEach((v, i) => {
+      if (v.checked) {
+        this.result.push(v.id)
+      }
+    })
+    if (this.result.length === this.list.length && this.result.length !== 0) {
+      this.allChecked = true
+    } else {
+      this.allChecked = false
+    }
+    this.$apply()
+  }
+
+  async initStore () {
+    try {
+      const res = await lf.net.post('/Api/public/system_config', {})
+      if (res.data && res.data.dealer_choice_is_open === 1) {
+        this.tip = 'show'
+        const store = lf.user.getStore()
+        if (store && store.id) {
+          this.store = store
+        }
+      } else {
+        this.tip = false
+      }
+      this.$apply()
+    } catch (e) {
+      console.error(e)
+      lf.toast(e.info || e.toString())
+    }
+  }
+
+  init () {
+    this.getGoodList()
+    this.initStore()
+  }
+
+  onLoad () {
+    this.isIpx = wepy.$instance.globalData.isIpx
+  }
+
+  onShow () {
   }
 }
 </script>
