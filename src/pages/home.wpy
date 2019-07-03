@@ -221,7 +221,7 @@
   }
 </style>
 <template>
-  <view class="homeContainer ">
+  <view class="homeContainer">
     <view class="topBar">
       <view class="scan"><image src="../images/icon5.png" alt=""></image></view>
       <view class="input-box">
@@ -315,6 +315,34 @@
         </view>
       </view>
     </view>
+    <view class="area-1 clearfix">
+      <view class="title">
+        <image src="../images/img1.png" alt=""></image>
+        <text>热卖商品</text>
+      </view>
+      <view class="area-1-container">
+        <view class="left-box">
+          <image mode="aspectFit" src="../images/icon1.png" alt=""></image>
+        </view>
+        <view class="right-box">
+          <view class="right-box-1">
+            <image src="../images/icon1.png" alt=""></image>
+          </view>
+          <view class="right-box-2">
+            <view class="inner">
+              <image src="../images/icon1.png" alt=""></image>
+            </view>
+            <view class="inner">
+              <image src="../images/icon1.png" alt=""></image>
+              <view class="mask">
+                <view class="text">查看更多</view>
+                <view class="icon-box"><image src="../images/icon16.png" alt=""></image></view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
   </view>
 </template>
 
@@ -328,7 +356,7 @@ export default class Home extends wepy.page {
     navigationBarBackgroundColor: '#fff',
     navigationBarTitleText: '首页',
     navigationBarTextStyle: 'black',
-    disableScroll: true,
+    // disableScroll: true,
     usingComponents: {
       'van-search': '/components/vant/search/index',
       'van-icon': '/components/vant/icon/index',
