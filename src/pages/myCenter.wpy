@@ -121,7 +121,7 @@
             align-items: center;
             justify-content: flex-start;
             .image-box{
-              background: rgba(255,0,0,0.1);
+              /*background: rgba(255,0,0,0.1);*/
               width: torpx(56);
               height: torpx(56);
               image{
@@ -180,7 +180,7 @@
           align-items: center;
           justify-content: flex-start;
           .image-box{
-            background: rgba(255,0,0,0.1);
+            /*background: rgba(255,0,0,0.1);*/
             width: torpx(56);
             height: torpx(56);
             position: relative;
@@ -231,7 +231,7 @@
           width: 25%;
           margin: torpx(25) 0;
           .image-box{
-            background: rgba(255,0,0,0.1);
+            /*background: rgba(255,0,0,0.1);*/
             width: torpx(56);
             height: torpx(56);
             image{
