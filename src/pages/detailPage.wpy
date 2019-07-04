@@ -8,12 +8,9 @@
     height: 0;
     color: transparent;
   }
-  .stepCount-container{
-    min-height: 100%;
-  }
 </style>
 <template>
-  <web-view src="http://huoyuancheng.wurenyulecang.com:10101/#/stepCount"></web-view>
+  <web-view src="http://huoyuancheng.wurenyulecang.com:10101/#/detailPage"></web-view>
 </template>
 
 <script>
@@ -24,7 +21,7 @@ export default class CategoryPage extends wepy.page {
   config = {
     backgroundTextStyle: 'light',
     navigationBarBackgroundColor: '#fff',
-    navigationBarTitleText: '计步',
+    navigationBarTitleText: '商品详情',
     navigationBarTextStyle: 'black',
     usingComponents: {
     }

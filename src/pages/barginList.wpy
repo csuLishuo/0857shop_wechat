@@ -10,11 +10,181 @@
   }
   .barginList-container{
     min-height: 100%;
+    .swiperBox{
+      height: 380rpx;
+      overflow: hidden;
+      swiper {
+        height: 100%;
+      }
+      .slide-image{
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .goodsList{
+      background: #fff;
+      padding-left: torpx(24);
+      .wrapper{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: space-between;
+        background: #fff;
+        padding: torpx(22) torpx(24) torpx(22) 0;
+        border-bottom: torpx(1) solid #f0f0f0;
+        .image-box{
+          width: torpx(225);
+          height: torpx(225);
+          border-radius: torpx(6);
+          overflow: hidden;
+          image{
+            width: 100%;
+            height: 100%;
+          }
+        }
+        .right-box{
+          width: torpx(450);
+          position: relative;
+          .title{
+            font-size: torpx(28);
+            width: torpx(390);
+            line-height: torpx(38);
+            margin-top: torpx(16);
+            font-weight: bold;
+            color: #393939;
+          }
+          .des{
+            line-height: torpx(40);
+            font-size: torpx(22);
+            color: #7c7c7c;
+          }
+          .tag-box{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: flex-start;
+            .tag{
+              height: torpx(30);
+              line-height: torpx(30);
+              padding: 0 torpx(10);
+              border: torpx(1) solid #ff3e31;
+              border-radius: torpx(10);
+              color: #ff3e31;
+              font-size: torpx(20);
+            }
+          }
+          .people{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            align-items: center;
+            justify-content: flex-start;
+            .image-box{
+              width: torpx(52);
+              height: torpx(52);
+              border-radius: 50%;
+              overflow: hidden;
+              margin-right: torpx(12);
+              image{
+                width: 100%;
+                height: 100%;
+              }
+            }
+            .text{
+              font-size: torpx(22);
+              color: #7e7e7e;
+            }
+          }
+          .price-box{
+            margin-top: torpx(30);
+            .price{
+              color: #ff3e31;
+              font-size: torpx(24);
+              font-weight: bold;
+              text{
+                font-size: torpx(34);
+                vertical-align: bottom;
+              }
+            }
+            .info{
+              color: #bababa;
+              font-size: torpx(18);
+            }
+          }
+          .btn{
+            width: torpx(153);
+            height: torpx(58);
+            line-height: torpx(58);
+            background-color: #ff3f31;
+            background-blend-mode: normal, normal;
+            border-radius: torpx(29);
+            text-align: center;
+            font-size: torpx(28);
+            color: #fff;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+          }
+        }
+      }
+    }
   }
 </style>
 <template>
   <view class="barginList-container">
-
+    <view class="swiperBox">
+      <swiper
+        indicator-dots="{{indicatorDots}}"
+        autoplay="{{autoplay}}"
+        interval="{{interval}}"
+        duration="{{duration}}"
+        indicator-dots="true"
+        indicator-color="rgba(255,255,255,0.5)"
+        indicator-active-color="#fff"
+      >
+        <block wx:for="{{images}}">
+          <swiper-item>
+            <image src="{{item}}" key="unique" class="slide-image" width="355" height="150" />
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+    <view class="goodsList">
+      <view class="wrapper" bindtap="goDetail">
+        <view class="image-box"><image src="../images/icon3.png" alt=""></image></view>
+        <view class="right-box">
+          <view class="title ellipsis-2">【立体小脸妆出来】RIRE双头阴影高光修容棒3g+3g立体小脸妆出来】RIRE双头阴影高光修容棒3g+3g</view>
+          <view class="people">
+            <view class="image-box"><image src="../images/img2.png" alt=""></image></view>
+            <view class="image-box"><image src="../images/img1.png" alt=""></image></view>
+            <view class="image-box"><image src="../images/img1.png" alt=""></image></view>
+            <view class="text">135人正在砍价</view>
+          </view>
+          <view class="price-box">
+            <view class="price">￥<text>599.00</text></view>
+          </view>
+          <view class="btn">砍价免费拿</view>
+        </view>
+      </view>
+      <view class="wrapper">
+        <view class="image-box"><image src="../images/icon3.png" alt=""></image></view>
+        <view class="right-box">
+          <view class="title ellipsis-2">【立体小脸妆出来】RIRE双头阴影高光修容棒3g+3g立体小脸妆出来】RIRE双头阴影高光修容棒3g+3g</view>
+          <view class="people">
+            <view class="image-box"><image src="../images/img2.png" alt=""></image></view>
+            <view class="image-box"><image src="../images/img1.png" alt=""></image></view>
+            <view class="image-box"><image src="../images/img1.png" alt=""></image></view>
+            <view class="text">135人正在砍价</view>
+          </view>
+          <view class="price-box">
+            <view class="price">￥<text>599.00</text></view>
+          </view>
+          <view class="btn">砍价免费拿</view>
+        </view>
+      </view>
+    </view>
   </view>
 </template>
 
@@ -29,36 +199,36 @@ export default class CategoryPage extends wepy.page {
     navigationBarTitleText: '砍价',
     navigationBarTextStyle: 'black',
     usingComponents: {
-      'van-search': '/components/vant/search/index',
-      'van-icon': '/components/vant/icon/index',
-      'van-popup': '/components/vant/popup/index',
-      'van-cell-group': '/components/vant/cell-group/index',
-      'van-swipe-cell': '/components/vant/swipe-cell/index'
     }
   }
   components = {
   }
   data = {
-    type: 1
+    indicatorDots: false,
+    autoplay: true,
+    interval: 3000,
+    duration: 1000,
+    images: [
+      '../images/icon1.png',
+      '../images/icon1_on.png',
+      '../images/icon2.png',
+      '../images/icon3.png'
+    ]
   }
   computed = {}
-  methods = {}
+  methods = {
+    goDetail () {
+      wepy.navigateTo({
+        url: 'detail_bargin'
+      })
+    }
+  }
   events = {}
 
   onLoad () {
   }
 
   onShow () {
-    wepy.$instance.showOrderRedDot()
-    if (this.$parent.globalData.isKD) {
-      this.type = 2
-      wx.setNavigationBarTitle({
-        title: '出单'
-      })
-      this.$invoke('navbar', 'init')
-    } else {
-      this.type = 1
-    }
   }
 }
 </script>

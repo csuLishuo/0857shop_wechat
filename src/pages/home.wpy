@@ -443,7 +443,7 @@
       >
         <block wx:for="{{images}}">
           <swiper-item>
-            <image src="{{item}}" class="slide-image" width="355" height="150" />
+            <image src="{{item}}" key="unique" class="slide-image" width="355" height="150" />
           </swiper-item>
         </block>
       </swiper>
@@ -582,7 +582,7 @@
       </scroll-view>
     </view>
     <view class="listbox">
-        <view class="wrapper">
+        <view class="wrapper" bindtap="goDetail">
           <view class="image-box"><image src="../images/icon3.png" alt=""></image></view>
           <view class="right-box">
             <view class="title ellipsis-2">【立体小脸妆出来】RIRE双头阴影高光修容棒3g+3g立体小脸妆出来】RIRE双头阴影高光修容棒3g+3g</view>
@@ -665,6 +665,11 @@ export default class Home extends wepy.page {
           url: 'stepCount'
         })
       }
+    },
+    goDetail () {
+      wepy.navigateTo({
+        url: 'detailPage'
+      })
     },
     more () {
       wepy.showToast({

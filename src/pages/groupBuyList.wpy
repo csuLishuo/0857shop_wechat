@@ -10,11 +10,194 @@
   }
   .groupBuyList-container{
     min-height: 100%;
+    .scroll_box{
+      background: #fff;
+      overflow: hidden;
+      white-space: nowrap;
+      scroll-view{
+        height: torpx(86);
+        padding-left: torpx(30);
+        .items{
+          display: inline-block;
+          margin-right: torpx(30);
+          font-size: torpx(26);
+          line-height: torpx(86);
+          &.on{
+            color: #000000;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+    .swiperBox{
+      height: 380rpx;
+      overflow: hidden;
+      swiper {
+        height: 100%;
+      }
+      .slide-image{
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .goodsList{
+      background: #fff;
+      padding-left: torpx(24);
+      .wrapper{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: space-between;
+        background: #fff;
+        padding: torpx(22) torpx(24) torpx(22) 0;
+        border-bottom: torpx(1) solid #f0f0f0;
+        .image-box{
+          width: torpx(225);
+          height: torpx(225);
+          border-radius: torpx(6);
+          overflow: hidden;
+          image{
+            width: 100%;
+            height: 100%;
+          }
+        }
+        .right-box{
+          width: torpx(450);
+          position: relative;
+          .title{
+            font-size: torpx(28);
+            width: torpx(390);
+            line-height: torpx(38);
+            margin-top: torpx(16);
+            font-weight: bold;
+            color: #393939;
+          }
+          .des{
+            line-height: torpx(40);
+            font-size: torpx(22);
+            color: #7c7c7c;
+          }
+          .tag-box{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: flex-start;
+            .tag{
+              height: torpx(30);
+              line-height: torpx(30);
+              padding: 0 torpx(10);
+              border: torpx(1) solid #ff3e31;
+              border-radius: torpx(10);
+              color: #ff3e31;
+              font-size: torpx(20);
+            }
+          }
+          .price-box{
+            margin-top: torpx(30);
+            .price{
+              color: #ff3e31;
+              font-size: torpx(24);
+              font-weight: bold;
+              text{
+                font-size: torpx(34);
+                vertical-align: bottom;
+              }
+            }
+            .info{
+              color: #bababa;
+              font-size: torpx(18);
+            }
+          }
+          .btn{
+            width: torpx(153);
+            height: torpx(58);
+            line-height: torpx(58);
+            background-image: linear-gradient(-90deg, #ff2736 0%, #ff2b71 100%), linear-gradient(#ff3f31, #ff3f31);
+            background-blend-mode: normal, normal;
+            border-radius: torpx(29);
+            text-align: center;
+            font-size: torpx(28);
+            color: #fff;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+          }
+        }
+      }
+    }
   }
 </style>
 <template>
   <view class="groupBuyList-container">
-
+    <view class="scroll_box">
+      <scroll-view scroll-x>
+        <view class="items on">热门</view>
+        <view class="items">热门</view>
+        <view class="items">热门</view>
+        <view class="items">热门</view>
+        <view class="items">热门</view>
+        <view class="items">热门</view>
+        <view class="items">热门</view>
+        <view class="items">热门</view>
+        <view class="items">热门</view>
+        <view class="items">热门</view>
+        <view class="items">热门</view>
+        <view class="items">热门</view>
+        <view class="items">热门</view>
+        <view class="items">热门</view>
+      </scroll-view>
+    </view>
+    <view class="swiperBox">
+      <swiper
+        indicator-dots="{{indicatorDots}}"
+        autoplay="{{autoplay}}"
+        interval="{{interval}}"
+        duration="{{duration}}"
+        indicator-dots="true"
+        indicator-color="rgba(255,255,255,0.5)"
+        indicator-active-color="#fff"
+      >
+        <block wx:for="{{images}}">
+          <swiper-item>
+            <image src="{{item}}" key="unique" class="slide-image" width="355" height="150" />
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+    <view class="goodsList">
+      <view class="wrapper" bindtap="goDetail">
+        <view class="image-box"><image src="../images/icon3.png" alt=""></image></view>
+        <view class="right-box">
+          <view class="title ellipsis-2">【立体小脸妆出来】RIRE双头阴影高光修容棒3g+3g立体小脸妆出来】RIRE双头阴影高光修容棒3g+3g</view>
+          <view class="des">已售2008件/库存10000件</view>
+          <view class="tag-box">
+            <view class="tag">满38减10</view>
+          </view>
+          <view class="price-box">
+            <view class="price">￥<text>599.00</text></view>
+            <view class="info">已售1389/剩2000</view>
+          </view>
+          <view class="btn">去开团</view>
+        </view>
+      </view>
+      <view class="wrapper">
+        <view class="image-box"><image src="../images/icon3.png" alt=""></image></view>
+        <view class="right-box">
+          <view class="title ellipsis-2">【立体小脸妆出来】RIRE双头阴影高光修容棒3g+3g立体小脸妆出来】RIRE双头阴影高光修容棒3g+3g</view>
+          <view class="des">已售2008件/库存10000件</view>
+          <view class="tag-box">
+            <view class="tag">满38减10</view>
+          </view>
+          <view class="price-box">
+            <view class="price">￥<text>599.00</text></view>
+            <view class="info">已售1389/剩2000</view>
+          </view>
+          <view class="btn">去开团</view>
+        </view>
+      </view>
+    </view>
   </view>
 </template>
 
@@ -34,10 +217,25 @@ export default class CategoryPage extends wepy.page {
   components = {
   }
   data = {
-    type: 1
+    indicatorDots: false,
+    autoplay: true,
+    interval: 3000,
+    duration: 1000,
+    images: [
+      '../images/icon1.png',
+      '../images/icon1_on.png',
+      '../images/icon2.png',
+      '../images/icon3.png'
+    ]
   }
   computed = {}
-  methods = {}
+  methods = {
+    goDetail () {
+      wepy.navigateTo({
+        url: 'detail_groupBuy'
+      })
+    }
+  }
   events = {}
 
   onLoad () {

@@ -75,8 +75,13 @@ export default class extends wepy.app {
       'pages/lottery', // 抽奖
       'pages/mission', // 任务
       'pages/groupBuyList', // 团购
+      'pages/detail_groupBuy', // 团购商品详情
       'pages/seckillList', // 秒杀
+      'pages/detail_seckill', // 秒杀商品详情
       'pages/barginList', // 砍价
+      'pages/detail_bargin', // 砍价商品详情
+      'pages/stepCount', // 计步
+      'pages/detailPage', // 商品详情
       'pages/test'
     ],
     window: {

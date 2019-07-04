@@ -10,11 +10,262 @@
   }
   .seckillList-container{
     min-height: 100%;
+    .area-1{
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      background-image: linear-gradient(-90deg, #ff2736 0%, #ff2b71 100%), linear-gradient(#ff3e31, #ff3e31);
+      background-blend-mode: normal, normal;
+      padding: torpx(20) 0;
+      .wrapper{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .time{
+          font-size: torpx(36);
+          font-weight: bold;
+          color: #fff;
+          opacity: 0.6;
+        }
+        .des{
+          font-size: torpx(22);
+          color: #fffefe;
+          opacity: 0.6;
+        }
+        &.on{
+          .time{
+            font-size: torpx(46);
+            opacity: 1;
+          }
+          .des{
+            height: torpx(32);
+            line-height: torpx(32);
+            width: torpx(139);
+            border-radius: torpx(16);
+            background: rgba(255, 255, 255, 0.9);
+            text-align: center;
+            color: #fd1529;
+            opacity: 1;
+          }
+        }
+      }
+    }
+    .area-2{
+      height: torpx(66);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 torpx(24);
+      background: #fff;
+      border-bottom: torpx(1) solid #e0e0e0;
+      .left-text{
+        font-size: torpx(26);
+        color: #393939;
+      }
+      .right-box{
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        .text, .time-text{
+          font-size: torpx(26);
+          color: #707070;
+        }
+        .text{
+          margin-right: torpx(20);
+        }
+        .time-text{
+          margin: 0 torpx(5);
+        }
+        .time-box{
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          .time{
+            padding: torpx(2);
+            line-height: torpx(32);
+            font-size: torpx(28);
+            color: #fff;
+            background: #464553;
+            border-radius: torpx(5);
+          }
+        }
+      }
+    }
+    .goodsList{
+      background: #fff;
+      padding-left: torpx(24);
+      .wrapper{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: space-between;
+        background: #fff;
+        padding: torpx(22) torpx(24) torpx(22) 0;
+        border-bottom: torpx(1) solid #f0f0f0;
+        .image-box{
+          width: torpx(225);
+          height: torpx(225);
+          border-radius: torpx(6);
+          overflow: hidden;
+          image{
+            width: 100%;
+            height: 100%;
+          }
+        }
+        .right-box{
+          width: torpx(450);
+          position: relative;
+          .title{
+            font-size: torpx(28);
+            width: torpx(390);
+            line-height: torpx(38);
+            margin-top: torpx(16);
+            font-weight: bold;
+            color: #393939;
+          }
+          .des{
+            line-height: torpx(40);
+            font-size: torpx(22);
+            color: #7c7c7c;
+            text{
+              color: #ff273d;
+            }
+          }
+          .tag-box{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: flex-start;
+            .tag{
+              height: torpx(30);
+              line-height: torpx(30);
+              padding: 0 torpx(10);
+              border: torpx(1) solid #ff3e31;
+              border-radius: torpx(10);
+              color: #ff3e31;
+              font-size: torpx(20);
+            }
+          }
+          .bar{
+            width: torpx(200);
+            height: torpx(28);
+            border-radius: torpx(14);
+            background-color: #ffcbcb;
+            position: relative;
+            text{
+              position: absolute;
+              height: torpx(28);
+              border-radius: torpx(14);
+              width: 50%;
+              left: 0;
+              top: 0;
+              background-image: linear-gradient(-90deg, #ff2736 0%, #ff2b71 100%), linear-gradient(#ffcbcb, #ffcbcb);
+              background-blend-mode: normal, normal;
+            }
+          }
+          .price-box{
+            margin-top: torpx(30);
+            .price{
+              color: #ff3e31;
+              font-size: torpx(24);
+              font-weight: bold;
+              text{
+                font-size: torpx(34);
+                vertical-align: bottom;
+              }
+            }
+            .price-origin{
+              color: #bababa;
+              font-size: torpx(18);
+              text-decoration: line-through;
+            }
+          }
+          .btn{
+            width: torpx(153);
+            height: torpx(58);
+            line-height: torpx(58);
+            background: #ff3f31;
+            background-blend-mode: normal, normal;
+            border-radius: torpx(29);
+            text-align: center;
+            font-size: torpx(28);
+            color: #fff;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+          }
+        }
+      }
+    }
   }
 </style>
 <template>
   <view class="seckillList-container">
-
+    <view class="area-1">
+      <view class="wrapper">
+        <view class="time">00:00</view>
+        <view class="des">已结束</view>
+      </view>
+      <view class="wrapper">
+        <view class="time">00:00</view>
+        <view class="des">已结束</view>
+      </view>
+      <view class="wrapper on">
+        <view class="time">00:00</view>
+        <view class="des">抢购进行中</view>
+      </view>
+      <view class="wrapper">
+        <view class="time">00:00</view>
+        <view class="des">已结束</view>
+      </view>
+      <view class="wrapper">
+        <view class="time">00:00</view>
+        <view class="des">已结束</view>
+      </view>
+    </view>
+    <view class="area-2">
+      <view class="left-text">抢购中 先下单先得哦</view>
+      <view class="right-box">
+        <view class="text">距结束</view>
+        <view class="time-box">
+          <view class="time">05</view>
+          <view class="time-text">:</view>
+          <view class="time">05</view>
+          <view class="time-text">:</view>
+          <view class="time">05</view>
+        </view>
+      </view>
+    </view>
+    <view class="goodsList">
+      <view class="wrapper" bindtap="goDetail">
+        <view class="image-box"><image src="../images/icon3.png" alt=""></image></view>
+        <view class="right-box">
+          <view class="title ellipsis-2">【立体小脸妆出来】RIRE双头阴影高光修容棒3g+3g立体小脸妆出来】RIRE双头阴影高光修容棒3g+3g</view>
+          <view class="des">已购2008件<text>/剩余10000件</text></view>
+          <view class="bar"><text></text></view>
+          <view class="price-box">
+            <view class="price-origin">￥599.00</view>
+            <view class="price">￥<text>599.00</text></view>
+          </view>
+          <view class="btn">马上抢购</view>
+        </view>
+      </view>
+      <view class="wrapper">
+        <view class="image-box"><image src="../images/icon3.png" alt=""></view>
+        <view class="right-box">
+          <view class="title ellipsis-2">【立体小脸妆出来】RIRE双头阴影高光修容棒3g+3g立体小脸妆出来】RIRE双头阴影高光修容棒3g+3g</view>
+          <view class="des">已购2008件<text>/剩余10000件</text></view>
+          <view class="bar"><text></text></view>
+          <view class="price-box">
+            <view class="price-origin">￥599.00</view>
+            <view class="price">￥<text>599.00</text></view>
+          </view>
+          <view class="btn">马上抢购</view>
+        </view>
+      </view>
+    </view>
   </view>
 </template>
 
@@ -37,7 +288,13 @@ export default class CategoryPage extends wepy.page {
     type: 1
   }
   computed = {}
-  methods = {}
+  methods = {
+    goDetail () {
+      wepy.navigateTo({
+        url: 'detail_seckill'
+      })
+    }
+  }
   events = {}
 
   onLoad () {
