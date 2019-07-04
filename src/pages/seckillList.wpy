@@ -8,13 +8,13 @@
     height: 0;
     color: transparent;
   }
-  .signIn-container{
+  .seckillList-container{
     min-height: 100%;
   }
 </style>
 <template>
-  <view class="signIn-container">
-    
+  <view class="seckillList-container">
+
   </view>
 </template>
 
@@ -29,11 +29,6 @@ export default class CategoryPage extends wepy.page {
     navigationBarTitleText: '秒杀',
     navigationBarTextStyle: 'black',
     usingComponents: {
-      'van-search': '/components/vant/search/index',
-      'van-icon': '/components/vant/icon/index',
-      'van-popup': '/components/vant/popup/index',
-      'van-cell-group': '/components/vant/cell-group/index',
-      'van-swipe-cell': '/components/vant/swipe-cell/index'
     }
   }
   components = {
@@ -49,16 +44,6 @@ export default class CategoryPage extends wepy.page {
   }
 
   onShow () {
-    wepy.$instance.showOrderRedDot()
-    if (this.$parent.globalData.isKD) {
-      this.type = 2
-      wx.setNavigationBarTitle({
-        title: '出单'
-      })
-      this.$invoke('navbar', 'init')
-    } else {
-      this.type = 1
-    }
   }
 }
 </script>

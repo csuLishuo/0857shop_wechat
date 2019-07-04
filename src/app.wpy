@@ -71,15 +71,18 @@ export default class extends wepy.app {
       'pages/categoryPage',
       'pages/shopCart',
       'pages/myCenter',
-      'pages/signIn',
-      'pages/groupBuyList',
-      'pages/seckillList',
+      'pages/signIn', // 签到
+      'pages/lottery', // 抽奖
+      'pages/mission', // 任务
+      'pages/groupBuyList', // 团购
+      'pages/seckillList', // 秒杀
+      'pages/barginList', // 砍价
       'pages/test'
     ],
     window: {
       backgroundTextStyle: 'dark',
       navigationBarBackgroundColor: '#ffffff',
-      navigationBarTitleText: '酒',
+      navigationBarTitleText: '0857主商城',
       navigationBarTextStyle: 'black'
     },
     tabBar: {

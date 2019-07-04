@@ -13,9 +13,7 @@
   }
 </style>
 <template>
-  <view class="signIn-container">
-    
-  </view>
+  <web-view src="http://huoyuancheng.wurenyulecang.com:10101/#/signIn"></web-view>
 </template>
 
 <script>

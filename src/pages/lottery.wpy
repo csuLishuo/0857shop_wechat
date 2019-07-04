@@ -8,14 +8,9 @@
     height: 0;
     color: transparent;
   }
-  .groupBuyList-container{
-    min-height: 100%;
-  }
 </style>
 <template>
-  <view class="groupBuyList-container">
-
-  </view>
+  <web-view src="http://huoyuancheng.wurenyulecang.com:10101/#/lottery"></web-view>
 </template>
 
 <script>
@@ -26,7 +21,7 @@ export default class CategoryPage extends wepy.page {
   config = {
     backgroundTextStyle: 'light',
     navigationBarBackgroundColor: '#fff',
-    navigationBarTitleText: '团购',
+    navigationBarTitleText: '抽奖',
     navigationBarTextStyle: 'black',
     usingComponents: {
     }
