@@ -218,6 +218,203 @@
         }
       }
     }
+    .area-2{
+      background: #fff;
+      margin: torpx(17) torpx(22);
+      border-radius: torpx(5);
+      overflow: hidden;
+      .area-2-container{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: flex-start;
+        justify-content: space-between;
+        .left-box{
+          width: torpx(260);
+          height: torpx(394);
+          display: flex;
+          flex-direction: column;
+          flex-wrap: nowrap;
+          align-items: flex-start;
+          justify-content: space-around;
+          border-right: 1px solid #f0f0f0;
+          .image-box{
+            width: 100%;
+            height: torpx(152);
+            image{
+              width: 100%;
+              height: 100%;
+            }
+          }
+          .title-box{
+            .title{
+              font-size: torpx(28);
+              line-height: torpx(40);
+              font-weight: bold;
+              padding-left: torpx(30);
+            }
+            .des{
+              padding-left: torpx(30);
+              font-size: torpx(26);
+              line-height: torpx(40);
+              color: #8e9198;
+            }
+            .time-box{
+              padding-left: torpx(30);
+              margin: torpx(10) 0;
+              display: flex;
+              flex-direction: row;
+              flex-wrap: nowrap;
+              align-items: center;
+              justify-content: flex-start;
+              text{
+                height: torpx(30);
+                background: #ff3e31;
+                padding: 0 torpx(5);
+                font-size: torpx(26);
+                color: #fff;
+              }
+              .icon{
+                font-style:normal;
+                color: #ff3e31;
+                font-size: torpx(26);
+                font-weight: bold;
+                margin: 0 torpx(5);
+              }
+            }
+          }
+        }
+        .right-box{
+          width: torpx(446);
+          height: torpx(394);
+          .right-box-1{
+            border-bottom: 1px solid #f0f0f0;
+          }
+          .right-box-1,.right-box-2{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            align-items: flex-start;
+            justify-content: space-between;
+            .inner{
+              position: relative;
+              width: torpx(223);
+              height: torpx(197);
+              .title{
+                font-size: torpx(28);
+                font-weight: bold;
+                padding-left: torpx(28);
+                line-height: torpx(84);
+                color: #f84f77;
+              }
+              .image-box{
+                width: 100%;
+                height: torpx(113);
+                image{
+                  width: 100%;
+                  height: 100%;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .area-3{
+      background: #fff;
+      overflow: hidden;
+      white-space: nowrap;
+      scroll-view{
+        height: torpx(86);
+        padding-left: torpx(30);
+        .items{
+          display: inline-block;
+          margin-right: torpx(30);
+          font-size: torpx(26);
+          line-height: torpx(86);
+          &.on{
+            color: #000000;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+    .listbox{
+        padding-left: torpx(24);
+        .wrapper{
+          display: flex;
+          flex-direction: row;
+          flex-wrap: nowrap;
+          align-items: center;
+          justify-content: space-between;
+          background: #fff;
+          padding: torpx(22) torpx(24) torpx(22) 0;
+          border-bottom: torpx(1) solid #f0f0f0;
+          .image-box{
+            width: torpx(225);
+            height: torpx(225);
+            border-radius: torpx(6);
+            overflow: hidden;
+            image{
+              width: 100%;
+              height: 100%;
+            }
+          }
+          .right-box{
+            width: torpx(450);
+            .title{
+              font-size: torpx(28);
+              width: torpx(390);
+              line-height: torpx(38);
+              margin-top: torpx(16);
+              font-weight: bold;
+              color: #393939;
+            }
+            .des{
+              line-height: torpx(40);
+              font-size: torpx(22);
+              color: #7c7c7c;
+            }
+            .tag-box{
+              display: flex;
+              flex-direction: row;
+              flex-wrap: wrap;
+              align-items: center;
+              justify-content: flex-start;
+              .tag{
+                height: torpx(30);
+                line-height: torpx(30);
+                padding: 0 torpx(10);
+                border: torpx(1) solid #ff981e;
+                border-radius: torpx(10);
+                color: #ff981e;
+                font-size: torpx(20);
+              }
+            }
+            .price-box{
+              margin-top: torpx(30);
+              display: flex;
+              flex-direction: row;
+              flex-wrap: wrap;
+              align-items: center;
+              justify-content: space-between;
+              .price{
+                color: #ff6c00;
+                font-size: torpx(24);
+                font-weight: bold;
+                span{
+                  font-size: torpx(34);
+                  vertical-align: bottom;
+                }
+              }
+              .info{
+                color: #bababa;
+                font-size: torpx(18);
+              }
+            }
+          }
+        }
+      }
   }
 </style>
 <template>
@@ -289,7 +486,7 @@
     </view>
     <view class="area-1 clearfix">
       <view class="title">
-        <image src="../images/img1.png" alt=""></image>
+        <image src="../images/image1.png" alt=""></image>
         <text>热卖商品</text>
       </view>
       <view class="area-1-container">
@@ -315,34 +512,90 @@
         </view>
       </view>
     </view>
-    <view class="area-1 clearfix">
-      <view class="title">
-        <image src="../images/img1.png" alt=""></image>
-        <text>热卖商品</text>
-      </view>
-      <view class="area-1-container">
+    <view class="area-2 clearfix">
+      <view class="area-2-container">
         <view class="left-box">
-          <image mode="aspectFit" src="../images/icon1.png" alt=""></image>
+          <view class="title-box">
+            <view class="title">限量秒杀</view>
+            <view class="des">3个整点9.9元秒杀</view>
+            <view class="time-box">
+              <text>05</text>
+              <view class="icon">:</view>
+              <text>05</text>
+              <view class="icon">:</view>
+              <text>05</text>
+            </view>
+          </view>
+          <view class="image-box">
+            <image src="../images/icon1.png" alt=""></image>
+          </view>
         </view>
         <view class="right-box">
           <view class="right-box-1">
-            <image src="../images/icon1.png" alt=""></image>
+            <view class="inner">
+              <view class="title">新品速递</view>
+              <view class="image-box">
+                <image src="../images/icon1.png" alt=""></image>
+              </view>
+            </view>
+            <view class="inner">
+              <view class="title">新品速递</view>
+              <view class="image-box">
+                <image src="../images/icon1.png" alt=""></image>
+              </view>
+            </view>
           </view>
           <view class="right-box-2">
             <view class="inner">
-              <image src="../images/icon1.png" alt=""></image>
+              <view class="title">新品速递</view>
+              <view class="image-box">
+                <image src="../images/icon1.png" alt=""></image>
+              </view>
             </view>
             <view class="inner">
-              <image src="../images/icon1.png" alt=""></image>
-              <view class="mask">
-                <view class="text">查看更多</view>
-                <view class="icon-box"><image src="../images/icon16.png" alt=""></image></view>
+              <view class="title">新品速递</view>
+              <view class="image-box">
+                <image src="../images/icon1.png" alt=""></image>
               </view>
             </view>
           </view>
         </view>
       </view>
     </view>
+    <view class="area-3">
+      <scroll-view scroll-x>
+        <view class="items on">热门</view>
+        <view class="items">热门</view>
+        <view class="items">热门</view>
+        <view class="items">热门</view>
+        <view class="items">热门</view>
+        <view class="items">热门</view>
+        <view class="items">热门</view>
+        <view class="items">热门</view>
+        <view class="items">热门</view>
+        <view class="items">热门</view>
+        <view class="items">热门</view>
+        <view class="items">热门</view>
+        <view class="items">热门</view>
+        <view class="items">热门</view>
+      </scroll-view>
+    </view>
+    <view class="listbox">
+        <view class="wrapper">
+          <view class="image-box"><image src="../images/icon3.png" alt=""></image></view>
+          <view class="right-box">
+            <view class="title ellipsis-2">【立体小脸妆出来】RIRE双头阴影高光修容棒3g+3g立体小脸妆出来】RIRE双头阴影高光修容棒3g+3g</view>
+            <view class="des">已售2008件/库存10000件</view>
+            <view class="tag-box">
+              <view class="tag">满38减10</view>
+            </view>
+            <view class="price-box">
+              <view class="price">￥<span>599.00</span></view>
+              <view class="info">包邮 · 七天退换货</view>
+            </view>
+          </view>
+        </view>
+      </view>
   </view>
 </template>
 
