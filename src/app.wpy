@@ -98,26 +98,26 @@ export default class extends wepy.app {
       'list': [
         {
           'pagePath': 'pages/home',
-          'iconPath': 'images/icon1_on.png',
-          'selectedIconPath': 'images/icon1.png',
+          'iconPath': 'images/icon1.png',
+          'selectedIconPath': 'images/icon1_on.png',
           'text': '首页'
         },
         {
           'pagePath': 'pages/categoryPage',
-          'iconPath': 'images/icon2_on.png',
-          'selectedIconPath': 'images/icon2.png',
-          'text': '分类'
+          'iconPath': 'images/icon2.png',
+          'selectedIconPath': 'images/icon2_on.png',
+          'text': '产品'
         },
         {
           'pagePath': 'pages/shopCart',
-          'iconPath': 'images/icon3_on.png',
-          'selectedIconPath': 'images/icon3.png',
+          'iconPath': 'images/icon3.png',
+          'selectedIconPath': 'images/icon3_on.png',
           'text': '购物车'
         },
         {
           'pagePath': 'pages/myCenter',
-          'iconPath': 'images/icon4_on.png',
-          'selectedIconPath': 'images/icon4.png',
+          'iconPath': 'images/icon4.png',
+          'selectedIconPath': 'images/icon4_on.png',
           'text': '我的'
         }
       ]

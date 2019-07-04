@@ -1,13 +1,192 @@
 <style lang="scss">
+  @import "../css/common";
+  page{
+    height: 100%;
+  }
+  ::-webkit-scrollbar{
+    width: 0;
+    height: 0;
+    color: transparent;
+  }
+  .categoryPage-container{
+    min-height: 100%;
+    .topBar{
+      background: #ff3e31;
+      height: torpx(94);
+      padding: torpx(18) 0;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-around;
+      .input-box{
+        background: #fff;
+        border-radius: torpx(10);
+        padding-left: torpx(50);
+        height: torpx(58);
+        width: torpx(700);
+        position: relative;
+        overflow: hidden;
+        image{
+          width: torpx(25);
+          height: torpx(25);
+          position: absolute;
+          left: torpx(16);
+          top: torpx(17);
+        }
+        input{
+          width: 100%;
+          line-height: torpx(58);
+          font-size: torpx(25);
+        }
+      }
+    }
+    .swiperBox{
+      width: 710rpx;
+      height: 306rpx;
+      margin: 0 auto 20rpx;
+      border-radius: 6rpx;
+      overflow: hidden;
+      swiper {
+        height: 100%;
+      }
+      .slide-image{
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .scroll_box{
+      background: #fff;
+      overflow: hidden;
+      white-space: nowrap;
+      scroll-view{
+        height: torpx(86);
+        padding-left: torpx(30);
+        .items{
+          display: inline-block;
+          margin-right: torpx(30);
+          font-size: torpx(26);
+          line-height: torpx(86);
+          &.on{
+            color: #000000;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+    .goodsList{
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 torpx(10);
+      .wrapper{
+        width: torpx(360);
+        height: torpx(511);
+        background: #fff;
+        border-radius: torpx(15);
+        margin-top: torpx(13);
+        .image-box{
+          height: torpx(334);
+          border-bottom: 1px solid #eff0f4;
+          padding: torpx(20);
+          display: flex;
+          align-items: center;
+          image{
+            max-width: 100%;
+            max-height: 100%;
+          }
+        }
+        .name{
+          font-size: torpx(26);
+          line-height: torpx(34);
+          margin-top: torpx(16);
+          color: #45484f;
+          padding: 0 torpx(26);
+        }
+        .price{
+          color: #161616;
+          font-size: torpx(24);
+          font-weight: bold;
+          padding: 0 torpx(26);
+          margin-top: torpx(28);
+          display: flex;
+          flex-direction: row;
+          flex-wrap: nowrap;
+          align-items: center;
+          justify-content: space-between;
+          .label{
+            line-height: torpx(32);
+            padding: 0 torpx(5);
+            background: #e20001;
+            border-radius: torpx(3);
+            font-size: torpx(22);
+            color: #fff;
+          }
+          text{
+            font-size: torpx(36);
+            vertical-align: bottom;
+          }
+        }
+      }
+    }
+  }
 </style>
 <template>
-  <view class="" style="height: 100%;">
-    <block wx:if="{{type == 2}}">
-      <navbar></navbar>
-    </block>
-    <block wx:else>
-      <ategorypage></ategorypage>
-    </block>
+  <view class="categoryPage-container">
+    <view class="topBar">
+      <view class="input-box">
+        <image src="../images/icon6.png" alt=""></image>
+        <input type="text">
+      </view>
+    </view>
+    <view class="swiperBox">
+      <swiper
+        indicator-dots="{{indicatorDots}}"
+        autoplay="{{autoplay}}"
+        interval="{{interval}}"
+        duration="{{duration}}"
+        indicator-dots="true"
+        indicator-color="rgba(255,255,255,0.5)"
+        indicator-active-color="#fff"
+      >
+        <block wx:for="{{images}}">
+          <swiper-item>
+            <image src="{{item}}" key="unique" class="slide-image" width="355" height="150" />
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+    <view class="scroll_box">
+      <scroll-view scroll-x>
+        <view class="items on">热门</view>
+        <view class="items">热门</view>
+        <view class="items">热门</view>
+        <view class="items">热门</view>
+        <view class="items">热门</view>
+        <view class="items">热门</view>
+        <view class="items">热门</view>
+        <view class="items">热门</view>
+        <view class="items">热门</view>
+        <view class="items">热门</view>
+        <view class="items">热门</view>
+        <view class="items">热门</view>
+        <view class="items">热门</view>
+        <view class="items">热门</view>
+      </scroll-view>
+    </view>
+    <view class="goodsList">
+      <view class="wrapper">
+        <view class="image-box"><image src="../images/img2.png" alt=""></image></view>
+        <view class="price">
+          <view>￥<text>599.00</text></view>
+          <view class="label">满38减10</view>
+        </view>
+        <view class="name ellipsis-2">PZAAO 中空缎面款色休中空缎面款色休中空缎面款色休中空缎面款色休..PZAAO 中空缎面款色休..</view>
+      </view>
+    </view>
+
   </view>
 </template>
 
@@ -19,20 +198,24 @@ export default class CategoryPage extends wepy.page {
   config = {
     backgroundTextStyle: 'light',
     navigationBarBackgroundColor: '#fff',
-    navigationBarTitleText: '分类',
+    navigationBarTitleText: '产品',
     navigationBarTextStyle: 'black',
     usingComponents: {
-      'van-search': '/components/vant/search/index',
-      'van-icon': '/components/vant/icon/index',
-      'van-popup': '/components/vant/popup/index',
-      'van-cell-group': '/components/vant/cell-group/index',
-      'van-swipe-cell': '/components/vant/swipe-cell/index'
     }
   }
   components = {
   }
   data = {
-    type: 1
+    indicatorDots: false,
+    autoplay: true,
+    interval: 5000,
+    duration: 1000,
+    images: [
+      '../images/icon1.png',
+      '../images/icon1_on.png',
+      '../images/icon2.png',
+      '../images/icon3.png'
+    ]
   }
   computed = {}
   methods = {}
@@ -42,16 +225,6 @@ export default class CategoryPage extends wepy.page {
   }
 
   onShow () {
-    wepy.$instance.showOrderRedDot()
-    if (this.$parent.globalData.isKD) {
-      this.type = 2
-      wx.setNavigationBarTitle({
-        title: '出单'
-      })
-      this.$invoke('navbar', 'init')
-    } else {
-      this.type = 1
-    }
   }
 }
 </script>
