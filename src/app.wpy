@@ -82,6 +82,17 @@ export default class extends wepy.app {
       'pages/detail_bargin', // 砍价商品详情
       'pages/stepCount', // 计步
       'pages/detailPage', // 商品详情
+      'pages/settingUp', // 设置
+      'pages/myOrder', // 我的订单
+      'pages/myBargin', // 我的砍价
+      'pages/myGroupBuy', // 我的拼团
+      'pages/agency', // 代理权限
+      'pages/myIncome', // 我的收益
+      'pages/myComment', // 我的评价
+      'pages/applyAgencyForm', // 申请成为代理
+      'pages/myCollection', // 我的收藏
+      'pages/myAddress', // 收货地址
+      'pages/myReward', // 我的奖品
       'pages/test'
     ],
     window: {

@@ -205,7 +205,7 @@
                 right-width="{{ 70 }}"
                 bind:click="delGood"
               >
-                <view class="item" @tap="gotoInfo({{ item.id }})">
+                <view class="item">
                   <view
                     class="c"
                     catchtap="loop"
@@ -266,7 +266,7 @@
           全选
         </van-checkbox>
       </view>
-      <form report-submit bindsubmit="goPay">
+      <form report-submit>
         <button  class="payButton" form-type="submit"></button>
       </form>
     </van-submit-bar>
@@ -274,9 +274,9 @@
 </template>
 <script>
 import wepy from 'wepy'
-import lf from 'lf'
+// import lf from 'lf'
 
-export default class CustomerShopCart extends wepy.page {
+export default class shopCart extends wepy.page {
   config = {
     navigationBarTitleText: '购物车',
     disableScroll: true,
@@ -303,210 +303,14 @@ export default class CustomerShopCart extends wepy.page {
   }
 
   computed = {
-    subText () {
-      let l = 0
-      this.result.forEach(v => {
-        l++
-      })
-      if (l === 0) {
-        return '去结算'
-      }
-      return `去结算(${l})`
-    },
-    totalAmount () {
-      let r = 0
-      let index = -1
-      this.result.forEach(v => {
-        index = this.getIndexById(v)
-        if (index > -1) {
-          r += lf.mult(+this.list[index].num, +this.list[index].goods_price)
-        }
-      })
-      return lf.mult(r, 100)
-    }
   }
   events = {}
   methods = {
-    updateStore () {
-      wepy.navigateTo({
-        url: 'storeChoose'
-      })
-    },
-    loop () {},
-    delGood (event) {
-      if (event.detail !== 'right') {
-        return
-      }
-      const id = event.currentTarget.dataset.index
-      const index = this.getIndexById(id)
-      const rIndex = this.result.findIndex(v => {
-        return v === id.toString()
-      })
-      if (rIndex > -1) {
-        this.result.splice(rIndex, 1)
-        if (this.result.length === 0) {
-          this.allChecked = false
-        }
-      }
-      // const list = JSON.parse(JSON.stringify(this.list))
-      // list.splice(index, 1)
-      // this.list = list
-      this.list.splice(index, 1)
-      this.multSaveList()
-      this.$apply()
-    },
-    gotoInfo (goodsId) {
-      wx.navigateTo({
-        url: 'wineInfo?goodsId=' + goodsId
-      })
-    },
-    onNumChange (event) {
-      let index = event.currentTarget.dataset.index
-      index = this.getIndexById(index)
-      this.list[index].num = event.detail
-      this.multSaveList()
-    },
-    onChange (event) {
-      this.result = event.detail
-      if (this.result.length === this.list.length) {
-        this.allChecked = true
-      } else {
-        this.allChecked = false
-      }
-      this.changeListChecked()
-    },
-    allChange (event) {
-      if (this.result.length === this.list.length) {
-        this.result = []
-        this.allChecked = false
-      } else {
-        this.result = this.list.map((v, i) => {
-          return v.id
-        })
-        this.allChecked = true
-      }
-      this.changeListChecked()
-    },
-    async goPay (e) {
-      let formId = e.detail.formId
-      if (!lf.user.isLogin()) {
-        wepy.navigateTo({
-          url: 'login'
-        })
-        return
-      }
-      try {
-        if (lf.user.getGoodList().length <= 0) {
-          return lf.toast('请先加入商品')
-        }
-        lf.showLoading()
-        let params = lf.user.getChooseGoodList().map(v => {
-          return {
-            goods_id: v.id,
-            number: v.num
-          }
-        })
-        let dealerId = ''
-        if (this.store && this.tip) {
-          dealerId = this.store.id
-        }
-        const res = await lf.net.post('/Api/Order/order_init', {
-          dealer_id: dealerId,
-          goods_json: JSON.stringify(params),
-          form_id: formId
-        })
-        if (res.code !== 200) {
-          lf.toast(res.info)
-          return
-        }
-        lf.user.clearShop()
-        wepy.navigateTo({
-          url: `myOrderInfo?orderId=${res.data.id}&shop=shop`
-        })
-        lf.hideLoading()
-      } catch (e) {
-        console.error(e)
-        lf.toast(e.info || e.toString())
-        lf.hideLoading()
-      }
-    }
   }
-
-  getIndexById (id) {
-    const index = this.list.findIndex(v => {
-      return v.id.toString() === id.toString()
-    })
-    return index
-  }
-
-  changeListChecked () {
-    this.list.forEach((v, i) => {
-      if (this.result.indexOf(v.id) > -1) {
-        v.checked = true
-      } else {
-        v.checked = false
-      }
-    })
-    this.multSaveList()
-  }
-
-  multSaveList () {
-    if (this.timeEvent) {
-      clearTimeout(this.timeEvent)
-      this.timeEvent = null
-    }
-    this.timeEvent = setTimeout(this.saveGoodList.bind(this), 500)
-  }
-
-  saveGoodList () {
-    lf.user.setGoodList(this.list)
-  }
-
-  getGoodList () {
-    this.list = []
-    this.result = []
-    // this.$apply()
-    const res = lf.user.getGoodList()
-    this.list = res
-    this.list.forEach((v, i) => {
-      if (v.checked) {
-        this.result.push(v.id)
-      }
-    })
-    if (this.result.length === this.list.length && this.result.length !== 0) {
-      this.allChecked = true
-    } else {
-      this.allChecked = false
-    }
-    this.$apply()
-  }
-
-  async initStore () {
-    try {
-      const res = await lf.net.post('/Api/public/system_config', {})
-      if (res.data && res.data.dealer_choice_is_open === 1) {
-        this.tip = 'show'
-        const store = lf.user.getStore()
-        if (store && store.id) {
-          this.store = store
-        }
-      } else {
-        this.tip = false
-      }
-      this.$apply()
-    } catch (e) {
-      console.error(e)
-      lf.toast(e.info || e.toString())
-    }
-  }
-
   init () {
-    this.getGoodList()
-    this.initStore()
   }
 
   onLoad () {
-    this.isIpx = wepy.$instance.globalData.isIpx
   }
 
   onShow () {

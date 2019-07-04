@@ -1,0 +1,44 @@
+<style lang="scss">
+  @import "../css/common";
+  page{
+    height: 100%;
+  }
+  ::-webkit-scrollbar{
+    width: 0;
+    height: 0;
+    color: transparent;
+  }
+</style>
+<template>
+  <web-view src="http://huoyuancheng.wurenyulecang.com:10101/#/myOrder"></web-view>
+</template>
+
+<script>
+import wepy from 'wepy'
+// import { SERVER_BAS_URL } from '../js/define'
+
+export default class CategoryPage extends wepy.page {
+  config = {
+    backgroundTextStyle: 'light',
+    navigationBarBackgroundColor: '#fff',
+    navigationBarTitleText: '我的订单',
+    navigationBarTextStyle: 'black',
+    usingComponents: {
+    }
+  }
+  components = {
+  }
+  data = {
+    type: 1
+  }
+  computed = {}
+  methods = {}
+  events = {}
+
+  onLoad () {
+  }
+
+  onShow () {
+  }
+}
+</script>

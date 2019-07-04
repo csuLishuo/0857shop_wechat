@@ -326,7 +326,7 @@
       <view class="bg-box">
         <image src="../images/img2.png" alt=""></image>
       </view>
-      <view class="setting-box" @click="go(12)"><image src="../images/icon26.png" alt=""></image></view>
+      <view class="setting-box" bindtap="go(12)"><image src="../images/icon26.png" alt=""></image></view>
       <view class="wrapper">
         <view class="top-box">
           <view class="left-box">
@@ -342,22 +342,22 @@
           </view>
         </view>
         <view class="area-1-1">
-          <view class="wrap" @click="go(1)">
+          <view class="wrap" bindtap="go(1)">
             <view class="image-box"><image src="../images/icon18.png" alt=""></image></view>
             <view class="name">我的收藏</view>
           </view>
-          <view class="wrap" @click="go(2)">
+          <view class="wrap" bindtap="go(2)">
             <view class="image-box"><image src="../images/icon19.png" alt=""></image></view>
             <view class="name">收货地址</view>
           </view>
-          <view class="wrap" @click="go(3)">
+          <view class="wrap" bindtap="go(3)">
             <view class="image-box"><image src="../images/icon20.png" alt=""></image></view>
             <view class="name">我的奖品</view>
           </view>
         </view>
       </view>
     </view>
-    <view class="area-2 clearfix" @click="go(4)">
+    <view class="area-2 clearfix" bindtap="go(4)">
       <view class="title-box">
         <view class="name">我的订单</view>
         <view class="icon-box"><image src="../images/icon21.png" alt=""></image></view>
@@ -392,23 +392,23 @@
     </view>
     <view class="area-3 clearfix">
       <view class="area-3-1">
-        <view class="wrap" @click="go(5)">
+        <view class="wrap" bindtap="go(5)">
           <view class="image-box"><image src="../images/icon27.png" alt=""></image></view>
           <view class="name">我的砍价</view>
         </view>
-        <view class="wrap" @click="go(6)">
+        <view class="wrap" bindtap="go(6)">
           <view class="image-box"><image src="../images/icon28.png" alt=""></image></view>
           <view class="name">我的拼团</view>
         </view>
-        <view class="wrap" @click="go(7)">
+        <view class="wrap" bindtap="go(7)">
           <view class="image-box"><image src="../images/icon29.png" alt=""></image></view>
           <view class="name">代理权限</view>
         </view>
-        <view class="wrap" @click="go(8)">
+        <view class="wrap" bindtap="go(8)">
           <view class="image-box"><image src="../images/icon30.png" alt=""></image></view>
           <view class="name">我的收益</view>
         </view>
-        <view class="wrap" @click="go(9)">
+        <view class="wrap" bindtap="go(9)">
           <view class="image-box"><image src="../images/icon31.png" alt=""></image></view>
           <view class="name">我的评价</view>
         </view>
@@ -416,7 +416,7 @@
           <view class="image-box"><image src="../images/icon32.png" alt=""></image></view>
           <view class="name">客服</view>
         </view>
-        <view class="wrap" @click="go(11)">
+        <view class="wrap" bindtap="go(11)">
           <view class="image-box"><image src="../images/icon33.png" alt=""></image></view>
           <view class="name">申请成为代理</view>
         </view>
@@ -459,7 +459,55 @@ export default class CategoryPage extends wepy.page {
     type: 1
   }
   computed = {}
-  methods = {}
+  methods = {
+    go (status) {
+      if (status === '1') {
+        wepy.navigateTo({
+          url: 'myCollection'
+        })
+      } else if (status === '2') {
+        wepy.navigateTo({
+          url: 'myAddress'
+        })
+      } else if (status === '3') {
+        wepy.navigateTo({
+          url: 'myReward'
+        })
+      } else if (status === '4') {
+        wepy.navigateTo({
+          url: 'myOrder'
+        })
+      } else if (status === '5') {
+        wepy.navigateTo({
+          url: 'myBargin'
+        })
+      } else if (status === '6') {
+        wepy.navigateTo({
+          url: 'myGroupBuy'
+        })
+      } else if (status === '7') {
+        wepy.navigateTo({
+          url: 'agency'
+        })
+      } else if (status === '8') {
+        wepy.navigateTo({
+          url: 'myIncome'
+        })
+      } else if (status === '9') {
+        wepy.navigateTo({
+          url: 'myComment'
+        })
+      } else if (status === '11') {
+        wepy.navigateTo({
+          url: 'applyAgencyForm'
+        })
+      } else if (status === '12') {
+        wepy.navigateTo({
+          url: 'settingUp'
+        })
+      }
+    }
+  }
   events = {}
 
   onLoad () {

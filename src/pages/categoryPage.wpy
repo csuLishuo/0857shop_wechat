@@ -151,9 +151,9 @@
         indicator-color="rgba(255,255,255,0.5)"
         indicator-active-color="#fff"
       >
-        <block wx:for="{{images}}">
+        <block wx:for="{{images}}" key="unique">
           <swiper-item>
-            <image src="{{item}}" key="unique" class="slide-image" width="355" height="150" />
+            <image src="{{item}}" class="slide-image" width="355" height="150" />
           </swiper-item>
         </block>
       </swiper>
