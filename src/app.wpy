@@ -71,6 +71,9 @@ export default class extends wepy.app {
       'pages/categoryPage',
       'pages/shopCart',
       'pages/myCenter',
+      'pages/signIn',
+      'pages/groupBuyList',
+      'pages/seckillList',
       'pages/test'
     ],
     window: {
