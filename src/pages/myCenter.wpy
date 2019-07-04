@@ -1,13 +1,442 @@
 <style lang="scss">
+  @import "../css/common";
+  page{
+    height: 100%;
+  }
+  ::-webkit-scrollbar{
+    width: 0;
+    height: 0;
+    color: transparent;
+  }
+  .myCenter-container{
+    min-height: 100%;
+    .area-1{
+      .bg-box{
+        height: torpx(470);
+        image{
+          width: 100%;
+          height: torpx(380);
+        }
+      }
+      position: relative;
+      .setting-box{
+        position: absolute;
+        top: torpx(30);
+        right: torpx(26);
+        width: torpx(37);
+        height: torpx(37);
+        image{
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .wrapper{
+        position: absolute;
+        top: torpx(107);
+        left: 50%;
+        margin-left: torpx(-349);
+        width: torpx(698);
+        background: #fff;
+        border-radius: torpx(18);
+        padding-top: torpx(30);
+        padding-bottom: torpx(20);
+        .top-box{
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          align-items: center;
+          justify-content: space-between;
+          padding-left: torpx(30);
+          .left-box{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: flex-start;
+            .portrait-box{
+              width: torpx(122);
+              height: torpx(122);
+              border-radius: 50%;
+              overflow: hidden;
+              margin-right: torpx(18);
+              image{
+                width: 100%;
+                height: 100%;
+              }
+            }
+            .text-box{
+              .name{
+                font-size: torpx(28);
+                color: #000;
+              }
+              .des{
+                font-size: torpx(23);
+                margin-top: torpx(25);
+                color: #e83c16;
+              }
+            }
+          }
+          .right-box{
+            display: flex;
+            align-items: center;
+            background-image: linear-gradient(83deg,
+              #ff4027 0%,
+              #802014 0%,
+              #000000 0%,
+              #802014 0%,
+              #ff4027 0%,
+              #ff296f 100%),
+            linear-gradient(
+                #ffe324,
+                #ffe324);
+            width: torpx(136);
+            height: torpx(62);
+            border-radius: torpx(31) 0px 0px torpx(31);
+            padding-left: torpx(29);
+            .image-box{
+              width: torpx(36);
+              height: torpx(36);
+              margin-right: torpx(9);
+              image{
+                width: 100%;
+                height: 100%;
+              }
+            }
+            .name{
+              font-size: torpx(26);
+              color: #fffefe;
+            }
+          }
+        }
+        .area-1-1{
+          display: flex;
+          flex-direction: row;
+          flex-wrap: nowrap;
+          align-items: center;
+          justify-content: space-around;
+          margin-top: torpx(70);
+          .wrap{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            .image-box{
+              background: rgba(255,0,0,0.1);
+              width: torpx(56);
+              height: torpx(56);
+              image{
+                width: 100%;
+                height: 100%;
+              }
+            }
+            .name{
+              font-size: torpx(23);
+              color: #4c4c4c;
+              margin-top: torpx(20);
+            }
+          }
+        }
+      }
+    }
+    .area-2{
+      width: torpx(698);
+      margin: torpx(20) auto 0;
+      background: #fff;
+      border-radius: torpx(18);
+      padding-bottom: torpx(24);
+      .title-box{
+        height: torpx(100);
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 torpx(30);
+        border-bottom: 1px solid #f5f5f5;
+        .name{
+          font-size: torpx(26);
+          color: #363636;
+          font-weight: bold;
+        }
+        .icon-box{
+          width: torpx(12);
+          height: torpx(21);
+          image{
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
+      .area-2-1{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: space-around;
+        margin-top: torpx(44);
+        .wrap{
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: flex-start;
+          .image-box{
+            background: rgba(255,0,0,0.1);
+            width: torpx(56);
+            height: torpx(56);
+            position: relative;
+            text{
+              position: absolute;
+              top: torpx(-10);
+              right: torpx(-10);
+              height: torpx(30);
+              line-height: torpx(30);
+              border-radius: torpx(15);
+              min-width: torpx(30);
+              padding: 0 torpx(2);
+              color: #fff;
+              text-align: center;
+              background: #ff0000;
+              font-size: torpx(24)
+            }
+            image{
+              width: 100%;
+              height: 100%;
+            }
+          }
+          .name{
+            font-size: torpx(23);
+            color: #4c4c4c;
+            margin-top: torpx(38);
+          }
+        }
+      }
+    }
+    .area-3{
+      width: torpx(698);
+      margin: torpx(20) auto 0;
+      background: #fff;
+      border-radius: torpx(18);
+      // padding-bottom: torpx(24);
+      .area-3-1{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: flex-start;
+        .wrap{
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: flex-start;
+          width: 25%;
+          margin: torpx(25) 0;
+          .image-box{
+            background: rgba(255,0,0,0.1);
+            width: torpx(56);
+            height: torpx(56);
+            image{
+              width: 100%;
+              height: 100%;
+            }
+          }
+          .name{
+            font-size: torpx(23);
+            color: #4c4c4c;
+            margin-top: torpx(22);
+          }
+        }
+      }
+    }
+    .area-4{
+      .title{
+        position: relative;
+        margin: torpx(25) 0;
+        image{
+          width: torpx(259);
+          height: torpx(30);
+          margin: 0 auto;
+          display: block;
+        }
+        text{
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          line-height: torpx(30);
+          height: torpx(30);
+          font-size: torpx(32);
+          text-align: center;
+        }
+      }
+      .recommend-list{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 torpx(20);
+        .wrapper{
+          width: torpx(348);
+          height: torpx(498);
+          background: #fff;
+          border-radius: torpx(15);
+          .image-box{
+            height: torpx(334);
+            border-bottom: 1px solid #eff0f4;
+            padding: torpx(20);
+            display: flex;
+            align-items: center;
+            image{
+              max-width: 100%;
+              max-height: 100%;
+            }
+          }
+          .name{
+            font-size: torpx(26);
+            line-height: torpx(46);
+            margin-top: torpx(16);
+            color: #45484f;
+            padding: 0 torpx(26);
+          }
+          .des{
+            font-size: torpx(20);
+            line-height: torpx(36);
+            color: #9c9c9c;
+            padding: 0 torpx(26);
+          }
+          .price{
+            color: #ff6c00;
+            font-size: torpx(20);
+            font-weight: bold;
+            padding: 0 torpx(26);
+            margin-top: torpx(16);
+            span{
+              font-size: torpx(29);
+              vertical-align: bottom;
+            }
+          }
+        }
+      }
+    }
+  }
 </style>
 <template>
-  <view class="" style="height: 100%;">
-    <block wx:if="{{type == 2}}">
-      <navbar></navbar>
-    </block>
-    <block wx:else>
-      <ategorypage></ategorypage>
-    </block>
+  <view class="myCenter-container">
+    <view class="area-1 clearfix">
+      <view class="bg-box">
+        <image src="../images/img2.png" alt=""></image>
+      </view>
+      <view class="setting-box" @click="go(12)"><image src="../images/icon26.png" alt=""></image></view>
+      <view class="wrapper">
+        <view class="top-box">
+          <view class="left-box">
+            <view class="portrait-box"><image src="../images/icon13.png" alt=""></image></view>
+            <view class="text-box">
+              <view class="name">斯嘉丽·约翰逊</view>
+              <view class="des">代理用户</view>
+            </view>
+          </view>
+          <view class="right-box">
+            <view class="image-box"><image src="../images/icon17.png" alt=""></image></view>
+            <view class="name">签到</view>
+          </view>
+        </view>
+        <view class="area-1-1">
+          <view class="wrap" @click="go(1)">
+            <view class="image-box"><image src="../images/icon18.png" alt=""></image></view>
+            <view class="name">我的收藏</view>
+          </view>
+          <view class="wrap" @click="go(2)">
+            <view class="image-box"><image src="../images/icon19.png" alt=""></image></view>
+            <view class="name">收货地址</view>
+          </view>
+          <view class="wrap" @click="go(3)">
+            <view class="image-box"><image src="../images/icon20.png" alt=""></image></view>
+            <view class="name">我的奖品</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="area-2 clearfix" @click="go(4)">
+      <view class="title-box">
+        <view class="name">我的订单</view>
+        <view class="icon-box"><image src="../images/icon21.png" alt=""></image></view>
+      </view>
+      <view class="area-2-1">
+        <view class="wrap">
+          <view class="image-box">
+            <image src="../images/icon22.png" alt=""></image>
+            <text>99</text>
+          </view>
+          <view class="name">待付款</view>
+        </view>
+        <view class="wrap">
+          <view class="image-box">
+            <image src="../images/icon23.png" alt=""></image>
+            <text>1</text>
+          </view>
+          <view class="name">待发货</view>
+        </view>
+        <view class="wrap">
+          <view class="image-box">
+            <image src="../images/icon24.png" alt=""></image>
+            <text>1</text>
+          </view>
+          <view class="name">待收货</view>
+        </view>
+        <view class="wrap">
+          <view class="image-box"><image src="../images/icon25.png" alt=""></image></view>
+          <view class="name">已完成</view>
+        </view>
+      </view>
+    </view>
+    <view class="area-3 clearfix">
+      <view class="area-3-1">
+        <view class="wrap" @click="go(5)">
+          <view class="image-box"><image src="../images/icon27.png" alt=""></image></view>
+          <view class="name">我的砍价</view>
+        </view>
+        <view class="wrap" @click="go(6)">
+          <view class="image-box"><image src="../images/icon28.png" alt=""></image></view>
+          <view class="name">我的拼团</view>
+        </view>
+        <view class="wrap" @click="go(7)">
+          <view class="image-box"><image src="../images/icon29.png" alt=""></image></view>
+          <view class="name">代理权限</view>
+        </view>
+        <view class="wrap" @click="go(8)">
+          <view class="image-box"><image src="../images/icon30.png" alt=""></image></view>
+          <view class="name">我的收益</view>
+        </view>
+        <view class="wrap" @click="go(9)">
+          <view class="image-box"><image src="../images/icon31.png" alt=""></image></view>
+          <view class="name">我的评价</view>
+        </view>
+        <view class="wrap">
+          <view class="image-box"><image src="../images/icon32.png" alt=""></image></view>
+          <view class="name">客服</view>
+        </view>
+        <view class="wrap" @click="go(11)">
+          <view class="image-box"><image src="../images/icon33.png" alt=""></image></view>
+          <view class="name">申请成为代理</view>
+        </view>
+      </view>
+    </view>
+    <view class="area-4 clearfix">
+      <view class="title clearfix">
+        <image src="../images/img1.png" alt=""></image>
+        <text>热卖推荐</text>
+      </view>
+      <view class="recommend-list">
+        <view class="wrapper">
+          <view class="image-box"><image src="../images/img2.png" alt=""></image></view>
+          <view class="name ellipsis-1">PZAAO 中空缎面款色休..PZAAO 中空缎面款色休..</view>
+          <view class="des ellipsis-1">已售1389/剩2000</view>
+          <view class="price">￥<span>599.00</span></view>
+        </view>
+      </view>
+    </view>
+
   </view>
 </template>
 
@@ -19,14 +448,9 @@ export default class CategoryPage extends wepy.page {
   config = {
     backgroundTextStyle: 'light',
     navigationBarBackgroundColor: '#fff',
-    navigationBarTitleText: '分类',
+    navigationBarTitleText: '个人中心',
     navigationBarTextStyle: 'black',
     usingComponents: {
-      'van-search': '/components/vant/search/index',
-      'van-icon': '/components/vant/icon/index',
-      'van-popup': '/components/vant/popup/index',
-      'van-cell-group': '/components/vant/cell-group/index',
-      'van-swipe-cell': '/components/vant/swipe-cell/index'
     }
   }
   components = {
@@ -42,16 +466,6 @@ export default class CategoryPage extends wepy.page {
   }
 
   onShow () {
-    wepy.$instance.showOrderRedDot()
-    if (this.$parent.globalData.isKD) {
-      this.type = 2
-      wx.setNavigationBarTitle({
-        title: '出单'
-      })
-      this.$invoke('navbar', 'init')
-    } else {
-      this.type = 1
-    }
   }
 }
 </script>

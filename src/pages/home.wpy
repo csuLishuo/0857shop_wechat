@@ -122,6 +122,7 @@
       background: #fff;
       .title{
         position: relative;
+        margin: torpx(25) 0;
         image{
           width: torpx(259);
           height: torpx(30);
@@ -486,8 +487,8 @@
       <image src="../images/icon1.png" alt=""></image>
     </view>
     <view class="area-1 clearfix">
-      <view class="title">
-        <image src="../images/image1.png" alt=""></image>
+      <view class="title clearfix">
+        <image src="../images/img1.png" alt=""></image>
         <text>热卖商品</text>
       </view>
       <view class="area-1-container">
