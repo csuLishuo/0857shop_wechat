@@ -87,12 +87,14 @@ export default class extends wepy.app {
       'pages/myBargin', // 我的砍价
       'pages/myGroupBuy', // 我的拼团
       'pages/agency', // 代理权限
+      'pages/delivery', // 快递发货
       'pages/myIncome', // 我的收益
       'pages/myComment', // 我的评价
       'pages/applyAgencyForm', // 申请成为代理
       'pages/myCollection', // 我的收藏
       'pages/myAddress', // 收货地址
       'pages/myReward', // 我的奖品
+      'pages/editAddress', // 编辑地址
       'pages/test'
     ],
     window: {

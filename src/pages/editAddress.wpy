@@ -1,0 +1,136 @@
+<style lang="scss">
+  @import "../css/common";
+  page{
+    height: 100%;
+  }
+  ::-webkit-scrollbar{
+    width: 0;
+    height: 0;
+    color: transparent;
+  }
+  .editAddress-container{
+    min-height: 100%;
+    background: #fff;
+    .border{
+      border-bottom: 1px solid #ebebeb;
+    }
+    .topBar{
+      background: #fff;
+      height: torpx(100);
+      padding: 0 torpx(36);
+      position: relative;
+      line-height: torpx(100);
+      .left-box{
+        width: torpx(19);
+        height: torpx(37);
+        position: absolute;
+        left: torpx(36);
+        top: torpx(32);
+        image{
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .title{
+        font-size: torpx(32);
+        font-weight: bold;
+        text-align: center;
+      }
+    }
+    .form-box{
+      padding-left: torpx(30);
+      .line{
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        height: torpx(104);
+        border-bottom: 1px solid #ebebeb;
+        .label{
+          font-size: torpx(28);
+          width: torpx(140);
+        }
+        &.line-1{
+          justify-content: space-between;
+          padding-right: torpx(30);
+        }
+        .right-box{
+          display: flex;
+          align-items: center;
+          text{
+            font-size: torpx(28);
+            color: #bebebe;
+            margin-right: torpx(20);
+          }
+          image{
+            width: torpx(12);
+            height: torpx(21);
+          }
+        }
+      }
+    }
+  }
+</style>
+<template>
+  <view class="editAddress-container">
+    <view class="border"></view>
+    <view class="form-box">
+      <view class="line">
+        <view class="label">用户名</view>
+        <view class="input-box">
+          <van-field placeholder="请填写收货人姓名" />
+        </view>
+      </view>
+      <view class="line">
+        <view class="label">联系电话</view>
+        <view class="input-box">
+          <van-field placeholder="请填写收货人联系电话" />
+        </view>
+      </view>
+      <view class="line line-1">
+        <view class="label">所在地区</view>
+        <view class="right-box">
+          <text>请选择</text>
+          <image src="../images/icon21.png" alt=""></image>
+        </view>
+      </view>
+      <view class="line">
+        <view class="label">详细地址</view>
+        <view class="input-box">
+          <van-field placeholder="街道、楼牌号等" />
+        </view>
+      </view>
+    </view>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+// import { SERVER_BAS_URL } from '../js/define'
+
+export default class EditAddress extends wepy.page {
+  config = {
+    backgroundTextStyle: 'light',
+    navigationBarBackgroundColor: '#fff',
+    navigationBarTitleText: '编辑地址',
+    navigationBarTextStyle: 'black',
+    usingComponents: {
+      'van-field': '/components/vant/field/index'
+    }
+  }
+  components = {
+  }
+  data = {
+    type: 1
+  }
+  computed = {}
+  methods = {
+  }
+  events = {}
+
+  onLoad () {
+  }
+
+  onShow () {
+  }
+}
+</script>

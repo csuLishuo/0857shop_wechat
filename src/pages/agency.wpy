@@ -8,16 +8,167 @@
     height: 0;
     color: transparent;
   }
+  .agency-container{
+    .topBar{
+      height: torpx(100);
+      padding: 0 torpx(36);
+      position: relative;
+      line-height: torpx(100);
+      .left-box{
+        width: torpx(19);
+        height: torpx(37);
+        position: absolute;
+        left: torpx(36);
+        top: torpx(32);
+        image{
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .title{
+        font-size: torpx(32);
+        color: #fff;
+        font-weight: bold;
+        text-align: center;
+      }
+      .right-box{
+        width: torpx(39);
+        height: torpx(39);
+        image{
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+    .area-1{
+      height: torpx(494);
+      // background-image: url("../images/image5.png");
+      // background-repeat: no-repeat;
+      // background-position: center;
+      // background-size: 100% 100%;
+      position: relative;
+      .bg{
+        width: 100%;
+        height: 100%;
+        image{
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .area-1-1{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        .image-bg{
+          width: torpx(168);
+          height: torpx(168);
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.4);
+          margin: torpx(72) auto 0;
+          .image-box{
+            width: torpx(154);
+            height: torpx(154);
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 1);
+            margin: torpx(7) auto 0;
+            overflow: hidden;
+            image{
+              width: 100%;
+              height: 100%;
+            }
+          }
+        }
+      }
+      .name{
+        font-size: torpx(30);
+        color: #fefefe;
+        margin-top: torpx(50);
+        text-align: center;
+      }
+    }
+    .area-2{
+      margin: torpx(20) auto 0;
+      background: #fff;
+      padding-bottom: torpx(50);
+      .area-2-1{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: space-around;
+        margin-top: torpx(44);
+        .wrap{
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: flex-start;
+          .image-box{
+            background: rgba(255,0,0,0.1);
+            width: torpx(75);
+            height: torpx(75);
+            position: relative;
+            image{
+              width: 100%;
+              height: 100%;
+            }
+          }
+          .name{
+            font-size: torpx(26);
+            color: #4c4c4c;
+            margin-top: torpx(32);
+          }
+        }
+      }
+    }
+  }
 </style>
 <template>
-  <web-view src="http://huoyuancheng.wurenyulecang.com:10101/#/agency"></web-view>
+  <view class="agency-container">
+    <view class="area-1">
+      <view class="bg">
+        <image src="../images/img5.png" alt=""></image>
+      </view>
+      <view class="area-1-1">
+        <view class="image-bg clearfix">
+          <view class="image-box">
+            <image src="../images/icon12.png" alt=""></image>
+          </view>
+        </view>
+        <view class="name">斯嘉丽约翰</view>
+      </view>
+    </view>
+    <view class="area-2 clearfix">
+      <view class="area-2-1">
+        <view class="wrap" bindtap="go(1)">
+          <view class="image-box">
+            <image src="../images/icon46.png" alt=""></image>
+          </view>
+          <view class="name">快递发货</view>
+        </view>
+        <view class="wrap" bindtap="go(2)">
+          <view class="image-box">
+            <image src="../images/icon47.png" alt=""></image>
+          </view>
+          <view class="name">快递收货</view>
+        </view>
+        <view class="wrap" bindtap="go(3)">
+          <view class="image-box">
+            <image src="../images/icon48.png" alt=""></image>
+          </view>
+          <view class="name">收货码</view>
+        </view>
+      </view>
+    </view>
+  </view>
 </template>
 
 <script>
 import wepy from 'wepy'
 // import { SERVER_BAS_URL } from '../js/define'
 
-export default class CategoryPage extends wepy.page {
+export default class Agency extends wepy.page {
   config = {
     backgroundTextStyle: 'light',
     navigationBarBackgroundColor: '#fff',
@@ -32,7 +183,23 @@ export default class CategoryPage extends wepy.page {
     type: 1
   }
   computed = {}
-  methods = {}
+  methods = {
+    go (status) {
+      if (status === '1') {
+        wepy.navigateTo({
+          url: 'delivery'
+        })
+      } else if (status === '2') {
+        wepy.navigateTo({
+          url: 'receive'
+        })
+      } else if (status === '3') {
+        wepy.navigateTo({
+          url: 'receiveCode'
+        })
+      }
+    }
+  }
   events = {}
 
   onLoad () {
