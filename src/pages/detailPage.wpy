@@ -8,31 +8,600 @@
     height: 0;
     color: transparent;
   }
+  .detailPage-container{
+    min-height: 100%;
+    padding-bottom: torpx(100);
+    .van-swipe-item{
+      height: torpx(612) !important;
+      image{
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .swiperBox{
+      width: 710rpx;
+      height: 306rpx;
+      margin: 0 auto 20rpx;
+      border-radius: 6rpx;
+      overflow: hidden;
+      swiper {
+        height: 100%;
+      }
+      .slide-image{
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .price-box{
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      height: torpx(112);
+      /*line-height: torpx(112);*/
+      padding: 0 torpx(20);
+      background: #ff3f31;
+      .price{
+        color: #fff;
+        font-size: torpx(50);
+        font-weight: bold;
+        display: flex;
+        align-items: flex-end;
+        text{
+          font-size: torpx(84);
+        }
+      }
+      .info{
+        color: #fffefe;
+        font-size: torpx(18);
+      }
+    }
+    .title{
+      padding: torpx(20) 0 torpx(10) torpx(32);
+      font-size: torpx(32);
+      line-height: torpx(50);
+      font-weight: bold;
+      background: #fff;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      .text{
+        width: torpx(575);
+      }
+      // .share{
+      //   width: torpx(112);
+      //   height: torpx(48);
+      //   font-size: torpx(24);
+      //   color: #9f9f9f;
+      //   font-weight: bold;
+      //   padding-left: torpx(52);
+      //   border-radius: torpx(24) 0 0 torpx(24);
+      //   background-image: url("../images/icon34.png");
+      //   background-repeat: no-repeat;
+      //   background-size: torpx(26) torpx(30);
+      //   background-position: torpx(21) torpx(10);
+      //   background-color: #f4f4f4;
+      // }
+    }
+    .area-1{
+      background: #fff;
+      margin-top: torpx(20);
+      .line{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: flex-start;
+        height: torpx(90);
+        line-height: torpx(90);
+        .name{
+          font-size: torpx(26);
+          color: #999;
+          padding-left: torpx(25);
+          padding-right: torpx(34);
+        }
+        .right-box{
+          font-size: torpx(26);
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          align-items: center;
+          justify-content: flex-start;
+          // .location{
+          //   padding-left: torpx(35);
+          //   background-image: url("../images/icon35.png");
+          //   background-repeat: no-repeat;
+          //   background-size: torpx(21) torpx(27);
+          //   background-position: left center;
+          // }
+          .border{
+            margin: 0 torpx(26);
+          }
+          .text-1{
+            color: #ff3f31;
+          }
+          .text-2{
+            margin-right: torpx(26);
+          }
+        }
+        .right-box-2{
+          padding-right: torpx(25);
+          justify-content: space-between;
+          width: torpx(635);
+          .icon-box{
+            width: torpx(12);
+            height: torpx(21);
+            image{
+              width: 100%;
+              height: 100%;
+            }
+          }
+        }
+      }
+    }
+    .area-2{
+      margin-top: torpx(20);
+      .area-2-title{
+        background: #fff;
+        height: torpx(112);
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        .border{
+          width: torpx(103);
+          border-bottom: 1px solid #eee;
+        }
+        .name{
+          font-size: torpx(28);
+          font-weight: bold;
+          margin: 0 torpx(30);
+        }
+      }
+      .image-box{
+        width: 100%;
+        image{
+          width: 100%;
+        }
+      }
+    }
+    .bottom-box{
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      height: torpx(100);
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #fff;
+      .icon-box{
+        width: 16%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: torpx(100);
+        image{
+          width: torpx(38);
+          height: torpx(36);
+        }
+        .text{
+          font-size: torpx(18);
+          color: #666;
+          margin-top: torpx(10);
+        }
+        .icon-box-1{
+          image{
+            width: torpx(44);
+            height: torpx(36);
+          }
+        }
+      }
+      .btn{
+        width: 34%;
+        font-size: torpx(30);
+        font-weight: bold;
+        color: #fff;
+        line-height: torpx(100);
+        text-align: center;
+        &.btn-1{
+          background-color: #404040;
+        }
+        &.btn-2{
+          background-image: linear-gradient(-90deg,
+            #ff3657 0%,
+            #ff7836 100%),
+          linear-gradient(
+              #ff3f31,
+              #ff3f31);
+        }
+      }
+    }
+    .area-3{
+      padding: torpx(36) 0 torpx(14);
+      background: #fff;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-around;
+      .wrapper{
+        width: torpx(159);
+        height: torpx(54);
+        line-height: torpx(54);
+        border-radius: torpx(27);
+        background: #fbf2f1;
+        color: #000;
+        font-size: torpx(24);
+        text-align: center;
+        &.on{
+          color: #ff3e31;
+          border: 1px solid #ff4436;
+        }
+        text{
+          font-weight: bold;
+        }
+      }
+    }
+    .area-4{
+      padding-top: torpx(36);
+      background: #fff;
+      .name-box{
+        padding-left: torpx(23);
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        .image-box{
+          width: torpx(57);
+          height: torpx(57);
+          border-radius: 50%;
+          overflow: hidden;
+          margin-right: torpx(24);
+          image{
+            width: 100%;
+            height: 100%;
+          }
+        }
+        .name{
+          font-size: torpx(30);
+          font-weight: bold;
+        }
+      }
+      .comment-content{
+        padding: torpx(23);
+        font-size: torpx(26);
+        line-height: torpx(42);
+      }
+      .image-list{
+        padding: torpx(20) torpx(23) 0;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        .image-box{
+          width: torpx(172);
+          height: torpx(172);
+          border-radius: torpx(8);
+          overflow: hidden;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-right: torpx(5);
+          image{
+            max-width: 100%;
+            max-height: 100%;
+          }
+        }
+      }
+    }
+    .pop-select{
+      .van-popup{
+        max-height: 60%;
+        overflow: scroll;
+        padding: torpx(20) torpx(20) torpx(100);
+      }
+      .goodDetail{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: flex-start;
+        background: #fff;
+        padding-bottom: torpx(40);
+        border-bottom: torpx(1) solid #ededed;
+        .image-box{
+          width: torpx(225);
+          height: torpx(225);
+          border-radius: torpx(6);
+          overflow: hidden;
+          margin-right: torpx(20);
+          display: flex;
+          flex-direction: row;
+          flex-wrap: nowrap;
+          align-items: center;
+          justify-content: center;
+          image{
+            max-width: 100%;
+            max-height: 100%;
+          }
+        }
+        .right-box{
+          width: torpx(450);
+          height: torpx(225);
+          position: relative;
+          .price-box-pop{
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            .price{
+              color: #ff3f31;
+              font-size: torpx(24);
+              font-weight: bold;
+              margin-bottom: torpx(10);
+              text{
+                font-size: torpx(34);
+                vertical-align: bottom;
+              }
+            }
+            .info{
+              color: #898989;
+              font-size: torpx(28);
+            }
+          }
+        }
+      }
+      .label-list{
+        padding: torpx(20) 0;
+        border-bottom: torpx(1) solid #ededed;
+        .name{
+          font-size: torpx(28);
+          color: #000;
+        }
+        .wrapper{
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          align-items: center;
+          justify-content: flex-start;
+          margin-top: torpx(24);
+          .wrap{
+            padding: 0 torpx(23);
+            height: torpx(64);
+            line-height: torpx(64);
+            border-radius: torpx(12);
+            background: #f5f5f5;
+            color: #010101;
+            font-size: torpx(24);
+            text-align: center;
+            margin-right: torpx(25);
+            &.on{
+              color: #ff3f31;
+              border: 1px solid #ff3f31;
+              background: #ffeae9;
+            }
+          }
+        }
+      }
+      .num-box{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: torpx(30);
+        .name{
+          font-size: torpx(28);
+          color: #000;
+        }
+        .van-stepper{
+          display: flex;
+        }
+      }
+      .btn{
+        background-image: linear-gradient(-90deg, #ff3657 0%, 	#ff7836 100%), linear-gradient(#ff3f31, #ff3f31);
+        width: torpx(704);
+        height: torpx(78);
+        text-align: center;
+        border-radius: torpx(39);
+        margin: torpx(100) auto 0;
+        font-size: torpx(32);
+        color: #fff;
+        line-height: torpx(78);
+      }
+    }
+  }
 </style>
 <template>
-  <web-view src="http://huoyuancheng.wurenyulecang.com:10101/#/detailPage"></web-view>
+  <view class="detailPage-container">
+    <view class="tabs">
+      <van-tabs sticky v-model="active">
+        <van-tab title="商品详情">
+          <view class="swiperBox">
+            <swiper
+              indicator-dots="{{indicatorDots}}"
+              autoplay="{{autoplay}}"
+              interval="{{interval}}"
+              duration="{{duration}}"
+              indicator-dots="true"
+              indicator-color="rgba(255,255,255,0.5)"
+              indicator-active-color="#fff"
+            >
+              <block wx:for="{{images}}" wx:key="unique">
+                <swiper-item>
+                  <image src="{{item}}" class="slide-image" width="355" height="150"></image>
+                </swiper-item>
+              </block>
+            </swiper>
+          </view>
+          <!-- <view class="banner">
+            <van-swipe :autoplay="3000">
+              <van-swipe-item  wx:for="{{images}}" wx:key="unique">
+                <image :src="item" /></image>
+              </van-swipe-item>
+            </van-swipe>
+          </view> -->
+          <view class="price-box">
+            <view class="price">￥<text>599.00</text></view>
+            <view class="info">已售1389/剩2000</view>
+          </view>
+          <view class="title">
+            <view class="text ellipsis-2">
+              【同价618】旗舰店 卡西欧（CASIO）樱花色新 款女表时尚防水运动学生表BGD-560
+            </view>
+            <view class="share">分享</view>
+          </view>
+          <view class="area-1">
+            <view class="line">
+              <view class="name">发货</view>
+              <view class="right-box">
+                <view class="location">湖南长沙</view>
+                <view class="border">|</view>
+                <view class="text">快递：免运费</view>
+              </view>
+            </view>
+            <view class="line">
+              <view class="name">优惠</view>
+              <view class="right-box">
+                <view class="text-1">满2000元减200元</view>
+              </view>
+            </view>
+            <view class="line">
+              <view class="name">保障</view>
+              <view class="right-box">
+                <view class="text-2">正品保证</view>
+                <view class="text-2">极速发货</view>
+                <view class="text-2">极速退款</view>
+                <view class="text-2">七天退换货</view>
+              </view>
+            </view>
+          </view>
+          <view class="area-1">
+            <view class="line" bindtap="showPop">
+              <view class="name">选择</view>
+              <view class="right-box right-box-2">
+                <view class="text">规格</view>
+                <view class="icon-box"><image src="../images/icon21.png" alt=""></image></view>
+              </view>
+            </view>
+          </view>
+          <view class="area-2">
+            <view class="area-2-title">
+              <view class="border"></view>
+              <view class="name">详情介绍</view>
+              <view class="border"></view>
+            </view>
+            <view class="image-box">
+              <image src="../images/icon9.png" alt=""></image>
+            </view>
+          </view>
+        </van-tab>
+        <van-tab title="用户评价">
+          <view class="area-3">
+            <view class="wrapper on">全部 <text>407</text></view>
+            <view class="wrapper">好评 <text>407</text></view>
+            <view class="wrapper">中评 <text>407</text></view>
+            <view class="wrapper">差评 <text>407</text></view>
+          </view>
+          <view class="area-4">
+            <view class="wrapper">
+              <view class="name-box">
+                <view class="image-box"><image src="../images/icon1.png" alt=""></image></view>
+                <view class="name">斯嘉丽</view>
+              </view>
+              <view class="comment-content">很好用，买的是2.0的，除了传输速度有点慢，是款到即发的毛宁，考试、鲜红色的，三角函数，很简单。的法律规范是合管就的服，对接焊缝思。</view>
+              <view class="image-list">
+                <view class="image-box" wx:for="{{images}}" wx:key="unique"><image src="{{item}}" alt=""></image></view>
+              </view>
+            </view>
+          </view>
+        </van-tab>
+      </van-tabs>
+    </view>
+    <view class="pop-select">
+      <van-popup show="{{showPop_select}}" position="bottom" bind:close="onClose">
+        <view class="goodDetail">
+          <view class="image-box">
+            <image src="../images/icon3.png" alt=""></image>
+          </view>
+          <view class="right-box">
+            <view class="price-box-pop">
+              <view class="price">￥<text>599.00</text></view>
+              <view class="info">包邮 · 七天退换货</view>
+            </view>
+          </view>
+        </view>
+        <view class="label-list">
+          <view class="name">颜色</view>
+          <view class="wrapper">
+            <view class="wrap on">红色</view>
+            <view class="wrap">红色</view>
+          </view>
+        </view>
+        <view class="label-list">
+          <view class="name">尺码</view>
+          <view class="wrapper">
+            <view class="wrap on">红色</view>
+            <view class="wrap">红色</view>
+          </view>
+        </view>
+        <view class="num-box">
+          <view class="name">购买数量</view>
+          <view class="step-view">
+            <van-stepper v-model="value" min="1" max="99" />
+          </view>
+        </view>
+        <view class="btn">确定</view>
+      </van-popup>
+    </view>
+  </view>
 </template>
 
 <script>
 import wepy from 'wepy'
 // import { SERVER_BAS_URL } from '../js/define'
 
-export default class CategoryPage extends wepy.page {
+export default class detailPage extends wepy.page {
   config = {
     backgroundTextStyle: 'light',
     navigationBarBackgroundColor: '#fff',
     navigationBarTitleText: '商品详情',
     navigationBarTextStyle: 'black',
     usingComponents: {
+      'van-popup': '/components/vant/popup/index',
+      'van-stepper': '/components/vant/stepper/index',
+      'van-tab': '/components/vant/tab/index',
+      'van-tabs': '/components/vant/tabs/index'
     }
   }
   components = {
   }
   data = {
-    type: 1
+    active: 0,
+    images: [
+      '../images/icon1.png',
+      '../images/icon1_on.png',
+      '../images/icon10.png',
+      '../images/icon3.png'
+    ],
+    detailId: '',
+    showPop_select: false
   }
   computed = {}
-  methods = {}
+  methods = {
+    onClose () {
+      this.showPop_select = false
+      this.$apply()
+    },
+    showPop () {
+      this.showPop_select = true
+      this.$apply()
+    }
+  }
   events = {}
 
   onLoad () {

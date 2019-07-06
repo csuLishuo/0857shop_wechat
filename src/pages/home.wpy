@@ -442,7 +442,7 @@
         indicator-color="rgba(255,255,255,0.5)"
         indicator-active-color="#fff"
       >
-        <block wx:for="{{images}}" key="unique">
+        <block wx:for="{{images}}" wx:key="unique">
           <swiper-item>
             <image src="{{item}}" class="slide-image" width="355" height="150" />
           </swiper-item>
