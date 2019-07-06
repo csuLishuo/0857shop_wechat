@@ -8,22 +8,218 @@
     height: 0;
     color: transparent;
   }
+  .myGroupBuy-container{
+    .topBar{
+      background: #fff;
+      height: torpx(100);
+      padding: 0 torpx(36);
+      position: relative;
+      line-height: torpx(100);
+      .left-box{
+        width: torpx(19);
+        height: torpx(37);
+        position: absolute;
+        left: torpx(36);
+        top: torpx(32);
+        image{
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .title{
+        font-size: torpx(32);
+        font-weight: bold;
+        text-align: center;
+      }
+    }
+    .goodsList{
+      margin-top: torpx(20);
+      background: #fff;
+      padding-left: torpx(24);
+      .wrapper{
+        padding: torpx(22) torpx(24) torpx(22) 0;
+        border-bottom: torpx(1) solid #f0f0f0;
+        .wrap-1{
+          display: flex;
+          flex-direction: row;
+          flex-wrap: nowrap;
+          align-items: center;
+          justify-content: space-between;
+          background: #fff;
+        }
+        .image-box{
+          width: torpx(225);
+          height: torpx(225);
+          border-radius: torpx(6);
+          overflow: hidden;
+          image{
+            width: 100%;
+            height: 100%;
+          }
+        }
+        .right-box{
+          width: torpx(450);
+          position: relative;
+          .title{
+            font-size: torpx(28);
+            width: torpx(390);
+            line-height: torpx(38);
+            margin-top: torpx(16);
+            font-weight: bold;
+            color: #393939;
+          }
+          .des{
+            line-height: torpx(40);
+            font-size: torpx(22);
+            color: #7c7c7c;
+          }
+          .tag-box{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: flex-start;
+            .tag{
+              height: torpx(30);
+              line-height: torpx(30);
+              padding: 0 torpx(10);
+              border: torpx(1) solid #ff3e31;
+              border-radius: torpx(10);
+              color: #ff3e31;
+              font-size: torpx(20);
+            }
+          }
+          .price-box{
+            margin-top: torpx(30);
+            .price{
+              color: #ff3e31;
+              font-size: torpx(24);
+              font-weight: bold;
+              span{
+                font-size: torpx(34);
+                vertical-align: bottom;
+              }
+            }
+            .info{
+              color: #bababa;
+              font-size: torpx(18);
+            }
+          }
+          .btn{
+            width: torpx(153);
+            height: torpx(58);
+            line-height: torpx(58);
+            background-image: linear-gradient(-90deg, #ff2736 0%, #ff2b71 100%), linear-gradient(#ff3f31, #ff3f31);
+            background-blend-mode: normal, normal;
+            border-radius: torpx(29);
+            text-align: center;
+            font-size: torpx(28);
+            color: #fff;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+          }
+          .label{
+            font-size: torpx(24);
+            color: #3e4244;
+            margin-top: torpx(50);
+            text-align: right;
+            padding-right: torpx(50);
+          }
+        }
+      }
+      .wrap-2{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: space-between;
+        background: #fff;
+        padding: 0 torpx(35);
+        height: torpx(80);
+        .text{
+          font-size: torpx(26);
+          color: #ff3f31;
+        }
+        .btn-box{
+          .btn{
+            width: torpx(150);
+            height: torpx(52);
+            line-height: torpx(52);
+            border-radius: torpx(26);
+            border: 1px solid #c0c0c0;
+            font-size: torpx(26);
+            color: #6f6f6f;
+            text-align: center;
+          }
+        }
+      }
+      .del-good {
+        width: 70px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: #ff0000;
+        color: #ffffff;
+        font-size: torpx(28);
+        height: 100%;
+        image{
+          width: torpx(39);
+          height: torpx(41);
+          margin-top: torpx(22);
+        }
+      }
+    }
+    .van-tab{
+      width: 20% !important;
+      flex-basis: 20% !important;
+    }
+  }
 </style>
 <template>
-  <web-view src="http://huoyuancheng.wurenyulecang.com:10101/#/myGroupBuy"></web-view>
+  <view class="myGroupBuy-container">
+    <van-tabs v-model="active">
+      <van-tab title="全部"></van-tab>
+      <van-tab title="待付款"></van-tab>
+      <van-tab title="拼团中"></van-tab>
+      <van-tab title="拼团成功"></van-tab>
+      <van-tab title="拼团失败"></van-tab>
+    </van-tabs>
+    <view class="goodsList">
+      <view class="wrapper" @click="goDetail">
+        <view class="wrap-1">
+          <view class="image-box"><image src="../images/icon3.png" alt=""></view>
+          <view class="right-box">
+            <view class="title ellipsis-2">【立体小脸妆出来】RIRE双头阴影高光修容棒3g+3g立体小脸妆出来】RIRE双头阴影高光修容棒3g+3g</view>
+            <view class="des">红色；175；女款</view>
+            <view class="label">共1件商品 合计：￥1267.00</view>
+          </view>
+        </view>
+        <view class="wrap-2">
+          <view class="text">拼团成功等待发货</view>
+          <view class="btn-box">
+            <view class="btn">提醒发货</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
 </template>
 
 <script>
 import wepy from 'wepy'
 // import { SERVER_BAS_URL } from '../js/define'
 
-export default class CategoryPage extends wepy.page {
+export default class MyGroupBuy extends wepy.page {
   config = {
     backgroundTextStyle: 'light',
     navigationBarBackgroundColor: '#fff',
     navigationBarTitleText: '我的拼团',
     navigationBarTextStyle: 'black',
     usingComponents: {
+      'van-tab': '/components/vant/tab/index',
+      'van-tabs': '/components/vant/tabs/index'
     }
   }
   components = {
