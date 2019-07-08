@@ -1,0 +1,195 @@
+<style lang="scss">
+  @import "../css/common";
+  page{
+    height: 100%;
+  }
+  ::-webkit-scrollbar{
+    width: 0;
+    height: 0;
+    color: transparent;
+  }
+  .distributionCard-container{
+    padding-bottom: torpx(160);
+    .top-bg{
+      background-image: linear-gradient(-30deg, #ff3939 50%, #ff4747 100%), linear-gradient(#3965ff, #3965ff);
+      .topBar{
+        height: torpx(100);
+        padding: 0 torpx(36);
+        position: relative;
+        line-height: torpx(100);
+        .left-box{
+          width: torpx(19);
+          height: torpx(37);
+          position: absolute;
+          left: torpx(36);
+          top: torpx(32);
+          image{
+            width: 100%;
+            height: 100%;
+          }
+        }
+        .title{
+          font-size: torpx(32);
+          color: #fff;
+          font-weight: bold;
+          text-align: center;
+        }
+        .right-box{
+          width: torpx(39);
+          height: torpx(39);
+          image{
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
+      .area-1{
+        padding: 0 torpx(30) 0 torpx(40);
+        height: torpx(200);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .left-box{
+          .name{
+            font-size: torpx(24);
+            color: #fff;
+          }
+          .price{
+            font-size: torpx(50);
+            font-weight: bold;
+            color: #fff;
+            margin-top: torpx(20);
+          }
+        }
+        .right-box{
+          width: torpx(154);
+          height: torpx(56);
+          line-height: torpx(56);
+          text-align: center;
+          border: solid 1px #ffffff;
+          color: #fff;
+          font-size: torpx(24);
+          border-radius: torpx(15);
+        }
+      }
+    }
+    .area-2{
+      padding-left: torpx(30);
+      background: #fff;
+      margin-bottom: torpx(20);
+      .line{
+        height: torpx(104);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid #eff0f4;
+        font-size: torpx(28);
+        padding: 0 torpx(25) 0 torpx(10);
+        .price{
+          color: #fe0000;
+        }
+      }
+    }
+    .area-3{
+      color: #828282;
+      padding: 0 torpx(40);
+      .name{
+        font-size: torpx(28);
+        margin-top: torpx(20);
+      }
+      .des{
+        font-size: torpx(24);
+        margin-top: torpx(20);
+        text-align: justify;
+        line-height: torpx(36);
+      }
+    }
+    .btn-bottom {
+      width: torpx(690);
+      height: torpx(80);
+      line-height: torpx(80);
+      background-color: #ff2841;
+      border-radius: torpx(80);
+      position: fixed;
+      bottom: torpx(40);
+      left: torpx(30);
+      right: torpx(30);
+      font-size: torpx(30);
+      color: #fff;
+      text-align: center;
+    }
+  }
+</style>
+<template>
+  <view class="distributionCard-container">
+    <view class="top-bg">
+      <view class="area-1">
+        <view class="left-box">
+          <view class="name">购物卡(元)</view>
+          <view class="price">1000.00</view>
+        </view>
+        <view class="right-box">提现明细</view>
+      </view>
+    </view>
+    <view class="area-2">
+      <view class="line">
+        <view class="name">可提现佣金</view>
+        <view class="price">10000.00元</view>
+      </view>
+    </view>
+    <view class="area-2">
+      <view class="line">
+        <view class="name">已提现佣金</view>
+        <view class="price">10000.00元</view>
+      </view>
+      <view class="line">
+        <view class="name">待打款佣金</view>
+        <view class="price">10000.00元</view>
+      </view>
+    </view>
+    <view class="area-3">
+      <view class="name">用户须知</view>
+      <view class="des">尊敬的用户，提现需要后台审核，最低提现不得低于100元，提现后，就是发健身房哈的交话费是的是角度看是，的积分是地方，是看得见的看法。</view>
+    </view>
+    <view class="btn-bottom" bindtap="go">
+      我要提现
+    </view>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+// import { SERVER_BAS_URL } from '../js/define'
+
+export default class MyOrder extends wepy.page {
+  config = {
+    backgroundTextStyle: 'light',
+    navigationBarBackgroundColor: '#fff',
+    navigationBarTitleText: '分销购物卡',
+    navigationBarTextStyle: 'black',
+    usingComponents: {
+    }
+  }
+  components = {
+  }
+  data = {
+    type: 1,
+    active: 0
+  }
+  computed = {}
+  methods = {
+    go () {
+      wepy.navigateTo({
+        url: 'applyWithdraw'
+      })
+    }
+  }
+  events = {}
+
+  onLoad () {
+  }
+
+  onShow () {
+  }
+}
+</script>

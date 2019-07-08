@@ -95,6 +95,13 @@ export default class extends wepy.app {
       'pages/myAddress', // 收货地址
       'pages/myReward', // 我的奖品
       'pages/editAddress', // 编辑地址
+      'pages/receive', // 快递收货
+      'pages/receiveCode', // 收货码
+      'pages/distributionCard', // 分销购物卡
+      'pages/applyWithdraw', // 申请提现
+      'pages/success_withdraw', // 提现成功
+      'pages/myProfit', // 我的分润
+      'pages/withdrawDetail', // 提现明细
       'pages/test'
     ],
     window: {

@@ -8,9 +8,241 @@
     height: 0;
     color: transparent;
   }
+  .myIncome-container{
+    .top-bg{
+      background-image: linear-gradient(-30deg,
+        #ff3939 49%,
+        #ff8c47 100%),
+      linear-gradient(
+          #3965ff,
+          #3965ff);
+      .topBar{
+        height: torpx(100);
+        padding: 0 torpx(36);
+        position: relative;
+        line-height: torpx(100);
+        .left-box{
+          width: torpx(19);
+          height: torpx(37);
+          position: absolute;
+          left: torpx(36);
+          top: torpx(32);
+          image{
+            width: 100%;
+            height: 100%;
+          }
+        }
+        .title{
+          font-size: torpx(32);
+          color: #fff;
+          font-weight: bold;
+          text-align: center;
+        }
+        .right-box{
+          width: torpx(39);
+          height: torpx(39);
+          image{
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
+      .area-1{
+        padding-left: torpx(40);
+        .top-box{
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          align-items: center;
+          justify-content: space-between;
+          margin-top: torpx(30);
+          .left-box{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: flex-start;
+            .portrait-box{
+              width: torpx(48);
+              height: torpx(48);
+              border-radius: 50%;
+              overflow: hidden;
+              margin-right: torpx(18);
+              image{
+                width: 100%;
+                height: 100%;
+              }
+            }
+            .text-box{
+              .name{
+                font-size: torpx(30);
+                color: #fff;
+              }
+            }
+          }
+          .right-box{
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            background-color: rgba(0,0,0,.2);
+            width: torpx(227);
+            height: torpx(48);
+            border-radius: torpx(24) 0px 0px torpx(24);
+            text-align: center;
+            .name{
+              font-size: torpx(24);
+              color: #fff;
+              text-align: center;
+            }
+          }
+        }
+        .area-1-2{
+          margin-top: torpx(50);
+          .name{
+            font-size: torpx(24);
+            color: #fff;
+            opacity: 0.6;
+          }
+          .price{
+            font-size: torpx(66);
+            font-weight: bold;
+            color: #fff;
+            margin-top: torpx(20);
+          }
+        }
+        .area-1-3{
+          height: torpx(150);
+          margin-top: torpx(30);
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          .wrap{
+            width: 50%;
+          }
+          .name{
+            font-size: torpx(24);
+            color: #fff;
+            opacity: 0.6;
+          }
+          .price{
+            font-size: torpx(50);
+            font-weight: bold;
+            color: #fff;
+            margin-top: torpx(20);
+          }
+        }
+      }
+    }
+    .area-2{
+      margin: torpx(20) auto 0;
+      background: #fff;
+      padding-bottom: torpx(50);
+      .area-2-1{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: flex-start;
+        margin-top: torpx(44);
+        .wrap{
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: flex-start;
+          width: 33.3%;
+          height: torpx(250);
+          .image-box{
+            background: rgba(255,0,0,0.1);
+            width: torpx(75);
+            height: torpx(75);
+            position: relative;
+            image{
+              width: 100%;
+              height: 100%;
+            }
+          }
+          .name{
+            font-size: torpx(26);
+            color: #4c4c4c;
+            margin-top: torpx(32);
+          }
+        }
+      }
+    }
+  }
 </style>
 <template>
-  <web-view src="http://huoyuancheng.wurenyulecang.com:10101/#/myIncome"></web-view>
+  <view class="myIncome-container">
+    <view class="top-bg">
+      <view class="topBar">
+        <view class="left-box" bindtap="goBack"><image src="../images/icon38.png" alt=""></image></view>
+        <view class="title">我的收益</view>
+        <!--搜索-->
+        <!--<view class="right-box"><image src="../images/icon45.png" alt=""></view>-->
+      </view>
+      <view class="area-1 clearfix">
+        <view class="top-box">
+          <view class="left-box">
+            <view class="portrait-box"><image src="../images/icon13.png" alt=""></image></view>
+            <view class="text-box">
+              <view class="name">斯嘉丽·约翰逊</view>
+            </view>
+          </view>
+          <view class="right-box">
+            <view class="name">推荐人：虞维文</view>
+          </view>
+        </view>
+        <view class="area-1-2">
+          <view class="name">总价值(元)</view>
+          <view class="price">1000.00</view>
+        </view>
+        <view class="area-1-3">
+          <view class="wrap">
+            <view class="name">购物券(元)</view>
+            <view class="price">1000.00</view>
+          </view>
+          <view class="wrap">
+            <view class="name">购物卡(元)</view>
+            <view class="price">1000.00</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="area-2 clearfix">
+      <view class="area-2-1">
+        <view class="wrap" bindtap="go(1)">
+          <view class="image-box">
+            <image src="../images/icon49.png" alt=""></image>
+          </view>
+          <view class="name">分销购物卡</view>
+        </view>
+        <view class="wrap" bindtap="go(2)">
+          <view class="image-box">
+            <image src="../images/icon50.png" alt=""></image>
+          </view>
+          <view class="name">我的分润</view>
+        </view>
+        <view class="wrap" bindtap="go(3)">
+          <view class="image-box">
+            <image src="../images/icon51.png" alt=""></image>
+          </view>
+          <view class="name">提现明细</view>
+        </view>
+        <view class="wrap" bindtap="go(4)">
+          <view class="image-box">
+            <image src="../images/icon52.png" alt=""></image>
+          </view>
+          <view class="name">我的团队</view>
+        </view>
+        <view class="wrap" bindtap="go(5)">
+          <view class="image-box">
+            <image src="../images/icon53.png" alt=""></image>
+          </view>
+          <view class="name">推广二维码</view>
+        </view>
+      </view>
+    </view>
+  </view>
 </template>
 
 <script>
@@ -32,7 +264,31 @@ export default class CategoryPage extends wepy.page {
     type: 1
   }
   computed = {}
-  methods = {}
+  methods = {
+    go (status) {
+      if (status === '1') {
+        wepy.navigateTo({
+          url: 'distributionCard'
+        })
+      } else if (status === '2') {
+        wepy.navigateTo({
+          url: 'myProfit'
+        })
+      } else if (status === '3') {
+        wepy.navigateTo({
+          url: 'withdrawDetail'
+        })
+      } else if (status === '4') {
+        wepy.navigateTo({
+          url: 'myGroup'
+        })
+      } else if (status === '5') {
+        wepy.navigateTo({
+          url: 'popularizeQrCode'
+        })
+      }
+    }
+  }
   events = {}
 
   onLoad () {

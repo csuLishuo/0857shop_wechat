@@ -1,0 +1,226 @@
+<style lang="scss">
+  @import "../css/common";
+  page{
+    height: 100%;
+  }
+  ::-webkit-scrollbar{
+    width: 0;
+    height: 0;
+    color: transparent;
+  }
+  .applyWithdraw-container{
+    padding-bottom: torpx(160);
+    .topBar{
+      background: #fff;
+      height: torpx(100);
+      padding: 0 torpx(36);
+      position: relative;
+      line-height: torpx(100);
+      .left-box{
+        width: torpx(19);
+        height: torpx(37);
+        position: absolute;
+        left: torpx(36);
+        top: torpx(32);
+        image{
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .title{
+        font-size: torpx(32);
+        font-weight: bold;
+        text-align: center;
+      }
+    }
+    .area-1{
+      margin-top: torpx(20);
+      padding-left: torpx(30);
+      background: #fff;
+      .area-1-1{
+        height: torpx(166);
+        border-bottom: 1px solid #eff0f4;
+        .van-cell{
+          height: 100%;
+          display: flex;
+          align-items: center;
+        }
+        .icon-box{
+          font-size: torpx(80);
+          font-weight: bold;
+          color: #fe0000;
+        }
+      }
+      .line{
+        height: torpx(104);
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        border-bottom: 1px solid #eff0f4;
+        font-size: torpx(28);
+        padding: 0 torpx(25) 0 torpx(10);
+        .price{
+          color: #898888;
+          margin-left: torpx(20);
+        }
+      }
+    }
+    .area-2{
+      padding: 0 torpx(40);
+      line-height: torpx(74);
+      font-size: torpx(24);
+      color: #a8a8a8;
+    }
+    .area-3{
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      height: torpx(100);
+      border-bottom: 1px solid #ebebeb;
+      justify-content: space-between;
+      padding: 0 torpx(37);
+      background: #fff;
+      .label{
+        font-size: torpx(28);
+        width: torpx(140);
+      }
+      .right-box{
+        display: flex;
+        align-items: center;
+        span{
+          font-size: torpx(28);
+          color: #bebebe;
+          margin-right: torpx(20);
+        }
+        image{
+          width: torpx(12);
+          height: torpx(21);
+        }
+      }
+    }
+    .area-4{
+      background: #fff;
+      padding-left: torpx(30);
+      .line{
+        .icon-box{
+          width: torpx(145);
+        }
+      }
+    }
+    .btn-bottom {
+      width: torpx(690);
+      height: torpx(80);
+      line-height: torpx(80);
+      background-color: #ff2841;
+      border-radius: torpx(80);
+      position: fixed;
+      bottom: torpx(40);
+      left: torpx(30);
+      right: torpx(30);
+      font-size: torpx(30);
+      color: #fff;
+      text-align: center;
+    }
+  }
+</style>
+<template>
+  <view class="applyWithdraw-container">
+    <view class="area-1">
+      <view class="area-1-1">
+        <van-field
+          v-model="price"
+          type="number"
+          clearable
+          placeholder="请输入提现金额"
+        >
+          <view class="icon-box" slot="left-icon">￥</view>
+        </van-field>
+      </view>
+      <view class="line">
+        <view class="name">账户剩余余额</view>
+        <view class="price">10000.00元</view>
+      </view>
+    </view>
+    <view class="area-2">提现金额不能小于100.00元</view>
+    <view class="area-3">
+      <view class="label">提现方式</view>
+      <view class="right-box">
+        <span>银行卡</span>
+        <image src="../images/icon21.png" alt=""></image>
+      </view>
+    </view>
+    <view class="area-4">
+      <view class="line">
+        <van-field
+          type="text"
+          required
+          clearable
+          placeholder="请输入开户人姓名"
+        >
+          <view class="icon-box" slot="left-icon">开户人</view>
+        </van-field>
+      </view>
+      <view class="line">
+        <van-field
+          type="text"
+          required
+          clearable
+          placeholder="请输入正确的银行名称"
+        >
+          <view class="icon-box" slot="left-icon">开户行</view>
+        </van-field>
+      </view>
+      <view class="line">
+        <van-field
+          type="number"
+          required
+          clearable
+          placeholder="请输入正确的银行账号"
+        >
+          <view class="icon-box" slot="left-icon">账号</view>
+        </van-field>
+      </view>
+    </view>
+    <view class="btn-bottom" bindtap="go">
+      提交申请
+    </view>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+// import { SERVER_BAS_URL } from '../js/define'
+
+export default class MyOrder extends wepy.page {
+  config = {
+    backgroundTextStyle: 'light',
+    navigationBarBackgroundColor: '#fff',
+    navigationBarTitleText: '申请提现',
+    navigationBarTextStyle: 'black',
+    usingComponents: {
+      'van-field': '/components/vant/field/index'
+    }
+  }
+  components = {
+  }
+  data = {
+    type: 1,
+    active: 0
+  }
+  computed = {}
+  methods = {
+    go () {
+      wepy.navigateTo({
+        url: 'success_withdraw'
+      })
+    }
+  }
+  events = {}
+
+  onLoad () {
+  }
+
+  onShow () {
+  }
+}
+</script>

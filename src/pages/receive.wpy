@@ -1,0 +1,65 @@
+<style lang="scss">
+  @import "../css/common";
+  page{
+    height: 100%;
+  }
+  ::-webkit-scrollbar{
+    width: 0;
+    height: 0;
+    color: transparent;
+  }
+  .receive-container{
+    .imgDel-box{
+      width: torpx(702);
+      margin: torpx(20) auto;
+      image{
+        width: 100%;
+      }
+    }
+  }
+</style>
+<template>
+  <view class="receive-container">
+    <van-tabs v-model="active">
+      <van-tab title="全部"></van-tab>
+      <van-tab title="未签收"></van-tab>
+      <van-tab title="已签收"></van-tab>
+    </van-tabs>
+    <view class="imgDel-box">
+      <image src="../images/imgDel1.png" alt=""></image>
+    </view>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+// import { SERVER_BAS_URL } from '../js/define'
+
+export default class MyOrder extends wepy.page {
+  config = {
+    backgroundTextStyle: 'light',
+    navigationBarBackgroundColor: '#fff',
+    navigationBarTitleText: '快递收货',
+    navigationBarTextStyle: 'black',
+    usingComponents: {
+      'van-tab': '/components/vant/tab/index',
+      'van-tabs': '/components/vant/tabs/index'
+    }
+  }
+  components = {
+  }
+  data = {
+    type: 1,
+    active: 0
+  }
+  computed = {}
+  methods = {}
+  events = {}
+
+  onLoad () {
+  }
+
+  onShow () {
+  }
+}
+</script>
