@@ -174,12 +174,6 @@
 <template>
   <view class="myIncome-container">
     <view class="top-bg">
-      <view class="topBar">
-        <view class="left-box" bindtap="goBack"><image src="../images/icon38.png" alt=""></image></view>
-        <view class="title">我的收益</view>
-        <!--搜索-->
-        <!--<view class="right-box"><image src="../images/icon45.png" alt=""></view>-->
-      </view>
       <view class="area-1 clearfix">
         <view class="top-box">
           <view class="left-box">

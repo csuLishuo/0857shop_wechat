@@ -499,7 +499,7 @@ export default class CategoryPage extends wepy.page {
         })
       } else if (status === '11') {
         wepy.navigateTo({
-          url: 'applyAgencyForm'
+          url: 'applyAgency'
         })
       } else if (status === '12') {
         wepy.navigateTo({

@@ -8,9 +8,184 @@
     height: 0;
     color: transparent;
   }
+  .myComment-container{
+    .topBar{
+      background: #fff;
+      height: torpx(100);
+      padding: 0 torpx(36);
+      position: relative;
+      line-height: torpx(100);
+      .left-box{
+        width: torpx(19);
+        height: torpx(37);
+        position: absolute;
+        left: torpx(36);
+        top: torpx(32);
+        image{
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .title{
+        font-size: torpx(32);
+        font-weight: bold;
+        text-align: center;
+      }
+    }
+    .wrapper{
+      width: torpx(714);
+      margin: torpx(20) auto 0;
+      background: #fff;
+      border-radius: torpx(14);
+      padding: 0 torpx(26);
+      .time{
+        font-size: torpx(22);
+        color: #727272;
+        line-height: torpx(86);
+      }
+      .goodContent{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: space-between;
+        background: #fff;
+        .image-box{
+          width: torpx(168);
+          height: torpx(168);
+          border-radius: torpx(6);
+          overflow: hidden;
+          image{
+            width: 100%;
+            height: 100%;
+          }
+        }
+        .right-box{
+          width: torpx(450);
+          position: relative;
+          .title{
+            font-size: torpx(26);
+            width: torpx(390);
+            line-height: torpx(38);
+            margin-top: torpx(16);
+            font-weight: bold;
+            color: #393939;
+          }
+          .deadline{
+            font-size: torpx(24);
+            line-height: torpx(30);
+            color: #ff3f31;
+          }
+          .des{
+            line-height: torpx(40);
+            font-size: torpx(20);
+            color: #7c7c7c;
+          }
+          .price-box{
+            margin-top: torpx(30);
+            .price{
+              color: #ff3e31;
+              font-size: torpx(24);
+              font-weight: bold;
+              text{
+                font-size: torpx(34);
+                vertical-align: bottom;
+              }
+            }
+          }
+          .btn{
+            width: torpx(153);
+            height: torpx(58);
+            line-height: torpx(58);
+            background: #ff3f31;
+            border-radius: torpx(29);
+            text-align: center;
+            font-size: torpx(28);
+            color: #fff;
+          }
+        }
+      }
+      .area-1{
+        .line{
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: flex-start;
+          height: torpx(80);
+          .name{
+            font-size: torpx(28);
+            color: #666;
+            margin-right: torpx(40);
+            margin-top: torpx(8);
+          }
+          .stars{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+            .image-box{
+              width: torpx(41);
+              height: torpx(39);
+              margin-right: torpx(30);
+              image{
+                width: 100%;
+                height: 100%;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 </style>
 <template>
-  <web-view src="http://huoyuancheng.wurenyulecang.com:10101/#/myComment"></web-view>
+  <view class="myComment-container">
+    <view class="wrapper">
+      <view class="time">2019.03.13 12:03:23</view>
+      <view class="goodContent">
+        <view class="image-box"><image src="../images/icon3.png"alt=""></image></view>
+        <view class="right-box">
+          <view class="title ellipsis-2">【立体小脸妆出来】RIRE双头阴影高光修容棒3g+3g立体小脸妆出来】RIRE双头阴影高光修容棒3g+3g</view>
+          <view class="des">颜色：白320</view>
+          <view class="price-box">
+            <view class="price">￥<text>599.00</text></view>
+          </view>
+        </view>
+      </view>
+      <view class="area-1">
+        <view class="line">
+          <view class="name">服务态度</view>
+          <view class="stars">
+            <view class="image-box"><image src="../images/icon55.png"alt=""></image></view>
+            <view class="image-box"><image src="../images/icon55.png"alt=""></image></view>
+            <view class="image-box"><image src="../images/icon55.png"alt=""></image></view>
+            <view class="image-box"><image src="../images/icon55.png"alt=""></image></view>
+            <view class="image-box"><image src="../images/icon55.png"alt=""></image></view>
+          </view>
+        </view>
+        <view class="line">
+          <view class="name">描述相符</view>
+          <view class="stars">
+            <view class="image-box"><image src="../images/icon56.png"alt=""></image></view>
+            <view class="image-box"><image src="../images/icon56.png"alt=""></image></view>
+            <view class="image-box"><image src="../images/icon56.png"alt=""></image></view>
+            <view class="image-box"><image src="../images/icon56.png"alt=""></image></view>
+            <view class="image-box"><image src="../images/icon56.png"alt=""></image></view>
+          </view>
+        </view>
+        <view class="line">
+          <view class="name">发货速度</view>
+          <view class="stars">
+            <view class="image-box"><image src="../images/icon56.png"alt=""></image></view>
+            <view class="image-box"><image src="../images/icon56.png"alt=""></image></view>
+            <view class="image-box"><image src="../images/icon56.png"alt=""></image></view>
+            <view class="image-box"><image src="../images/icon56.png"alt=""></image></view>
+            <view class="image-box"><image src="../images/icon56.png"alt=""></image></view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
 </template>
 
 <script>

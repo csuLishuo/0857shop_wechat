@@ -1,0 +1,135 @@
+<style lang="scss">
+  @import "../css/common";
+  page{
+    height: 100%;
+  }
+  ::-webkit-scrollbar{
+    width: 0;
+    height: 0;
+    color: transparent;
+  }
+  .myGroup-container{
+    .topBar{
+      background: #fff;
+      height: torpx(100);
+      padding: 0 torpx(36);
+      position: relative;
+      line-height: torpx(100);
+      .left-box{
+        width: torpx(19);
+        height: torpx(37);
+        position: absolute;
+        left: torpx(36);
+        top: torpx(32);
+        image{
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .title{
+        font-size: torpx(32);
+        font-weight: bold;
+        text-align: center;
+      }
+    }
+    .wrapper{
+      width: torpx(702);
+      margin: torpx(20) auto 0;
+      background: #fff;
+      border-radius: torpx(10);
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      padding: torpx(30);
+      padding-right: torpx(40);
+      .left-box{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: flex-start;
+        .portrait-box{
+          width: torpx(92);
+          height: torpx(92);
+          border-radius: 50%;
+          overflow: hidden;
+          margin-right: torpx(22);
+          image{
+            width: 100%;
+            height: 100%;
+          }
+        }
+        .text-box{
+          .name{
+            font-size: torpx(26);
+          }
+          .des{
+            font-size: torpx(22);
+            margin-top: torpx(18);
+            color: #656565;
+          }
+        }
+      }
+      .right-box{
+        color: #000;
+        font-size: torpx(26);
+        font-weight: bold;
+      }
+    }
+  }
+</style>
+<template>
+  <view class="myGroup-container">
+    <van-tabs v-model="active">
+      <van-tab title="全部成员"></van-tab>
+      <van-tab title="A级成员"></van-tab>
+      <van-tab title="B级成员"></van-tab>
+    </van-tabs>
+    <view class="wrapper">
+      <view class="left-box">
+        <view class="portrait-box"><image src="../images/icon13.png" alt=""></image></view>
+        <view class="text-box">
+          <view class="name">罗杰斯  15355556666</view>
+          <view class="des">2018-12-05 16:29:45</view>
+        </view>
+      </view>
+      <view class="right-box">
+        普通用户
+      </view>
+    </view>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+// import { SERVER_BAS_URL } from '../js/define'
+
+export default class MyOrder extends wepy.page {
+  config = {
+    backgroundTextStyle: 'light',
+    navigationBarBackgroundColor: '#fff',
+    navigationBarTitleText: '我的团队',
+    navigationBarTextStyle: 'black',
+    usingComponents: {
+      'van-tab': '/components/vant/tab/index',
+      'van-tabs': '/components/vant/tabs/index'
+    }
+  }
+  components = {
+  }
+  data = {
+    active: 0
+  }
+  computed = {}
+  methods = {}
+  events = {}
+
+  onLoad () {
+  }
+
+  onShow () {
+  }
+}
+</script>

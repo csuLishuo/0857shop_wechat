@@ -102,6 +102,10 @@ export default class extends wepy.app {
       'pages/success_withdraw', // 提现成功
       'pages/myProfit', // 我的分润
       'pages/withdrawDetail', // 提现明细
+      'pages/myGroup', // 我的团队
+      'pages/popularizeQrCode', // 推广二维码
+      'pages/applyAgency', // 申请代理
+      'pages/success_apply', // 申请提交成功
       'pages/test'
     ],
     window: {

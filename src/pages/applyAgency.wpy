@@ -1,0 +1,118 @@
+<style lang="scss">
+  @import "../css/common";
+  page{
+    height: 100%;
+  }
+  ::-webkit-scrollbar{
+    width: 0;
+    height: 0;
+    color: transparent;
+  }
+  .applyAgency-container{
+    min-height: 100%;
+    background: #fff;
+    padding-bottom: torpx(160);
+    .topBar{
+      background: #fff;
+      height: torpx(100);
+      padding: 0 torpx(36);
+      position: relative;
+      line-height: torpx(100);
+      .left-box{
+        width: torpx(19);
+        height: torpx(37);
+        position: absolute;
+        left: torpx(36);
+        top: torpx(32);
+        image{
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .title{
+        font-size: torpx(32);
+        font-weight: bold;
+        text-align: center;
+      }
+    }
+    .image-box{
+      margin-top: torpx(100);
+      image{
+        width: 100%;
+      }
+    }
+    .line-1{
+      font-size: torpx(68);
+      font-weight: bold;
+      text-align: center;
+      margin-top: torpx(46);
+    }
+    .line-2{
+      font-size: torpx(28);
+      font-weight: bold;
+      text-align: center;
+      margin-top: torpx(30);
+      color: #666;
+    }
+    .btn-bottom {
+      width: torpx(690);
+      height: torpx(80);
+      line-height: torpx(80);
+      background-color: #fbb931;
+      border-radius: torpx(80);
+      position: fixed;
+      bottom: torpx(40);
+      left: torpx(30);
+      right: torpx(30);
+      font-size: torpx(30);
+      color: #fff;
+      text-align: center;
+    }
+  }
+</style>
+<template>
+  <view class="applyAgency-container clearfix">
+    <view class="image-box"><image src="../images/img7.png" alt=""></image></view>
+    <view class="line-1">成为代理</view>
+    <view class="line-2">让你在工作之余也能赚钱，赶快加入吧</view>
+    <view class="btn-bottom" bindtap="go">
+      立即申请
+    </view>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+// import { SERVER_BAS_URL } from '../js/define'
+
+export default class CategoryPage extends wepy.page {
+  config = {
+    backgroundTextStyle: 'light',
+    navigationBarBackgroundColor: '#fff',
+    navigationBarTitleText: '申请代理',
+    navigationBarTextStyle: 'black',
+    usingComponents: {
+    }
+  }
+  components = {
+  }
+  data = {
+    type: 1
+  }
+  computed = {}
+  methods = {
+    go () {
+      wepy.navigateTo({
+        url: 'applyAgencyForm'
+      })
+    }
+  }
+  events = {}
+
+  onLoad () {
+  }
+
+  onShow () {
+  }
+}
+</script>

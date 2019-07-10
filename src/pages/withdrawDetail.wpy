@@ -181,7 +181,7 @@ export default class MyOrder extends wepy.page {
   components = {
   }
   data = {
-    type: 1
+    active: 0
   }
   computed = {}
   methods = {}

@@ -1,0 +1,132 @@
+<style lang="scss">
+  @import "../css/common";
+  page{
+    height: 100%;
+  }
+  ::-webkit-scrollbar{
+    width: 0;
+    height: 0;
+    color: transparent;
+  }
+  .popularizeQrCode-container{
+    padding-bottom: torpx(160);
+    .area-1{
+      position: relative;
+      .bg{
+        width: 100%;
+        image{
+          width: 100%;
+        }
+      }
+      /*background-image: url('../images/image6.png');*/
+      /*background-repeat: no-repeat;*/
+      /*background-size: 100% auto;*/
+      /*background-position: top;*/
+      .wrapper{
+        position: absolute;
+        top: torpx(146);
+        left: torpx(21);
+        width: torpx(708);
+        background-image: linear-gradient(-30deg,#ff3939 49%, #ff8c47 100%), linear-gradient(#ffffff, #ffffff);
+        background-blend-mode: normal, normal;
+        border-radius: torpx(30);
+        /*margin: torpx(146) auto 0;*/
+        /*position: relative;*/
+        .portrait-box{
+          width: torpx(198);
+          height: torpx(198);
+          border-radius: 50%;
+          overflow: hidden;
+          margin-left: torpx(-99);
+          position: absolute;
+          top: torpx(-99);
+          left: 50%;
+          image{
+            width: 100%;
+            height: 100%;
+          }
+        }
+        .name{
+          font-size: torpx(36);
+          color: #fff;
+          text-align: center;
+          margin-top: torpx(120);
+        }
+        .qr-box{
+          width: torpx(384);
+          height: torpx(384);
+          margin: torpx(42) auto 0;
+          background: #fff;
+        }
+        .info{
+          font-size: torpx(30);
+          color: #fff;
+          text-align: center;
+          margin-top: torpx(86);
+          margin-bottom: torpx(86);
+        }
+      }
+    }
+    .btn-bottom {
+      width: torpx(690);
+      height: torpx(80);
+      line-height: torpx(80);
+      background-color: #ff2841;
+      border-radius: torpx(80);
+      position: fixed;
+      bottom: torpx(40);
+      left: torpx(30);
+      right: torpx(30);
+      font-size: torpx(30);
+      color: #fff;
+      text-align: center;
+    }
+  }
+</style>
+<template>
+  <view class="popularizeQrCode-container">
+    <view class="area-1 clearfix">
+      <div class="bg"><image src="../images/img6.png" alt=""></image></div>
+      <view class="wrapper clearfix">
+        <view class="portrait-box"><image src="../images/img3.png" alt=""></image></view>
+        <view class="name">斯嘉丽</view>
+        <view class="qr-box"></view>
+        <view class="info">分享自己的二维码，和朋友一起赚钱</view>
+      </view>
+    </view>
+    <view class="btn-bottom">
+      保存我的推广码
+    </view>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+// import { SERVER_BAS_URL } from '../js/define'
+
+export default class MyOrder extends wepy.page {
+  config = {
+    backgroundTextStyle: 'light',
+    navigationBarBackgroundColor: '#fff',
+    navigationBarTitleText: '推广二维码',
+    navigationBarTextStyle: 'black',
+    usingComponents: {
+      'van-tab': '/components/vant/tab/index',
+      'van-tabs': '/components/vant/tabs/index'
+    }
+  }
+  components = {
+  }
+  data = {
+  }
+  computed = {}
+  methods = {}
+  events = {}
+
+  onLoad () {
+  }
+
+  onShow () {
+  }
+}
+</script>

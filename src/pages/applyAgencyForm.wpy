@@ -8,9 +8,183 @@
     height: 0;
     color: transparent;
   }
+  .applyAgencyForm-container{
+    min-height: 100%;
+    padding-bottom: torpx(160);
+    .topBar{
+      background: #fff;
+      height: torpx(100);
+      padding: 0 torpx(36);
+      position: relative;
+      line-height: torpx(100);
+      .left-box{
+        width: torpx(19);
+        height: torpx(37);
+        position: absolute;
+        left: torpx(36);
+        top: torpx(32);
+        image{
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .title{
+        font-size: torpx(32);
+        font-weight: bold;
+        text-align: center;
+      }
+    }
+    .area-1{
+      background: #fff;
+      .title{
+        font-size: torpx(28);
+        text-align: center;
+        margin-top: torpx(35);
+        margin-bottom: torpx(25);
+      }
+      .wrapper{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        .wrap{
+          .image-box{
+            width: torpx(349);
+            height: torpx(201);
+            image{
+              width: 100%;
+              height: 100%;
+            }
+          }
+          .text{
+            font-size: torpx(24);
+            background: #fbb931;
+            color: #fff;
+            line-height: torpx(53);
+            text-align: center;
+          }
+        }
+      }
+    }
+    .area-2{
+      margin-top: torpx(20);
+      background: #fff;
+      padding-left: torpx(30);
+      .title{
+        font-size: torpx(32);
+        line-height: torpx(80);
+      }
+      .line{
+        .icon-box{
+          width: torpx(145);
+        }
+      }
+    }
+    .btn-bottom {
+      width: torpx(690);
+      height: torpx(80);
+      line-height: torpx(80);
+      background-color: #fbb931;
+      border-radius: torpx(80);
+      position: fixed;
+      bottom: torpx(40);
+      left: torpx(30);
+      right: torpx(30);
+      font-size: torpx(30);
+      color: #fff;
+      text-align: center;
+    }
+  }
 </style>
 <template>
-  <web-view src="http://huoyuancheng.wurenyulecang.com:10101/#/applyAgencyForm"></web-view>
+  <view class="applyAgencyForm-container">
+    <view class="area-1 clearfix">
+      <view class="title">请上传身份证</view>
+      <view class="wrapper">
+        <view class="wrap">
+          <view class="image-box"><image src="../images/img8.png" alt=""></image></view>
+          <view class="text">上传身份证正面</view>
+        </view>
+        <view class="wrap">
+          <view class="image-box"><image src="../images/img9.png" alt=""></image></view>
+          <view class="text">上传身份证反面</view>
+        </view>
+      </view>
+    </view>
+    <view class="area-2">
+      <view class="title">身份信息填写</view>
+      <view class="form-box">
+        <view class="line">
+          <van-field
+            type="text"
+            required
+            clearable
+            placeholder="请输入姓名"
+          >
+            <view class="icon-box" slot="left-icon">姓名</view>
+          </van-field>
+        </view>
+        <view class="line">
+          <van-field
+            type="number"
+            required
+            clearable
+            placeholder="请输入身份证号"
+          >
+            <view class="icon-box" slot="left-icon">身份证号</view>
+          </van-field>
+        </view>
+        <view class="line">
+          <van-field
+            type="tel"
+            required
+            clearable
+            placeholder="请输入正确的手机号"
+          >
+            <view class="icon-box" slot="left-icon">手机号</view>
+          </van-field>
+        </view>
+      </view>
+    </view>
+    <view class="area-2">
+      <view class="form-box">
+        <view class="line">
+          <van-field
+            type="text"
+            required
+            clearable
+            placeholder="请选择地址"
+          >
+            <view class="icon-box" slot="left-icon">所在地址</view>
+          </van-field>
+          <van-field
+            type="text"
+            required
+            clearable
+            placeholder="请填写身份证详细地址"
+          >
+            <view class="icon-box" slot="left-icon">详细地址</view>
+          </van-field>
+        </view>
+      </view>
+    </view>
+    <view class="area-2">
+      <view class="form-box">
+        <view class="line">
+          <van-field
+            type="tel"
+            required
+            clearable
+            placeholder="请输入推荐人的手机号"
+          >
+            <view class="icon-box" slot="left-icon">推荐人号码</view>
+          </van-field>
+        </view>
+      </view>
+    </view>
+    <view class="btn-bottom" bindtap="go">
+      提交
+    </view>
+  </view>
 </template>
 
 <script>
@@ -24,6 +198,7 @@ export default class CategoryPage extends wepy.page {
     navigationBarTitleText: '申请成为代理',
     navigationBarTextStyle: 'black',
     usingComponents: {
+      'van-field': '/components/vant/field/index'
     }
   }
   components = {
@@ -32,7 +207,13 @@ export default class CategoryPage extends wepy.page {
     type: 1
   }
   computed = {}
-  methods = {}
+  methods = {
+    go () {
+      wepy.reLaunch({
+        url: 'success_apply'
+      })
+    }
+  }
   events = {}
 
   onLoad () {
